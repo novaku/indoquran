@@ -51,8 +51,8 @@ Ext.Loader.setConfig({
     enabled: true
 });
 
-Ext.Loader.setPath('Ext.ux', base_url+'assets/extjs/examples/ux');
-//Ext.Loader.setPath('Ext.ux', 'http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux');
+// Ext.Loader.setPath('Ext.ux', base_url+'assets/extjs/examples/ux');
+Ext.Loader.setPath('Ext.ux', 'http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux');
 
 Ext.require([
 	'*',
