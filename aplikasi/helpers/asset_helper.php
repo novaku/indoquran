@@ -39,7 +39,7 @@ function extjs_asset_css() {
 <link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux/grid/css/GridFilters.css" />
 <link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux/grid/css/RangeMenu.css" />
 	';
-	return $asset_local;
+	return $asset_cdn;
 }
 
 function extjs_asset_js() {
@@ -64,7 +64,7 @@ function extjs_asset_js() {
 	$asset_app_js .= js_asset('funcVar.js');
 	$asset_app_js .= js_asset('quran.js');
 	
-	return $asset_local.$asset_app_js;
+	return $asset_cdn.$asset_app_js;
 }
 
 function quran_mp3($filenya,$ustadz='http://www.everyayah.com/data/Hudhaify_32kbps/') {
@@ -75,7 +75,7 @@ function quran_mp3($filenya,$ustadz='http://www.everyayah.com/data/Hudhaify_32kb
 	$asset_cdn = '
 <object width="480" height="24" id="audioplayer1" data="'.base_url().'assets/swf/player.swf" type="application/x-shockwave-flash"><param value="'.base_url().'assets/swf/player.swf" name="movie"><param value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp;                 rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp;   text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile='.$ustadz.$filenya.'" name="FlashVars"><param value="high" name="quality"><param value="false" name="menu"><param value="transparent" name="wmode"></object>
 	';
-	return $asset_local;
+	return $asset_cdn;
 }
 
 function quran_img($filenya,$src='http://c00022506.cdn1.cloudfiles.rackspacecloud.com/') {
@@ -83,5 +83,5 @@ function quran_img($filenya,$src='http://c00022506.cdn1.cloudfiles.rackspaceclou
 	// list($width, $height, $type, $attr) = getimagesize($src.$filenya);
 	$asset_local = "<img src=\"".base_url()."assets/quran_img/".$filenya."\" ".$attr." />";
 	$asset_cdn = "<img src=\"".$src.$filenya."\" ".$attr." />";
-	return $asset_local;
+	return $asset_cdn;
 }
