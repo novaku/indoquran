@@ -1,4 +1,4 @@
 indoquran
 =========
 
-source code for indoquran.web.id (not include assets)
+source code dari indoquran.web.id (tidak dilengkapi dengan assets)
