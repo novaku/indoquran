@@ -583,7 +583,7 @@ Ext.define('Quran', {
         name:'VerseID',
         type:'int'
     },
-    'AyahText','img','mp3','qs','namaSurah','asbabunNuzul'
+    'AyahText','img','mp3','qs','namaSurah','asbabunNuzul','baca'
     ],
     idProperty: 'ID'
 });

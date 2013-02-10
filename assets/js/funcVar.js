@@ -22,6 +22,7 @@ function getAllLayouts() {
                 '<i>"{AyahText}"</i></b></td><td valign="top">',
                 '<div align="right">',
                 '<img src="http://c00022506.cdn1.cloudfiles.rackspacecloud.com/{img}" />&nbsp;&nbsp;&nbsp;<br>',
+				'{baca}<br>',
                 '<object type="application/x-shockwave-flash" data="'+base_url+'assets/swf/player.swf" id="audioplayer1" height="24" width="460">',
                 '<param name="movie" value="'+base_url+'assets/swf/player.swf">',
                 '<param name="FlashVars" value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp;                 rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp;   text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile=http://www.everyayah.com/data/Hudhaify_32kbps/{mp3}">',
