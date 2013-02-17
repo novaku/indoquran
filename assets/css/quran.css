@@ -1,0 +1,86 @@
+HTML, BODY { height: 100%; }
+#loading-mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000000;
+	z-index: 1;
+}
+#loading {
+	position: absolute;
+	top: 40%;
+	left: 40%;
+	z-index: 2;
+}
+#loading SPAN {
+	 background: url('../images/loading.gif') no-repeat left center;
+	 padding: 68px 68px;
+	 display: block;
+}
+#header {
+	background: #7F99BE url(../images/header-bg.gif) repeat-x center;
+}
+#header h1 {
+	font-size: 16px;
+	color: #fff;
+	font-weight: normal;
+	padding: 5px 10px;
+}
+.x-grid-row-over .x-grid-cell-inner {
+	font-weight: bold;
+}
+.ux-layout-center-item {
+	margin:0 auto;
+	text-align:left;
+}
+.ux-layout-center .x-panel-body,   
+body.ux-layout-center {
+	text-align:center;
+}
+.x-tree-icon-parent {
+	background-image: url("../images/ico/book.png");
+}
+.x-grid-tree-node-expanded .x-tree-icon-parent {
+	background-image: url("../images/ico/book_open.png");
+}
+.x-tree-icon-leaf {
+	background-image: url("../images/ico/page_white.png");
+}
+.x-action-col-icon {
+	cursor:pointer
+}
+#panel-1190-body {background-color: #9AF034;}
+#panel-1191-body {background-color: #2D1A00;}
+#panel-1192-body {background-color: #2D1A00;}
+#panel-1193-body {background-color: #E7EFF5;}
+#panel-1194-body {background-color: #FF3C00;}
+.bukutamuSend {background-image:url("../images/ico/tick.png")}
+.bukutamuNew {background-image:url("../images/ico/page_edit.png")}
+.reset {background-image:url("../images/ico/arrow_refresh.png")}
+.recapcha {background-image:url("../images/ico/key_go.png")}
+.next {background-image:url("../images/ico/arrow_right.png")}
+.prev {background-image:url("../images/ico/arrow_left.png")}
+.current {background-image:url("../images/ico/arrow_in.png")}
+.close {background-image:url("../images/ico/door.png")}
+.random {background-image:url("../images/ico/arrow_switch.png")}
+.link {background-image:url("../images/ico/world_link.png")}
+.menu_root {background-image:url("../images/ico/tag_red.png")}
+.menu_child {background-image:url("../images/ico/tag_blue.png")}
+.download {background-image:url("../images/ico/world_go.png")}
+.clear {background-image:url("../images/ico/cancel.png")}
+div.eg {
+	background-color: #E1E1E1;
+	width: 70%;
+	padding: 10px;
+	margin-right: 20px;
+	margin-top: 10px;
+	white-space: normal;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	font-family: Verdana, Helvetica, sans-serif;
+}
+sup {background-color: green;color: yellow;font-size:10px}
+.x-action-col-cell img {height: 16px;width: 16px;cursor: pointer;}
+.x-action-col-cell img.view-an {background-image: url(../images/ico/script.png);}

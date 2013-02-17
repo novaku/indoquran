@@ -225,76 +225,47 @@ class M_quran extends CI_Model {
         $tipe = $this->input->post('tipe') == '' ? 'harian' : $this->input->post('tipe');
         $chartVar = $this->input->post('chartVar') == '' ? '0' : $this->input->post('chartVar');
         $lim = $this->input->post('limit') == '' ? '0' : $this->input->post('limit');
+		$result = null;
 
         if ($chartVar == 0) {
-            $limit1 = 0;
+            $limit1 = -1;
             $limit2 = $lim;
         } else {
-            $limit1 = (($chartVar * -1) * $lim) + 1;
+            $limit1 = (($chartVar * -1) * $lim);
             $limit2 = (($chartVar * -1) + 1) * $lim;
         }
 
         switch ($tipe) {
             case 'harian' : {
                     $result = $this->db->query("
-					SELECT DATE_FORMAT(VisDate,'%W, %d-%b-%Y') as judul,
-						count(*) as jumlah
-					FROM logs a
-					WHERE (DATEDIFF(NOW(),DATE(VisDate)) >= " . $limit1 . ")
-						AND (DATEDIFF(NOW(),DATE(VisDate)) <= " . $limit2 . ")
-					GROUP BY DATE(VisDate)
+					SELECT DISTINCT FROM_UNIXTIME(UNIX_TIMESTAMP(VisDate),\"%W, %d-%b-%Y\") AS judul, COUNT(*) AS jumlah
+					FROM `logs`
+					WHERE UNIX_TIMESTAMP(VisDate) BETWEEN UNIX_TIMESTAMP('".date('Y-m-d',strtotime("-".$limit2." day"))."') AND UNIX_TIMESTAMP('".date('Y-m-d',strtotime("-".$limit1." day"))."')
+					GROUP BY judul
 					ORDER BY VisDate
 				");
-                    $hasil = json_encode($result->result_object());
                 } break;
             case 'bulanan' : {
-                    $arr = array();
-                    for ($i = $limit2; $i >= $limit1; $i--) {
-                        if (date("d") >= 28) {
-                            $yearMon = date("Y-m", strtotime("-20 day -" . $i . " month"));
-                        } else {
-                            $yearMon = date("Y-m", strtotime("-" . $i . " month"));
-                        }
-
-                        $query = $this->db->query("
-						SELECT DATE_FORMAT(VisDate,'%M-%Y') as judul,
-							count(*) as jumlah
-						FROM logs a
-						WHERE a.VisDate LIKE '" . $yearMon . "%'
-						GROUP BY MONTH(a.VisDate)
+					$result = $this->db->query("
+						SELECT DISTINCT FROM_UNIXTIME(UNIX_TIMESTAMP(VisDate),\"%b-%Y\") AS judul, COUNT(*) AS jumlah
+						FROM `logs`
+						WHERE UNIX_TIMESTAMP(VisDate) BETWEEN UNIX_TIMESTAMP('".date('Y-m',strtotime("-".$limit2." month"))."-01') AND UNIX_TIMESTAMP('".date('Y-m',strtotime("-".$limit1." month"))."-01')
+						GROUP BY judul
+						ORDER BY VisDate
 					");
-                        foreach ($query->result() as $row) {
-                            $arr[] = array(
-                                'judul' => $row->judul,
-                                'jumlah' => $row->jumlah
-                            );
-                        }
-                    }
-                    $hasil = json_encode($arr);
                 } break;
             case 'tahunan' : {
-                    $arr = array();
-                    for ($i = $limit2; $i >= $limit1; $i--) {
-                        $year = date("Y", strtotime("-" . $i . " year"));
-                        $query = $this->db->query("
-						SELECT YEAR(a.VisDate) as judul,
-							count(*) as jumlah
-						FROM logs a
-						WHERE a.VisDate LIKE '" . $year . "%'
-						GROUP BY YEAR(a.VisDate)
+                    $result = $this->db->query("
+						SELECT DISTINCT FROM_UNIXTIME(UNIX_TIMESTAMP(VisDate),\"%Y\") AS judul, COUNT(*) AS jumlah
+						FROM `logs`
+						WHERE UNIX_TIMESTAMP(VisDate) BETWEEN UNIX_TIMESTAMP('".date('Y-',strtotime("-".$limit2." year"))."01-01') AND UNIX_TIMESTAMP('".date('Y-',strtotime("-".$limit1." year"))."01-01')
+						GROUP BY judul
+						ORDER BY VisDate
 					");
-                        foreach ($query->result() as $row) {
-                            $arr[] = array(
-                                'judul' => $row->judul,
-                                'jumlah' => $row->jumlah
-                            );
-                        }
-                    }
-                    $hasil = json_encode($arr);
                 } break;
         }
-
-        return '({rows:' . $hasil . '})';
+		// echo $this->db->last_query();
+        return '({rows:' . json_encode($result->result()) . '})';
     }
 
     function m_statistikLast() {
@@ -302,52 +273,44 @@ class M_quran extends CI_Model {
         $chartVar = $this->input->post('chartVar') == '' ? '0' : $this->input->post('chartVar');
         $lim = $this->input->post('limit') == '' ? '0' : $this->input->post('limit');
 
-        $limit1 = (($chartVar * -1) * $lim) + 1;
-        $limit2 = (($chartVar * -1) + 1) * $lim;
+		if ($chartVar == 0) {
+            $limit1 = $lim;
+        } else {
+            $limit1 = (($chartVar * -1) * $lim);
+        }
+		
 
         $jum = 0;
         switch ($tipe) {
             case 'harian' : {
                     $query = $this->db->query("
-					SELECT COUNT(*) AS jum 
-					FROM logs 
-					WHERE DATEDIFF(NOW(),DATE(VisDate)) <= " . $limit2 . "
-					GROUP BY DATE(VisDate)
-				");
-                    foreach ($query->result() as $row) {
-                        $jum = $row->jum;
-                    }
+						SELECT COUNT(*) AS jum
+						FROM `logs`
+						WHERE UNIX_TIMESTAMP(VisDate) < UNIX_TIMESTAMP('".date('Y-m-d',strtotime("-".$limit1." day"))."')
+					");
+					$obj = $query->row();
+                    $jum = $obj->jum;
                 } break;
             case 'bulanan' : {
-                    $limit2 = $limit2++;
-                    if (date("d") >= 28) {
-                        $yearMon = date("Y-m", strtotime("-20 day -" . $limit2 . " month"));
-                    } else {
-                        $yearMon = date("Y-m", strtotime("-" . $limit2 . " month"));
-                    }
                     $query = $this->db->query("
-					SELECT COUNT(*) AS jum
-					FROM logs
-					WHERE VisDate LIKE '" . $yearMon . "%'
-					GROUP BY MONTH(VisDate)
-				");
-                    foreach ($query->result() as $row) {
-                        $jum = $row->jum;
-                    }
+						SELECT COUNT(*) AS jum
+						FROM `logs`
+						WHERE UNIX_TIMESTAMP(VisDate) <= UNIX_TIMESTAMP('".date('Y-m',strtotime("-".$limit1." month"))."-01')
+					");
+					$obj = $query->row();
+                    $jum = $obj->jum;
                 } break;
             case 'tahunan' : {
-                    $compare = date("Y", strtotime("-" . $limit2 . " year"));
                     $query = $this->db->query("
-					SELECT COUNT(*) AS jum
-					FROM logs
-					WHERE VisDate LIKE '" . $compare . "%'
-					GROUP BY YEAR(VisDate)
-				");
-                    foreach ($query->result() as $row) {
-                        $jum = $row->jum;
-                    }
+						SELECT COUNT(*) AS jum
+						FROM `logs`
+						WHERE UNIX_TIMESTAMP(VisDate) <= UNIX_TIMESTAMP('".date('Y-',strtotime("-".$limit1." year"))."-01-01')
+					");
+					$obj = $query->row();
+                    $jum = $obj->jum;
                 } break;
         }
+		// echo $this->db->last_query();
         return $jum;
     }
 

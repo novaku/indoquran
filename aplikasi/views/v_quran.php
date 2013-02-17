@@ -6,94 +6,7 @@
 	<meta name="description" content="Al-Qur'an Digital : Indonesian Translation">
 	<meta name="keywords" content="quran digital,al quran digital,al-quran digital,alquran online indonesia,indoquran,al quran digital online,alquran online,quran online indonesia,al quran online indonesia,quran web,alquran digital,al-qur'an digital,al qur'an digital,qur'an web,al quran online,al quran web,al quran,alquran,quran digital online,alquran web,alquran indonesia,web quran,quran online,al quran indonesia,qur'an digital,al qur an digital,al-quran online,alquran online digital,al quran translation,al qur'an,digital online,qur'an online indonesia,al quran bahasa indonesia,koran online indonesia,digital alquran,indonesia translation,quran,stacked pie chart,al-quran digital online,al quran digital indonesia,al qur'an on line,al'quran digital,web.id,al-qur'an online,al quran gratis,al qur`an,on line translator,translate al quran,taksbar,al quran translate,web qur'an,al-quran online indonesia,qur'an translation,al-quran translation,kata bijak dari al quran,aplikasi al-quran,digital alqur'an,al qur'an web,online qur'an,al qur'an digital online,al qur'an online indonesia,alqur'an online,alqur'an web,al qur'an online,alquran on line,qur'an online,alqur an online,filter.gif,qur an online,aplikasi al quran,taskbar,quran.web,quran indonesian translation,alqur'an indonesia,digital quran online,web alquran,al-qur'an online indonesia,indoqur'an,al'quran,ext.panel,online al quran,alkuran digital,quran digital indonesia,translate quran,digitalonline,www.al quran digital.com,alquran digital online,al - quran digital,indo quran,alquran diqital,digital al-quran,digital qur'an,al quran and translation,al-qur'an,qur an digital,digital indonesia,aplikasi alqur'an,right gif,alquran translation,al-quran web,alqur'an digital,al.qur'an,alqur,al quran on line,indonesian translation,al qur,digital al quran,al qur an online,al-quran,al-qur an digital,alquran indonesia online,hbox,bg.gif,program al quran digital,alqur'an,ext.ux.grid.gridfilters,alqur an digital,alqur'an on line,al-qur'an indonesia,quranweb,al-qur'an web,quran indonesia,al">
 	<?=extjs_asset_css()?>
-    <style type="text/css">
-    HTML, BODY { height: 100%; }
-	#loading-mask {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: #000000;
-		z-index: 1;
-	}
-	#loading {
-		position: absolute;
-		top: 40%;
-		left: 40%;
-		z-index: 2;
-	}
-	#loading SPAN {
-		 background: url('<?=path_asset('images/loading.gif')?>') no-repeat left center;
-		 padding: 68px 68px;
-		 display: block;
-	}
-	#header {
-		background: #7F99BE url(<?=path_asset('images/header-bg.gif')?>) repeat-x center;
-	}
-	#header h1 {
-		font-size: 16px;
-		color: #fff;
-		font-weight: normal;
-		padding: 5px 10px;
-	}
-	.x-grid-row-over .x-grid-cell-inner {
-		font-weight: bold;
-	}
-	.ux-layout-center-item {
-		margin:0 auto;
-		text-align:left;
-	}
-	.ux-layout-center .x-panel-body,   
-	body.ux-layout-center {
-		text-align:center;
-	}
-	.x-tree-icon-parent {
-		background-image: url("<?=path_asset('images/ico/book.png')?>");
-	}
-	.x-grid-tree-node-expanded .x-tree-icon-parent {
-		background-image: url("<?=path_asset('images/ico/book_open.png')?>");
-	}
-	.x-tree-icon-leaf {
-		background-image: url("<?=path_asset('images/ico/page_white.png')?>");
-	}
-	.x-action-col-icon {
-		cursor:pointer
-	}
-	#panel-1190-body {background-color: #9AF034;}
-	#panel-1191-body {background-color: #2D1A00;}
-	#panel-1192-body {background-color: #2D1A00;}
-	#panel-1193-body {background-color: #E7EFF5;}
-	#panel-1194-body {background-color: #FF3C00;}
-	.bukutamuSend {background-image:url("<?=path_asset('images/ico/tick.png')?>")}
-	.bukutamuNew {background-image:url("<?=path_asset('images/ico/page_edit.png')?>")}
-	.reset {background-image:url("<?=path_asset('images/ico/arrow_refresh.png')?>")}
-	.recapcha {background-image:url("<?=path_asset('images/ico/key_go.png')?>")}
-	.next {background-image:url("<?=path_asset('images/ico/arrow_right.png')?>")}
-	.prev {background-image:url("<?=path_asset('images/ico/arrow_left.png')?>")}
-	.current {background-image:url("<?=path_asset('images/ico/arrow_in.png')?>")}
-	.close {background-image:url("<?=path_asset('images/ico/door.png')?>")}
-	.random {background-image:url("<?=path_asset('images/ico/arrow_switch.png')?>")}
-	.link {background-image:url("<?=path_asset('images/ico/world_link.png')?>")}
-	.menu_root {background-image:url("<?=path_asset('images/ico/tag_red.png')?>")}
-	.menu_child {background-image:url("<?=path_asset('images/ico/tag_blue.png')?>")}
-	.download {background-image:url("<?=path_asset('images/ico/world_go.png')?>")}
-	.clear {background-image:url("<?=path_asset('images/ico/cancel.png')?>")}
-	div.eg {
-		background-color: #E1E1E1;
-		width: 70%;
-		padding: 10px;
-		margin-right: 20px;
-		margin-top: 10px;
-		white-space: normal;
-		border-radius: 5px;
-		-moz-border-radius: 5px;
-		font-family: Verdana, Helvetica, sans-serif;
-	}
-	sup {background-color: green;color: yellow;font-size:10px}
-	.x-action-col-cell img {height: 16px;width: 16px;cursor: pointer;}
-	.x-action-col-cell img.view-an {background-image: url(<?=path_asset('images/ico/script.png')?>);}
-    </style>
+	<?=css_asset('quran.css')?>
 	<script type="text/javascript">
 	var base_url = '<?=base_url()?>';
 	</script>
@@ -110,7 +23,7 @@
 				<tr>
 					<td><?=image_asset('logo.png')?></td>
 					<td align="right">
-						<!-- AddThis Button BEGIN 
+						<!-- AddThis Button BEGIN -->
 						<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 						<a class="addthis_button_preferred_1"></a>
 						<a class="addthis_button_preferred_2"></a>
@@ -121,7 +34,7 @@
 						</div>
 						<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 						<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f801bfd4ebb5319"></script>
-						AddThis Button END -->
+						<!-- AddThis Button END -->
 					</td>					
 				</tr>
 			</table>
