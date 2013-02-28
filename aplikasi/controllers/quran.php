@@ -1,53 +1,32 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Quran extends CI_Controller {
-	var $nama_user_agent = '';
-
     function __construct() {
         parent::__construct();
-        $this->load->model('m_quran');
         // $this->output->enable_profiler(TRUE);
         $this->load->library('user_agent');
         $this->load->library('email');
+		$this->load->model('m_quran');
         $config_mail['mailtype'] = 'html';
         $this->email->initialize($config_mail);
-		//tipe agent
-        if ($this->agent->is_browser()) {
-            $this->nama_user_agent = $this->agent->browser() . ' ' . $this->agent->version();
-        } elseif ($this->agent->is_robot()) {
-            $this->nama_user_agent = $this->agent->robot();
-        } elseif ($this->agent->is_mobile()) {
-            $this->nama_user_agent = $this->agent->mobile();
-        } else {
-            $this->nama_user_agent = $this->agent->agent_string();
-        }
     }
 
     function index() {
-		$this->session->set_userdata(array('visitId'=>null));
-		//insert data pengunjung
-		$clientData = array(
-			'VisIP' => $this->input->ip_address(),
-			'VisRef' => $this->agent->referrer(),
-			'VisUrl' => $_SERVER['REQUEST_URI'],
-			'VisDate' => date('Y-m-d H:i:s'),
-			'VisAgent' => $this->nama_user_agent,
-			'VisPlatform' => $this->agent->platform(),
-			'VisAgentString' => $this->agent->agent_string()
-		);
-		$this->db->insert('logs', $clientData);		
-		$this->session->set_userdata(array('visitId'=>$this->db->insert_id()));
+		$this->m_quran->m_insertLogPengunjung();
         //redirect ke mobile content kalo dari mobile browser
         if ($this->agent->is_mobile()) {
             redirect(base_url() . 'mobile/', 'refresh');
         } else {
-            $data = array(
-                'kataMutiara' => $this->m_quran->m_kataMutiara()
-            );
-
-            $this->load->view('v_quran', $data);
+            $this->load->view('v_quran');
         }
     }
+	
+	function tab($name) {
+		$data = array(
+			'kataMutiara' => $this->m_quran->m_kataMutiara()
+		);
+		$this->load->view('tab/'.$name,$data);
+	}
 
     function displayAyat($id = 1) {
 		$this->m_quran->m_setLogActivity();

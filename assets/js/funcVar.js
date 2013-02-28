@@ -97,7 +97,6 @@ function getAllLayouts() {
                 },{
 					icon: base_url+'assets/images/ico/separator.png',
 				},{
-					// icon: base_url+'assets/images/ico/script.png',
 					getClass: function(v, meta, rec) {
 						if (rec.get('asbabunNuzul') != '') {
 							this.items[2].tooltip = 'AsbabunNuzul ' + rec.get('qs');
@@ -520,13 +519,40 @@ function getAllLayouts() {
             xtype: 'tabpanel',
             items: [{
                 title: 'Selamat Datang',
-                contentEl: 'tentang-div'
+				loader: {
+                    url: base_url+'quran/tab/tentang',
+                    contentType: 'html',
+                    loadMask: true
+                },
+				listeners: {
+                    activate: function(tab) {
+                        tab.loader.load();
+                    }
+                }
             },{
                 title: 'Link',
-                contentEl: 'link-div'
+				loader: {
+                    url: base_url+'quran/tab/link',
+                    contentType: 'html',
+                    loadMask: true
+                },
+				listeners: {
+                    activate: function(tab) {
+                        tab.loader.load();
+                    }
+                }
             },{
                 title: 'Donasi',
-                contentEl: 'donasi-div'
+				loader: {
+                    url: base_url+'quran/tab/donasi',
+                    contentType: 'html',
+                    loadMask: true
+                },
+				listeners: {
+                    activate: function(tab) {
+                        tab.loader.load();
+                    }
+                }
             }],
             title: 'Tentang Aplikasi',
             layout: 'fit',

@@ -1,6 +1,33 @@
 <?php
 
 class M_quran extends CI_Model {
+	function m_insertLogPengunjung() {
+		//tipe agent
+        if ($this->agent->is_browser()) {
+            $nama_user_agent = $this->agent->browser() . ' ' . $this->agent->version();
+        } elseif ($this->agent->is_robot()) {
+            $nama_user_agent = $this->agent->robot();
+        } elseif ($this->agent->is_mobile()) {
+            $nama_user_agent = $this->agent->mobile();
+        } else {
+            $nama_user_agent = $this->agent->agent_string();
+        }
+	
+		$this->session->set_userdata(array('visitId'=>null));
+		//insert data pengunjung
+		$clientData = array(
+			'VisIP' => $this->input->ip_address(),
+			'VisRef' => $this->agent->referrer(),
+			'VisUrl' => $_SERVER['REQUEST_URI'],
+			'VisDate' => date('Y-m-d H:i:s'),
+			'VisAgent' => $nama_user_agent,
+			'VisPlatform' => $this->agent->platform(),
+			'VisAgentString' => $this->agent->agent_string()
+		);
+		$this->db->insert('logs', $clientData);
+		$this->session->set_userdata(array('visitId'=>$this->db->insert_id()));
+	}
+
     function m_displayAyat($id = 0) {
 		$cariKata = $this->input->post('cariKata') == '' ? '' : $this->input->post('cariKata');
         $query = $this->db->select('*')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id')->where(array('a.ID' => $id))->get();

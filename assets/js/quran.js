@@ -81,7 +81,7 @@ Ext.onReady(function(){
 		border: false,
 		autoScroll: true,
 		margins: '0 0 0 0',
-		html: '<center><a href="https://www.facebook.com/pages/Al-Quran-Digital-Indonesian-Translation/138205322915167" target="_TOP" title="Al-Qur&#039;an Digital Indonesian Translation"><img src="https://badge.facebook.com/badge/138205322915167.1837.672375535.png" style="border: 0px;" /></a><br/><a href="http://www.facebook.com/business/dashboard/" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Make your own badge!">Promote Your Page Too</a></center>',
+		html: '<center><a href="https://www.facebook.com/pages/Al-Quran-Digital-Indonesian-Translation/138205322915167" target="_TOP" title="Al-Qur&#039;an Digital Indonesian Translation"><img src="https://badge.facebook.com/badge/138205322915167.1837.672375535.png" style="border: 0px;" /></a></center>',
 		bbar: Ext.create('Ext.ux.StatusBar', {
 
 			items: [clock]
