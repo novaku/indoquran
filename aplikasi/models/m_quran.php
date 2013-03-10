@@ -467,15 +467,15 @@ class M_quran extends CI_Model {
 
         if ($url == 'http://www.indoquran.web.id/download/AlQuranDigital.chm') { //jika .chm
             $msg = '<i>Assalamualaikum Warrahmatullahi Wabaroklatuh.</i><br>Berikut alamat download aplikasi : <a href="' . $url . '">' . $url . '</a>.';
-            $subjek = 'Request Download Aplikasi';
+            $subjek = 'Download Aplikasi (CHM)';
         } else {
             $msg = '<i>Assalamualaikum Warrahmatullahi Wabaroklatuh.</i><br>Berikut alamat download aplikasi : <a href="' . $url . '">' . $url . '</a><br>Harap konfirmasi melalui reply email ini jika file sudah berhasil download dan antum ingin mulai membuka aplikasi. Kami akan memberikan detail password untuk aplikasi tersebut.';
-            $subjek = 'Download Aplikasi';
+            $subjek = 'Download Aplikasi (EXE)';
         }
 
         $this->email->from('kontak@indoquran.web.id', 'Alquran Digital:Indonesian Transalation');
         $this->email->to($email);
-        $this->email->cc('kontak@indoquran.web.id');
+        // $this->email->cc('kontak@indoquran.web.id');
 
         $this->email->subject($subjek);
         $this->email->message($msg);
