@@ -537,6 +537,35 @@ var windowBukuTamu = Ext.create('Ext.window.Window', {
         }
     }]
 });
+
+var windowAsbabunNuzul = Ext.create('Ext.window.Window', {
+    title: 'Asbabun Nuzul',
+    hideTitle: true,
+    closable: false,
+    modal: true,
+    width: 650,
+	height: 400,
+    layout: 'border',
+    buttonAlign: 'center',
+    border: false,
+	items: {
+        xtype : 'panel',
+        id:'areaAsbabunNuzul',
+		region: 'center',
+        border: false,
+        autoScroll: true,
+        setLoading: true,
+        layout: 'fit',
+        bodyStyle:'padding:5px'
+    },
+    buttons: [{
+        text: 'Tutup',
+        iconCls: 'close',
+        handler: function() {
+            windowAsbabunNuzul.hide();
+        }
+    }]
+});
 /*
 ===================================END VARIABLES & FUNCTION===================================
 */

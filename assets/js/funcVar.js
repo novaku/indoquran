@@ -105,7 +105,14 @@ function getAllLayouts() {
                     },
                     handler: function(grid, rowIndex, colIndex) {
                         var rec = quranStore.getAt(rowIndex);
-						Ext.MessageBox.alert('AsbabunNuzul ' +rec.get('qs') , rec.get('asbabunNuzul'));
+						windowAsbabunNuzul.setTitle('AsbabunNuzul ' +rec.get('qs'));
+						Ext.getCmp('areaAsbabunNuzul').removeAll();
+						var isi = Ext.create('Ext.Component', {
+							html: rec.get('asbabunNuzul')
+						});
+						Ext.getCmp('areaAsbabunNuzul').add(isi);
+						windowAsbabunNuzul.show();
+						// Ext.MessageBox.alert('AsbabunNuzul ' +rec.get('qs') , rec.get('asbabunNuzul'));
 					}
 				}]
             },{
