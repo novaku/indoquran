@@ -13,7 +13,7 @@ class M_quran extends CI_Model {
             $nama_user_agent = $this->agent->agent_string();
         }
 	
-		$this->session->set_userdata(array('visitId'=>null));
+		// $this->session->set_userdata(array('visitId'=>null));
 		//insert data pengunjung
 		$clientData = array(
 			'VisIP' => $this->input->ip_address(),
@@ -24,8 +24,11 @@ class M_quran extends CI_Model {
 			'VisPlatform' => $this->agent->platform(),
 			'VisAgentString' => $this->agent->agent_string()
 		);
-		$this->db->insert('logs', $clientData);
-		$this->session->set_userdata(array('visitId'=>$this->db->insert_id()));
+		$visId = $this->session->userdata('visitId');
+		if(empty($visId)) {
+			$this->db->insert('logs', $clientData);
+			$this->session->set_userdata(array('visitId'=>$this->db->insert_id()));
+		}
 	}
 
     function m_displayAyat($id = 0) {
@@ -542,6 +545,7 @@ class M_quran extends CI_Model {
 	}
 
 	function m_setLogActivity($txt='') {
+		/*
 		$q = $this->db->get_where('aktifitas',array('log_id'=>$this->session->userdata('visitId')));
 		$jum = $q->num_rows();
 		if($jum>0) {
@@ -560,6 +564,7 @@ class M_quran extends CI_Model {
 			);
 			$this->db->insert('aktifitas',array('log_id'=>$this->session->userdata('visitId'),'aktifitas'=>json_encode($data)));
 		}
+		*/
 	}
 	
 	function m_getTarjamah($id) {
