@@ -22,13 +22,13 @@ function path_asset($asset_name) {
 
 function extjs_asset_css() {
 	$asset_local = '
-<link rel="stylesheet" type="text/css" href="'.base_url().'assets/extjs/resources/css/ext-all-gray.css" />
-<link rel="stylesheet" type="text/css" href="'.base_url().'assets/extjs/examples/ux/css/TabScrollerMenu.css" />
-<link rel="stylesheet" type="text/css" href="'.base_url().'assets/extjs/examples/ux/css/CheckHeader.css" />
-<link rel="stylesheet" type="text/css" href="'.base_url().'assets/extjs/examples/tabs/tabs-adv.css" />
-<link rel="stylesheet" type="text/css" href="'.base_url().'assets/extjs/examples/tabs/tabs.css" />
-<link rel="stylesheet" type="text/css" href="'.base_url().'assets/extjs/examples/ux/grid/css/GridFilters.css" />
-<link rel="stylesheet" type="text/css" href="'.base_url().'assets/extjs/examples/ux/grid/css/RangeMenu.css" />
+<link rel="stylesheet" type="text/css" href="assets/extjs/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="assets/extjs/examples/ux/css/TabScrollerMenu.css" />
+<link rel="stylesheet" type="text/css" href="assets/extjs/examples/ux/css/CheckHeader.css" />
+<link rel="stylesheet" type="text/css" href="assets/extjs/examples/tabs/tabs-adv.css" />
+<link rel="stylesheet" type="text/css" href="assets/extjs/examples/tabs/tabs.css" />
+<link rel="stylesheet" type="text/css" href="assets/extjs/examples/ux/grid/css/GridFilters.css" />
+<link rel="stylesheet" type="text/css" href="assets/extjs/examples/ux/grid/css/RangeMenu.css" />
 	';
 	$asset_cdn = '
 <link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/resources/css/ext-all.css" />
@@ -46,7 +46,7 @@ function extjs_asset_js() {
 	$asset_local = '
 <script type="text/javascript">document.getElementById("loading-message").innerHTML = \'<font face="tahoma" color="white">Memuat Style...</font>\';</script>
 <script type="text/javascript">document.getElementById("loading-message").innerHTML = \'<font face="tahoma" color="white">Memuat System..</font>\';</script>
-<script type="text/javascript" src="'.base_url().'assets/extjs/ext-all.js"></script>
+<script type="text/javascript" src="assets/extjs/ext-all.js"></script>
 <script type="text/javascript">document.getElementById("loading-message").innerHTML = \'<font face="tahoma" color="white">Memuat Aplikasi...</font>\';</script>
 <script type="text/javascript">document.getElementById("loading-message").innerHTML = \'<font face="tahoma" color="white">Inisialisasi...</font>\';</script>
 <!-- aplikasi js -->';
@@ -69,19 +69,19 @@ function extjs_asset_js() {
 
 function quran_mp3($filenya,$ustadz='http://www.everyayah.com/data/Hudhaify_32kbps/') {
 	$asset_local = '
-<object width="480" height="24" id="audioplayer1" data="'.base_url().'assets/swf/player.swf" type="application/x-shockwave-flash"><param value="'.base_url().'assets/swf/player.swf" name="movie"><param value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp;                 rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp;   text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile='.base_url().'assets/quran_mp3/'.$filenya.'" name="FlashVars"><param value="high" name="quality"><param value="false" name="menu"><param value="transparent" name="wmode"></object>
+<object width="480" height="24" id="audioplayer1" data="assets/swf/player.swf" type="application/x-shockwave-flash"><param value="assets/swf/player.swf" name="movie"><param value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp;                 rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp;   text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile=assets/quran_mp3/'.$filenya.'" name="FlashVars"><param value="high" name="quality"><param value="false" name="menu"><param value="transparent" name="wmode"></object>
 	';
 
 	$asset_cdn = '
-<object width="480" height="24" id="audioplayer1" data="'.base_url().'assets/swf/player.swf" type="application/x-shockwave-flash"><param value="'.base_url().'assets/swf/player.swf" name="movie"><param value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp;                 rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp;   text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile='.$ustadz.$filenya.'" name="FlashVars"><param value="high" name="quality"><param value="false" name="menu"><param value="transparent" name="wmode"></object>
+<object width="480" height="24" id="audioplayer1" data="assets/swf/player.swf" type="application/x-shockwave-flash"><param value="assets/swf/player.swf" name="movie"><param value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp;                 rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp;   text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile='.$ustadz.$filenya.'" name="FlashVars"><param value="high" name="quality"><param value="false" name="menu"><param value="transparent" name="wmode"></object>
 	';
 	return $asset_cdn;
 }
 
 function quran_img($filenya,$src='http://c00022506.cdn1.cloudfiles.rackspacecloud.com/') {
-	// list($width, $height, $type, $attr) = getimagesize(base_url().'assets/quran_img/'.$filenya);
-	list($width, $height, $type, $attr) = getimagesize($src.$filenya);
+	list($width, $height, $type, $attr) = getimagesize('assets/quran_img/'.$filenya);
+	// list($width, $height, $type, $attr) = getimagesize($src.$filenya);
 	$asset_local = "<img src=\"".base_url()."assets/quran_img/".$filenya."\" ".$attr." />";
 	$asset_cdn = "<img src=\"".$src.$filenya."\" ".$attr." />";
-	return $asset_cdn;
+	return $asset_local;
 }
