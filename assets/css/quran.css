@@ -51,11 +51,11 @@ body.ux-layout-center {
 .x-action-col-icon {
 	cursor:pointer
 }
-#panel-1190-body {background-color: #9AF034;}
-#panel-1191-body {background-color: #2D1A00;}
-#panel-1192-body {background-color: #2D1A00;}
-#panel-1193-body {background-color: #E7EFF5;}
-#panel-1194-body {background-color: #FF3C00;}
+.panel-database {background-color: #9AF034;}
+.panel-images {background-color: #2D1A00;}
+.panel-audio {background-color: #2D1A00;}
+.panel-extjs {background-color: #E7EFF5;}
+.panel-codeigniter {background-color: #FF3C00;}
 .bukutamuSend {background-image:url("../images/ico/tick.png")}
 .bukutamuNew {background-image:url("../images/ico/page_edit.png")}
 .reset {background-image:url("../images/ico/arrow_refresh.png")}
