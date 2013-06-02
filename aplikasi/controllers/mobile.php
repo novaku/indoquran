@@ -1,15 +1,53 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Mobile extends CI_Controller {
-	function __construct()
-    {
+	function __construct() {
         parent::__construct();
-		$this->load->model('m_quran');
+		$this->load->model('m_mobile');
+		$this->load->library('email');
+		$this->load->helper('email');
     }
 	
-	public function index()
-	{
+	function index() {
 		//echo '<a href="tel:+6285720211699">TELEPON</a>';
-		echo "Mobile version untuk website ini masih dalam tahap pengembangan, harap kunjungi aplikasi website ini dengan menggunakan browser PC";
+		// echo "Mobile version untuk website ini masih dalam tahap pengembangan, harap kunjungi aplikasi website ini dengan menggunakan browser PC";
+		$this->load->view('v_mobile');
+	}
+	
+	function loadResult() {
+		$page = $this->input->post('page') == '' ? '' : $this->input->post('page');
+		$act = $this->input->post('act') == '' ? 'read' : $this->input->post('act');
+		$data = null;
+		if($page=='bukutamu') {
+			if($act=='insert') {
+				echo $this->m_mobile->m_bukuTamu('insert');
+			} else {
+				ob_start();
+				$this->bukutamuPaging(1);
+				$out = ob_get_contents();
+				ob_end_clean();
+				$data['bukutamu'] = $out;
+			}
+		}
+		if($act!='insert') {
+			$this->load->view('mobile_content/result/'.$page,$data);
+		}
+	}
+	
+	function bukutamuPaging($p=1) {
+		$data['bukutamu'] = json_decode($this->m_mobile->m_bukuTamu('read',$p));
+		$this->load->library('pagination');
+		$config['total_rows'] = $data['bukutamu']->jum;
+		$this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+		$this->load->view('mobile_content/result/bukutamuPaging',$data);
+	}
+	
+	function getBukuTamuId($id=1) {
+		echo $this->m_mobile->m_getBukuTamuId($id);
+	}
+	
+	function loadPageAttrib($attribute) {
+		$this->load->view('mobile_content/'.$attribute);
 	}
 }

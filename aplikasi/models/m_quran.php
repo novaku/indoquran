@@ -350,8 +350,8 @@ class M_quran extends CI_Model {
         $text = $this->input->post('text') == '' ? '' : $this->input->post('text');
         $newText = preg_replace('/[^[:print:]]/', '', $this->input->post('text'));
         $newText = htmlspecialchars($newText, ENT_QUOTES);
-        $limit = $this->input->post('limit') == '' ? '' : $this->input->post('limit');
-        $start = $this->input->post('start') == '' ? '' : $this->input->post('start');
+        $limit = $this->input->post('limit') == '' ? 10 : $this->input->post('limit');
+        $start = $this->input->post('start') == '' ? 0 : $this->input->post('start');
         $dir = $this->input->post('dir') == '' ? 'DESC' : $this->input->post('dir');
         $sort = $this->input->post('sort') == '' ? 'date' : $this->input->post('sort');
 
