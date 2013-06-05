@@ -3,7 +3,7 @@ $config['base_url'] = 'mobile/bukutamuPaging/';
 $config['per_page'] = 10;
 $config['num_links'] = 2;
 $config['use_page_numbers'] = TRUE;
-$config['full_tag_open'] = '<div class="pagination pagination-centered pagination-large"><ul>';
+$config['full_tag_open'] = '<div class="pagination pagination-centered"><ul>';
 $config['full_tag_close'] = '</ul></div>';
 $config['first_link'] = false;
 $config['first_tag_open'] = '<li>';
