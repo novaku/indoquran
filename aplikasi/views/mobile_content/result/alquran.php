@@ -1,4 +1,6 @@
 <form class="form-search">
-  <input type="text" class="input-medium search-query" style="width: 80%">
-  <button type="submit" class="btn" style="width: 100px">Cari</button>
+  <div class="input-append">
+    <input type="text" class="span2 search-query">
+    <button type="submit" class="btn">Cari</button>
+  </div>
 </form>
