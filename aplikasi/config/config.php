@@ -357,6 +357,8 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+$config['quran_img'] = 'http://c00022506.cdn1.cloudfiles.rackspacecloud.com/';
+$config['quran_mp3'] = 'http://www.everyayah.com/data/Hudhaify_32kbps/';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
