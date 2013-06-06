@@ -28,6 +28,8 @@
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
 	  var base_url = '<?=base_url()?>';
+	  var quran_img = '<?=$this->config->item('quran_img')?>';
+	  var quran_mp3 = '<?=$this->config->item('quran_mp3')?>';
 	</script>
 </head>
 <body>
