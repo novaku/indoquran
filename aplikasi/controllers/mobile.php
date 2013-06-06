@@ -50,4 +50,8 @@ class Mobile extends CI_Controller {
 	function loadPageAttrib($attribute) {
 		$this->load->view('mobile_content/'.$attribute);
 	}
+	
+	function getAllAyat() {
+		echo $this->m_mobile->m_getAllAyat();
+	}
 }

@@ -77,4 +77,83 @@ class M_mobile extends CI_Model {
 		$qry = $this->db->select("id,DATE_FORMAT(date,'%d-%M-%Y %H:%i:%s') as date,name,email,REPLACE(text,'&lt;br&gt;','') as text",false)->get_where('bukutamu',array('id'=>$id));
 		return json_encode($qry->result());
 	}
+	
+	function m_getAllAyat() {
+        $juzID = $this->input->post('juzID') == '' ? 0 : $this->input->post('juzID');
+        // $start = ($this->input->post('page') - 1) * $this->input->post('limit');
+
+        $this->db->start_cache();
+		$this->db->select('a.ID,a.SuraID,a.VerseID,b.nama surah',false);
+		$this->db->join('surah b', 'a.SuraID=b.id');
+        $this->db->get('quran_indo a');
+		if ($juzID != 0) {
+			switch($juzID) {
+				case 1 : $this->db->where(array('a.ID >= '=> 1,'a.ID < '=> 149));
+					break;
+				case 2 : $this->db->where(array('a.ID >= '=> 149,'a.ID < '=> 260));
+					break;
+				case 3 : $this->db->where(array('a.ID >= '=> 260,'a.ID < '=> 385));
+					break;
+				case 4 : $this->db->where(array('a.ID >= '=> 385,'a.ID < '=> 517));
+					break;
+				case 5 : $this->db->where(array('a.ID >= '=> 517,'a.ID < '=> 641));
+					break;
+				case 6 : $this->db->where(array('a.ID >= '=> 641,'a.ID < '=> 752));
+					break;
+				case 7 : $this->db->where(array('a.ID >= '=> 752,'a.ID < '=> 800));
+					break;
+				case 8 : $this->db->where(array('a.ID >= '=> 800,'a.ID < '=> 1042));
+					break;
+				case 9 : $this->db->where(array('a.ID >= '=> 1042,'a.ID < '=> 1201));
+					break;
+				case 10 : $this->db->where(array('a.ID >= '=> 1201,'a.ID < '=> 1329));
+					break;
+				case 11 : $this->db->where(array('a.ID >= '=> 1329,'a.ID < '=> 1479));
+					break;
+				case 12 : $this->db->where(array('a.ID >= '=> 1479,'a.ID < '=> 1649));
+					break;
+				case 13 : $this->db->where(array('a.ID >= '=> 1649,'a.ID < '=> 1804));
+					break;
+				case 14 : $this->db->where(array('a.ID >= '=> 1804,'a.ID < '=> 2030));
+					break;
+				case 15 : $this->db->where(array('a.ID >= '=> 2030,'a.ID < '=> 2215));
+					break;
+				case 16 : $this->db->where(array('a.ID >= '=> 2215,'a.ID < '=> 2484));
+					break;
+				case 17 : $this->db->where(array('a.ID >= '=> 2484,'a.ID < '=> 2674));
+					break;
+				case 18 : $this->db->where(array('a.ID >= '=> 2674,'a.ID < '=> 2876));
+					break;
+				case 19 : $this->db->where(array('a.ID >= '=> 2876,'a.ID < '=> 3219));
+					break;
+				case 20 : $this->db->where(array('a.ID >= '=> 3219,'a.ID < '=> 3385));
+					break;
+				case 21 : $this->db->where(array('a.ID >= '=> 3385,'a.ID < '=> 3564));
+					break;
+				case 22 : $this->db->where(array('a.ID >= '=> 3564,'a.ID < '=> 3727));
+					break;
+				case 23 : $this->db->where(array('a.ID >= '=> 3727,'a.ID < '=> 4090));
+					break;
+				case 24 : $this->db->where(array('a.ID >= '=> 4090,'a.ID < '=> 4265));
+					break;
+				case 25 : $this->db->where(array('a.ID >= '=> 4265,'a.ID < '=> 4511));
+					break;
+				case 26 : $this->db->where(array('a.ID >= '=> 4511,'a.ID < '=> 4706));
+					break;
+				case 27 : $this->db->where(array('a.ID >= '=> 4706,'a.ID < '=> 5105));
+					break;
+				case 28 : $this->db->where(array('a.ID >= '=> 5105,'a.ID < '=> 5242));
+					break;
+				case 29 : $this->db->where(array('a.ID >= '=> 5242,'a.ID < '=> 5673));
+					break;
+				case 30 : $this->db->where(array('a.ID >= '=> 5673));
+					break;
+			}
+        }
+        $this->db->stop_cache();
+        $total = $this->db->get()->num_rows();
+        // $this->db->limit($this->input->post('limit'), $start);
+        $query = $this->db->get();
+        return json_encode($query->result());
+    }
 }
