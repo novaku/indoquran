@@ -54,4 +54,17 @@ class Mobile extends CI_Controller {
 	function getAllAyat() {
 		echo $this->m_mobile->m_getAllAyat();
 	}
+	
+	function displayAyat($id) {
+        echo $this->m_mobile->m_displayAyat($id);
+    }
+	
+	function mp3player($id) {
+		$data = $this->m_mobile->getAyatInfo($id);
+		$arr = array(
+			'mp3_file' => $data['mp3'],
+			'mp3_info' => $data['nama_surah'].':'.$data['VerseID']
+		);
+		$this->load->view('v_mp3_player',$arr);
+	}
 }
