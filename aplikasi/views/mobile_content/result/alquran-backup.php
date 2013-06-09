@@ -34,4 +34,30 @@ foreach($juz as $k => $v) {
     <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Tutup</button>
   </div>
 </div>
-<script src="<?=base_url()?>assets/js/quran-juz.js"></script>
+
+<script type="text/javascript">
+function getAyatId(id,judul) {
+	$("#myModalLabel").html(judul);
+	$.get('mobile/displayAyat/'+id, function(data) {
+		$("#ayatModal .modal-body").html(data);
+	});
+}
+<?php
+foreach($juz as $k => $v) {
+?>
+$('#collapse<?=$v['id']?>').on('show', function () {
+	var elm = $('#collapse<?=$v['id']?> .accordion-inner');
+	elm.append('<br>');
+	$.get("json/juz<?=$v['id']?>.json",
+	function(data){
+		var i=1;
+		$.each(data, function(key, val) {
+			elm.append('<a href="#ayatModal" role="button" class="btn" data-toggle="modal" onclick="getAyatId('+val.ID+',\''+val.surah+' ayat '+val.VerseID+'\')">Buka QS. '+val.surah+':'+val.VerseID+'</a>');
+			i++;
+		});
+	}, "json");
+});
+<?php
+}
+?>
+</script>
