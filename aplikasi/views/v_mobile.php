@@ -24,7 +24,7 @@
       <div id="page-menu"></div>
       <div class="container">
         <br/>
-		<div id="result"><img id="loading" src="<?=base_url()?>assets/images/loading-min.gif" alt="loading" /></div>
+		<div id="result"></div>
       </div>
       <div id="push"></div>
     </div>

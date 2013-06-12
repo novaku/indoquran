@@ -35,6 +35,7 @@ class Mobile extends CI_Controller {
 	}
 	
 	function bukutamuPaging($p=1) {
+		$this->output->cache(60);
 		$data['bukutamu'] = json_decode($this->m_mobile->m_bukuTamu('read',$p));
 		$this->load->library('pagination');
 		$config['total_rows'] = $data['bukutamu']->jum;
@@ -44,22 +45,27 @@ class Mobile extends CI_Controller {
 	}
 	
 	function getBukuTamuId($id=1) {
+		$this->output->cache(60);
 		echo $this->m_mobile->m_getBukuTamuId($id);
 	}
 	
 	function loadPageAttrib($attribute) {
+		$this->output->cache(60);
 		$this->load->view('mobile_content/'.$attribute);
 	}
 	
 	function getAllAyat() {
+		$this->output->cache(60);
 		echo $this->m_mobile->m_getAllAyat();
 	}
 	
 	function displayAyat($id) {
+		$this->output->cache(60);
         echo $this->m_mobile->m_displayAyat($id);
     }
 	
 	function mp3player($id) {
+		$this->output->cache(60);
 		$data = $this->m_mobile->getAyatInfo($id);
 		$arr = array(
 			'mp3_file' => $data['mp3'],
@@ -69,6 +75,7 @@ class Mobile extends CI_Controller {
 	}
 	
 	function getJumAyat($id=1) {
+		$this->output->cache(60);
 		echo $this->m_mobile->m_getJumAyat($id);
 	}
 }
