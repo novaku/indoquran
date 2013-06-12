@@ -67,4 +67,8 @@ class Mobile extends CI_Controller {
 		);
 		$this->load->view('v_mp3_player',$arr);
 	}
+	
+	function getJumAyat($id=1) {
+		echo $this->m_mobile->m_getJumAyat($id);
+	}
 }

@@ -176,4 +176,24 @@ class M_mobile extends CI_Model {
         }
         return $text;
     }
+	
+	function m_getJumAyat($surahId) {
+		$q = $this->db->select('id,nama,jum_ayat')->get_where('surah',array('id'=>$surahId));
+		$r = $q->row();
+		$jum = $r->jum_ayat;
+		$t = $this->db->select('ID')->from('quran_indo')->where('SuraID',$r->id)->order_by('VerseID','asc')->limit(1)->get();
+		$d = $t->row();
+		$ayatId = $d->ID;
+		$arr = array();
+		for($i=1;$i<=$jum;$i++) {
+			$arr[] = array(
+				'ID' => $ayatId,
+				'SuraID' => $r->id,
+				'VerseID' => $i,
+				'surah' => str_replace("'", "`", $r->nama)
+			);
+			$ayatId++;
+		}
+		return json_encode($arr);
+	}
 }
