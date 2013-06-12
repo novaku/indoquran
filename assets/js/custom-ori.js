@@ -1,3 +1,10 @@
+$(document).ajaxSend(function(event, request, settings) {
+	$('#loading-indicator').show();
+});
+
+$(document).ajaxComplete(function(event, request, settings) {
+	$('#loading-indicator').hide();
+});
 //init variables
 var default_content="";
 var menuId=["depan","alquran","bukutamu"];
@@ -39,8 +46,6 @@ function loadPage(url){
 		dataType: "html",
 		success: function(msg){
 			if(parseInt(msg)!=0){
-				$('#result').html('<img id="loading" src="assets/images/loading-min.gif" alt="loading" />');
-				$('#loading').css('visibility','hidden');
 				$('#result').html(msg);
 				addActiveClass(url);
 			}
