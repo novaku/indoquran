@@ -130,7 +130,7 @@ $mobiles = array(
 					'zte'				=> "ZTE",
 					'sendo'				=> "Sendo",
 					'android'           => "Android",
-					'windows'           => "Windows Phone",
+					// 'windows'           => "Windows Phone",
 
 					// Operating Systems
 					'symbian'				=> "Symbian",
