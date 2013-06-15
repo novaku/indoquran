@@ -42,7 +42,7 @@
 		<div id="north-div" align="center">
 			<table border="0" width="100%">
 				<tr>
-					<td><?=image_asset('logo.png')?></td>
+					<td><img width="512" height="52" src="assets/images/logo.png" /></td>
 					<td align="right">
 						<!-- AddThis Button BEGIN -->
 						<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
