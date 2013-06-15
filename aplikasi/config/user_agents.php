@@ -43,7 +43,10 @@ $platforms = array (
 					'bsdi'				=> 'BSDi',
 					'openbsd'			=> 'OpenBSD',
 					'gnu'				=> 'GNU/Linux',
-					'unix'				=> 'Unknown Unix OS'
+					'unix'				=> 'Unknown Unix OS',
+					'playstation 3'     => 'Playstation 3',
+                    'nintendo wii'      => 'Nintendo Wii',
+					'ubuntu'            => 'Ubuntu',
 				);
 
 
@@ -126,6 +129,8 @@ $mobiles = array(
 					'spv'				=> "SPV",
 					'zte'				=> "ZTE",
 					'sendo'				=> "Sendo",
+					'android'           => "Android",
+					'windows'           => "Windows Phone",
 
 					// Operating Systems
 					'symbian'				=> "Symbian",
