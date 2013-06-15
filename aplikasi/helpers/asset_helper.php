@@ -4,9 +4,8 @@ function css_asset($asset_name) {
 }
 
 function image_asset($asset_name) {
-	// list($width, $height, $type, $attr) = getimagesize(base_url().'assets/images/'.$asset_name);
-	// return "<img src=\"".base_url()."assets/images/".$asset_name."\" ".$attr." />";
-	return "<img src=\"".base_url()."assets/images/".$asset_name."\" />";
+	list($width, $height, $type, $attr) = getimagesize(base_url().'assets/images/'.$asset_name);
+	return "<img src=\"".base_url()."assets/images/".$asset_name."\" ".$attr." />";
 }
 
 function js_asset($asset_name) {
