@@ -17,7 +17,7 @@ class Quran extends CI_Controller {
         if ($this->agent->is_mobile()) {
             redirect(base_url() . 'mobile/', 'refresh');
         } else {
-			$this->output->cache(60);
+			// $this->output->cache(60);
             $this->load->view('v_quran');
         }
     }
@@ -26,7 +26,7 @@ class Quran extends CI_Controller {
 		$data = array(
 			'kataMutiara' => $this->m_quran->m_kataMutiara()
 		);
-		$this->output->cache(60);
+		// $this->output->cache(60);
 		$this->load->view('tab/'.$name,$data);
 	}
 
@@ -85,7 +85,7 @@ class Quran extends CI_Controller {
     }
 
     function viewHosting() {
-		$this->output->cache(60);
+		// $this->output->cache(60);
         $this->load->view('v_hosting');
     }
 
@@ -109,24 +109,24 @@ class Quran extends CI_Controller {
         } else {
             $data['navi'] = '<table border="0"><tr><td align="right">'.$navPr.'</td><td>|<br/>|<br/>|<br/>|<br/>|</td><td>' . $navNx.'</td></tr></table>';
         }
-		$this->output->cache(60);
+		// $this->output->cache(60);
         $this->load->view('v_ayat', $data);
     }
 
     function prakata() {
         $data['jumDownload'] = $this->db->count_all('download_stat');
-		$this->output->cache(60);
+		// $this->output->cache(60);
         $this->load->view('v_prakata', $data);
     }
 
     function api() {
-		$this->output->cache(60);
+		// $this->output->cache(60);
         $this->load->view('v_api');
     }
 
     function reff($type='') {
 		$data = array('type'=>$type);
-		$this->output->cache(60);
+		// $this->output->cache(60);
         $this->load->view('v_reff',$data);
     }
 
@@ -137,12 +137,12 @@ class Quran extends CI_Controller {
     }
 
     function test() {
-		$this->output->cache(60);
+		// $this->output->cache(60);
         $this->load->view('v_test');
     }
 
     function gads() {
-		$this->output->cache(60);
+		// $this->output->cache(60);
         $this->load->view('v_google_ads');
     }
 	
