@@ -12,6 +12,7 @@
 	echo $pagination;
 ?>
 <script type="text/javascript">
+var base_url = '<?=base_url()?>';
 $('.pagination ul li a').click(function(e){
 	e.preventDefault();
 	var href = $(this).attr('href');
@@ -20,10 +21,11 @@ $('.pagination ul li a').click(function(e){
 	});
 });
 function getBukutamuId(id) {
-	$.get('mobile/getBukuTamuId/'+id, function(data) {
+	$.get(base_url+'mobile/getBukuTamuId/'+id, function(data) {
 		var obj = $.parseJSON(data);
+		var isi = 'Tanggal : '+obj[0].date+'<br/>Email : '+obj[0].email+'<br/>Isi :<br/>'+obj[0].text;
 		$('#bukutamuModalLabel').text("Dari : "+obj[0].name);
-		$('#bukutamuModalBody').html("Tanggal : "+obj[0].date+"<br/>Email : "+obj[0].email+"<br/>Isi :<br/>"+obj[0].text);
+		$('#bukutamuModalBody').html(isi);
 	});
-}
+};
 </script>

@@ -8,10 +8,23 @@ class Mobile extends CI_Controller {
 		$this->load->helper('email');
     }
 	
-	function index() {
+	function index($page='depan') {
 		//echo '<a href="tel:+6285720211699">TELEPON</a>';
 		// echo "Mobile version untuk website ini masih dalam tahap pengembangan, harap kunjungi aplikasi website ini dengan menggunakan browser PC";
-		$this->load->view('v_mobile');
+		$data['page'] = $page;
+		if($page=='bukutamu') {
+			$act = $this->input->post('act') == '' ? 'read' : $this->input->post('act');
+			if($act=='insert') {
+				echo $this->m_mobile->m_bukuTamu('insert');
+			} else {
+				ob_start();
+				$this->bukutamuPaging(1);
+				$out = ob_get_contents();
+				ob_end_clean();
+				$data['bukutamu'] = $out;
+			}
+		}
+		$this->load->view('v_mobile',$data);
 	}
 	
 	function loadResult() {

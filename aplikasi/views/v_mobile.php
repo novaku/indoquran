@@ -18,21 +18,44 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?=base_url()?>assets/ico/72.png">
 	<link rel="apple-touch-icon-precomposed" href="<?=base_url()?>assets/ico/57.png">
 	<link rel="shortcut icon" href="<?=base_url()?>assets/ico/32.png">
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-40015895-1', 'indoquran.web.id');
+	  ga('send', 'pageview');
+	</script>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-40015895-1']);
+	  _gaq.push(['_setDomainName', 'indoquran.web.id']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
   </head>
   <body>
     <div id="wrap">
-      <div id="page-menu"></div>
-      <div class="container">
-        <br/>
-		<div id="result"><img id="loading-indicator" src="assets/images/loading-min.gif" alt="loading" /></div>
-      </div>
+      <div id="page-menu">
+		<?php $this->load->view('mobile_content/menu'); ?>
+	  </div>
+	  <div class="container">
+		<br>
+		<div id="result">
+			<?php $this->load->view('mobile_content/result/'.$page); ?>
+		</div>
+	  </div>
       <div id="push"></div>
     </div>
-    <div id="page-footer"></div>
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?=base_url()?>assets/js/jquery.js"></script>
-	<!-- <script src="<?=base_url()?>assets/js/jquery-2.0.1.min.js"></script> -->
+    <div id="page-footer">
+		<?php $this->load->view('mobile_content/footer'); ?>
+	</div>
     <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
-    <script src="<?=base_url()?>assets/js/custom.js"></script>
   </body>
 </html>

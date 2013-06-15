@@ -59,13 +59,30 @@
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
   </div>
 </div>
+<script src="<?=base_url()?>assets/js/jquery-2.0.1.min.js"></script>
 <script type="text/javascript">
+var base_url = '<?=base_url()?>';
+$('.pagination ul li a').click(function(e){
+	e.preventDefault();
+	var href = $(this).attr('href');
+	$.get(href, function(data) {
+		$('#bukutamu-daftar').html(data);
+	});
+});
+function getBukutamuId(id) {
+	$.get(base_url+'mobile/getBukuTamuId/'+id, function(data) {
+		var obj = $.parseJSON(data);
+		var isi = 'Tanggal : '+obj[0].date+'<br/>Email : '+obj[0].email+'<br/>Isi :<br/>'+obj[0].text;
+		$('#bukutamuModalLabel').text("Dari : "+obj[0].name);
+		$('#bukutamuModalBody').html(isi);
+	});
+};
 $("#form-isi-bukutamu").submit(function(e){
 	e.preventDefault();
 	var form = $(this);
 	$.ajax({
 		type: "POST",
-		url: "mobile/loadResult",
+		url: base_url+"mobile/loadResult",
 		data: form.serialize(),
 		success: function(msg){
 			var obj = $.parseJSON(msg);

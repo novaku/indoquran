@@ -1,5 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-$config['base_url'] = 'mobile/bukutamuPaging/';
+$config['base_url'] = base_url().'mobile/bukutamuPaging/';
 $config['per_page'] = 10;
 $config['num_links'] = 2;
 $config['use_page_numbers'] = TRUE;
