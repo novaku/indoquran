@@ -39,6 +39,7 @@
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
 	</script>
+	<script src="<?=base_url()?>assets/js/jquery-2.0.1.min.js"></script>
   </head>
   <body>
     <div id="wrap">
@@ -56,6 +57,10 @@
     <div id="page-footer">
 		<?php $this->load->view('mobile_content/footer'); ?>
 	</div>
-    <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
+	<script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		var base_url = '<?=base_url()?>';
+	</script>
+	<script src="<?=base_url()?>assets/js/quran-juz.js"></script>
   </body>
 </html>

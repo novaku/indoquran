@@ -11,21 +11,4 @@
 	echo '</table>';
 	echo $pagination;
 ?>
-<script type="text/javascript">
-var base_url = '<?=base_url()?>';
-$('.pagination ul li a').click(function(e){
-	e.preventDefault();
-	var href = $(this).attr('href');
-	$.get(href, function(data) {
-		$('#bukutamu-daftar').html(data);
-	});
-});
-function getBukutamuId(id) {
-	$.get(base_url+'mobile/getBukuTamuId/'+id, function(data) {
-		var obj = $.parseJSON(data);
-		var isi = 'Tanggal : '+obj[0].date+'<br/>Email : '+obj[0].email+'<br/>Isi :<br/>'+obj[0].text;
-		$('#bukutamuModalLabel').text("Dari : "+obj[0].name);
-		$('#bukutamuModalBody').html(isi);
-	});
-};
-</script>
+<script src="<?=base_url()?>assets/js/bukutamu.js"></script>

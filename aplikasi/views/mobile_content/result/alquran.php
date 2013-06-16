@@ -81,8 +81,3 @@ $obj = json_decode($surahJson);
     <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Tutup</button>
   </div>
 </div>
-<script src="<?=base_url()?>assets/js/jquery-2.0.1.min.js"></script>
-<script type="text/javascript">
-	var base_url = '<?=base_url()?>';
-</script>
-<script src="<?=base_url()?>assets/js/quran-juz.js"></script>
