@@ -6,6 +6,7 @@ class Mobile extends CI_Controller {
 		$this->load->model('m_mobile');
 		$this->load->library('email');
 		$this->load->helper('email');
+		$this->load->driver('cache');
     }
 	
 	function index($page='depan') {

@@ -64,7 +64,11 @@ class M_quran extends CI_Model {
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan;
         }
-        return $text;
+        if ( ! $memDisplayAyat = $this->cache->memcached->get('mem_display_ayat'.$id)) {
+			$memDisplayAyat = $text;
+			$this->cache->memcached->save('mem_display_ayat'.$id, $memDisplayAyat, 300);
+		}
+        return $memDisplayAyat;
     }
 
     function m_getAllAyat() {
@@ -158,15 +162,17 @@ class M_quran extends CI_Model {
 			}
         }
         $this->db->stop_cache();
-
         $total = $this->db->get()->num_rows();
-
         $this->db->limit($this->input->post('limit'), $start);
-
         $query = $this->db->get();
 
         // $total = $this->db->select('*')->from('quran_indo')->like('AyahText', $kata, 'both')->get()->num_rows();
-        return '({total:' . $total . ',data:' . json_encode($query->result()) . '})';
+        
+        if ( ! $memGetAllAyat = $this->cache->memcached->get('mem_get_all_ayat'.$kata.$SuraID.$juzID.$start)) {
+			$memGetAllAyat = '({total:' . $total . ',data:' . json_encode($query->result()) . '})';
+			$this->cache->memcached->save('mem_get_all_ayat'.$kata.$SuraID.$juzID.$start, $memGetAllAyat, 300);
+		}
+        return $memGetAllAyat;
     }
 
     function m_getPengunjung() {
@@ -295,7 +301,12 @@ class M_quran extends CI_Model {
                 } break;
         }
 		// echo $this->db->last_query();
-        return '({rows:' . json_encode($result->result()) . '})';
+		
+		if ( ! $memGetStatistik = $this->cache->memcached->get('mem_get_statistik'.$tipe.$chartVar.$lim)) {
+			$memGetStatistik = '({rows:' . json_encode($result->result()) . '})';
+			$this->cache->memcached->save('mem_get_statistik'.$tipe.$chartVar.$lim, $memGetStatistik, 300);
+		}
+        return $memGetStatistik;
     }
 
     function m_statistikLast() {
@@ -374,9 +385,9 @@ class M_quran extends CI_Model {
                     );
 
                     if ($this->db->insert('bukutamu', $data)) {
-                        echo "{success:true, Msg:'Sukses memasukkan bukutamu dari $_REQUEST[name]'}";
+                        return "{success:true, Msg:'Sukses memasukkan bukutamu dari $_REQUEST[name]'}";
                     } else {
-                        echo"{success:false, Msg:'Gagal memasukkan bukutamu dari $_REQUEST[name]'}";
+                        return "{success:false, Msg:'Gagal memasukkan bukutamu dari $_REQUEST[name]'}";
                     }
                 } break;
             case "read" : {
@@ -394,7 +405,11 @@ class M_quran extends CI_Model {
                         );
                     }
                     $sum = $this->db->count_all('bukutamu');
-                    echo '({success:true, total:' . $sum . ',rows:' . json_encode($arr) . '})';
+                    if ( ! $memGetBukuTamu = $this->cache->memcached->get('mem_get_bukutamu'.$sort.$dir.$limit.$start)) {
+						$memGetBukuTamu = '({success:true, total:' . $sum . ',rows:' . json_encode($arr) . '})';
+						$this->cache->memcached->save('mem_get_bukutamu'.$sort.$dir.$limit.$start, $memGetBukuTamu, 300);
+					}
+			        return $memGetBukuTamu;
                 } break;
         }
     }
@@ -419,6 +434,7 @@ class M_quran extends CI_Model {
     }
 
     function m_getAyatInfo() {
+    	$ayatId = $this->input->post('ayatId')==''?0:$this->input->post('ayatId');
         $query = $this->db->query("
 			SELECT (SELECT CONCAT('[',a.SuraID, ':', a.VerseID, '] ', b.nama, ' (', b.arti, '), Ayat ', a.VerseID)
 				FROM quran_indo a 
@@ -433,9 +449,13 @@ class M_quran extends CI_Model {
 			LEFT JOIN surah d ON (c.SuraID=d.id)
 			WHERE c.ID = '" . $this->input->post('ayatId') . "'
 		");
-        foreach ($query->result() as $row) {
-            return '["' . $row->prev . '","' . $row->current . '","' . $row->next . '"]';
-        }
+		$row = $query->row();
+		
+		if ( ! $memGetAyatInfo = $this->cache->memcached->get('mem_get_ayat_info'.$ayatId)) {
+			$memGetAyatInfo = '["' . $row->prev . '","' . $row->current . '","' . $row->next . '"]';
+			$this->cache->memcached->save('mem_get_ayat_info'.$ayatId, $memGetAyatInfo, 300);
+		}
+        return $memGetAyatInfo;
     }
 	
 	function m_getAyatId() {
@@ -497,7 +517,12 @@ class M_quran extends CI_Model {
 		foreach($q->result() as $r) {
 			$arr['rows'][] = array('id'=>$r->id,'head'=>$r->arab,'head_body'=>$r->head_body,'nama_surah'=>$r->nama_surah);
 		}
-		return json_encode($arr);
+		
+		if ( ! $memGetListSurah = $this->cache->memcached->get('mem_get_list_surah')) {
+			$memGetListSurah = json_encode($arr);
+			$this->cache->memcached->save('mem_get_list_surah', $memGetListSurah, 300);
+		}
+        return $memGetListSurah;
 	}
 	
 	function m_getListSurahId() {
@@ -506,7 +531,12 @@ class M_quran extends CI_Model {
 		foreach($q->result() as $r) {
 			$arr['rows'][] = array('id'=>$r->id,'head'=>'Nama Surah','txt'=>$r->txt);
 		}
-		return json_encode($arr);
+		
+		if ( ! $memGetListSurahId = $this->cache->memcached->get('mem_get_list_surah_id')) {
+			$memGetListSurahId = json_encode($arr);
+			$this->cache->memcached->save('mem_get_list_surah_id', $memGetListSurahId, 300);
+		}
+        return $memGetListSurahId;
 	}
 	
 	function m_getListAyatId() {
@@ -518,12 +548,22 @@ class M_quran extends CI_Model {
 		for($i=1;$i<=$jumAyat;$i++) {
 			$arr['rows'][] = array('id'=>$i,'head'=>'Nama Ayat','txt'=>$namaSurah.' : ayat('.$i.')');
 		}
-		return json_encode($arr);
+		
+		if ( ! $memGetListAyatId = $this->cache->memcached->get('mem_get_list_ayat_id'.$SuraID)) {
+			$memGetListAyatId = json_encode($arr);
+			$this->cache->memcached->save('mem_get_list_ayat_id'.$SuraID, $memGetListAyatId, 300);
+		}
+        return $memGetListAyatId;
 	}
 	
 	function m_getListPlatform() {
 		$q = $this->db->select('VisPlatform as id,VisPlatform as text')->from('logs')->group_by('VisPlatform')->order_by('VisPlatform')->get();
-		return json_encode($q->result());
+		
+		if ( ! $memGetListPlatform = $this->cache->memcached->get('mem_get_list_platform')) {
+			$memGetListPlatform = json_encode($q->result());
+			$this->cache->memcached->save('mem_get_list_platform', $memGetListPlatform, 300);
+		}
+        return $memGetListPlatform;
 	}
 	
 	function m_autoCompleteSearch() {
@@ -541,7 +581,12 @@ class M_quran extends CI_Model {
 		$this->db->stop_cache();
         $total = $this->db->get()->num_rows();
         $query = $this->db->limit($count, $start)->get();
-        return $callback . '({"total":"' . $total . '","data":' . json_encode($query->result_object()) . '})';
+        
+        if ( ! $memGetAutoComplete = $this->cache->memcached->get('mem_get_list_autocomplete'.json_encode($cari))) {
+			$memGetAutoComplete = $callback . '({"total":"' . $total . '","data":' . json_encode($query->result_object()) . '})';
+			$this->cache->memcached->save('mem_get_list_autocomplete'.json_encode($cari), $memGetAutoComplete, 300);
+		}
+        return $memGetAutoComplete;
 	}
 
 	function m_setLogActivity($txt='') {

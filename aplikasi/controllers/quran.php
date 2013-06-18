@@ -9,6 +9,7 @@ class Quran extends CI_Controller {
 		$this->load->model('m_quran');
         $config_mail['mailtype'] = 'html';
         $this->email->initialize($config_mail);
+        $this->load->driver('cache');
     }
 
     function index() {
@@ -31,7 +32,6 @@ class Quran extends CI_Controller {
 	}
 
     function displayAyat($id = 1) {
-		$this->m_quran->m_setLogActivity();
         echo $this->m_quran->m_displayAyat($id);
     }
 
@@ -45,13 +45,11 @@ class Quran extends CI_Controller {
 
     function getPengunjung() {
 		$page = $this->input->post('page')==''?null:$this->input->post('page');
-		$this->m_quran->m_setLogActivity($page);
         echo $this->m_quran->m_getPengunjung();
     }
 
     function statistik() {
 		$tipe = $this->input->post('tipe')==''?'harian':$this->input->post('tipe');
-		$this->m_quran->m_setLogActivity($tipe);
         echo $this->m_quran->m_statistik();
     }
 
@@ -61,7 +59,6 @@ class Quran extends CI_Controller {
 
     function bukuTamu($act = "insert") {
 		$start = $this->input->post('start') == '' ? '' : $this->input->post('start');
-		$this->m_quran->m_setLogActivity($start);
         switch ($act) {
             case "insert" : {
                     echo $this->m_quran->m_bukuTamu("insert");
@@ -90,7 +87,6 @@ class Quran extends CI_Controller {
     }
 
     function viewAyat($id) {
-		$this->m_quran->m_setLogActivity($id);
         $data['display'] = $this->m_quran->m_displayAyat($id);
 		$data['judul'] = $this->m_quran->m_getJudulAyat($id);
 		$data['tarjamah'] = $this->m_quran->m_getTarjamah($id);
@@ -132,7 +128,6 @@ class Quran extends CI_Controller {
 
     function download() {
 		$email = $this->input->post('emailField') == '' ? '' : $this->input->post('emailField');
-		$this->m_quran->m_setLogActivity($email);
         echo $this->m_quran->m_download();
     }
 
@@ -174,7 +169,6 @@ class Quran extends CI_Controller {
 	
 	function autoCompleteSearch() {
 		$cari = $this->input->get('query') != '' ? $this->input->get('query') : '';
-		$this->m_quran->m_setLogActivity($cari);
 		echo $this->m_quran->m_autoCompleteSearch();
 	}
 }
