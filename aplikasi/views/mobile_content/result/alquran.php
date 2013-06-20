@@ -29,6 +29,7 @@ $obj = json_decode($surahJson);
 						<blockquote>
 						  <small><?=$v->head_body?></small>
 						</blockquote>
+						<div id="contentSurah<?=$v->id?>"></div>
 						</div>
 					</div>
 				</div>
