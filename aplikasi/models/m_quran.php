@@ -302,11 +302,13 @@ class M_quran extends CI_Model {
         }
 		// echo $this->db->last_query();
 		
-		if ( ! $memGetStatistik = $this->cache->memcached->get('mem_get_statistik'.$tipe.$chartVar.$lim)) {
-			$memGetStatistik = '({rows:' . json_encode($result->result()) . '})';
-			$this->cache->memcached->save('mem_get_statistik'.$tipe.$chartVar.$lim, $memGetStatistik, 300);
-		}
-        return $memGetStatistik;
+		//not using memcached for graphic
+		// if ( ! $memGetStatistik = $this->cache->memcached->get('mem_get_statistik'.$tipe.$chartVar.$lim)) {
+			// $memGetStatistik = '({rows:' . json_encode($result->result()) . '})';
+			// $this->cache->memcached->save('mem_get_statistik'.$tipe.$chartVar.$lim, $memGetStatistik, 300);
+		// }
+        // return $memGetStatistik;
+		return '({rows:' . json_encode($result->result()) . '})';
     }
 
     function m_statistikLast() {
