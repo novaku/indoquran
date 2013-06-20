@@ -210,9 +210,9 @@ class M_mobile extends CI_Model {
 			$ayatId++;
 		}
 		
-		if ( ! $memGetJumAyatId = $this->cache->memcached->get('mem_get_ayat_id_mobile'.$surahId)) {
+		if ( ! $memGetJumAyatId = $this->cache->memcached->get('mem_get_jum_ayat_mobile'.$surahId)) {
 			$memGetJumAyatId = json_encode($arr);
-			$this->cache->memcached->save('mem_get_ayat_id_mobile'.$surahId, $memGetJumAyatId, 300);
+			$this->cache->memcached->save('mem_get_jum_ayat_mobile'.$surahId, $memGetJumAyatId, 300);
 		}
         return $memGetJumAyatId;
 	}
