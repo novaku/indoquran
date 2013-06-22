@@ -85,4 +85,8 @@ class Mobile extends CI_Controller {
 	function getJumAyat($id=1) {
 		echo $this->m_mobile->m_getJumAyat($id);
 	}
+	
+	function getAyatInfo($id=1) {
+		echo $this->m_mobile->m_getAyatInfo($id);
+	}
 }

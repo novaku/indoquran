@@ -60,6 +60,13 @@
 	<script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		var base_url = '<?=base_url()?>';
+		$('#loadingDiv').hide();
+		$(document).ajaxStart(function() {
+			$( "#loadingDiv" ).show();
+		});
+		$(document).ajaxStop(function() {
+			$( "#loadingDiv" ).hide();
+		});
 	</script>
 	<script src="<?=base_url()?>assets/js/quran-juz.js"></script>
   </body>

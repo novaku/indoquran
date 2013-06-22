@@ -216,4 +216,27 @@ class M_mobile extends CI_Model {
 		}
         return $memGetJumAyatId;
 	}
+	
+	function m_getAyatInfo() {
+    	$ayatId = $this->input->post('ayatId')==''?0:$this->input->post('ayatId');
+        $query = $this->db->query("
+			SELECT (SELECT CONCAT(b.nama, ' : ', a.VerseID)
+				FROM quran_indo a 
+				JOIN surah b ON (a.SuraID=b.id)
+				WHERE a.ID = (c.ID - 1)) prev
+				,(SELECT CONCAT(b.nama, ' : ', a.VerseID)
+				FROM quran_indo a 
+				JOIN surah b ON (a.SuraID=b.id)
+				WHERE a.ID = (c.ID + 1)) as next
+			FROM quran_indo c 
+			WHERE c.ID = '" . $this->input->post('ayatId') . "'
+		");
+		$row = $query->row();
+		
+		if ( ! $memGetAyatInfo = $this->cache->memcached->get('mem_get_ayat_info'.$ayatId)) {
+			$memGetAyatInfo = '["' . $row->prev . '","' . $row->next . '"]';
+			$this->cache->memcached->save('mem_get_ayat_info'.$ayatId, $memGetAyatInfo, 300);
+		}
+        return $memGetAyatInfo;
+    }
 }

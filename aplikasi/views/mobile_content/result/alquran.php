@@ -76,9 +76,11 @@ $obj = json_decode($surahJson);
     <h3 id="myModalLabel">Judul</h3>
   </div>
   <div class="modal-body">
-    <p>-</p>
+    <div id="loadingDiv" style="align:center"><img src="<?=base_url()?>assets/images/loading-min.gif" /></div>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Tutup</button>
+	<span id="prevBtn"><a class="btn btn-info">Prev</a></span>
+	<a class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Tutup</a>
+	<span id="nextBtn"><a class="btn btn-info">Next</a></span>
   </div>
 </div>
