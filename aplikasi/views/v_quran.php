@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>AL-Quran Digital Online : Indonesian Translation</title>

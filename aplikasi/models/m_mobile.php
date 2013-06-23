@@ -46,7 +46,7 @@ class M_mobile extends CI_Model {
 					$this->email->cc($email);
 
 					$this->email->subject('Buku Tamu Baru IndoQuran.Web.Id Dari '.$name);
-					$this->email->message('Buku Tamu Dari : '.$name.'<br/>Email : <a href="mailto:'.$email.'">'.$email.'</a><br/>Isi : '.$text);
+					$this->email->message('Buku Tamu Dari : '.$name.'<br/>Email : <a href="mailto:'.$email.'">'.$email.'</a><br/>Isi : '.$text."<br/>--dikirim dari mobile website--");
 
 					$this->email->send();
 
@@ -257,4 +257,84 @@ class M_mobile extends CI_Model {
 		}
         return $memGetAyatInfo;
     }
+	
+	function m_getHasilCari() {
+		$arr = array();
+		$cariKata = $this->input->post('cariKata');
+		if($cariKata=="") {
+			$arr = array(
+				'success'=>false,
+				'data'=>null,
+				'msg'=>'Anda belum memasukkan kata pencarian'
+			);
+		} else {
+			$this->db->start_cache();
+			$this->db->select('a.ID,a.VerseID,a.SuraID,b.nama')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id');
+			$pieces = explode(" ", $cariKata);
+            foreach ($pieces as &$val) {
+                $this->db->or_like('a.AyahText', $val, 'both');
+            }
+			$this->db->order_by('a.SuraID,a.ID');
+			$this->db->stop_cache();
+			$jum = $this->db->get()->num_rows();
+			if($jum > 0) {
+				$arrResult = array();
+				$i=0;
+				$pertama = true;
+				foreach($this->db->get()->result() as $r) {
+					if($pertama) {
+						$arrResult[$i] = array(
+							'surahId' => $r->SuraID,
+							'surahName' => str_replace("'", "`", $r->nama),
+							'ayatList' => array(array(
+								'VerseID'=>$r->VerseID,
+								'ID'=>$r->ID
+							))
+						);
+						$pertama = false;
+					} else {
+						if($arrResult[$i]['surahId'] == $r->SuraID) {
+							$arrResult[$i]['ayatList'][] = array(
+								'VerseID'=>$r->VerseID,
+								'ID'=>$r->ID
+							);
+						} else {
+							$i++;
+							$arrResult[$i] = array(
+								'surahId' => $r->SuraID,
+								'surahName' => str_replace("'", "`", $r->nama),
+								'ayatList' => array(array(
+									'VerseID'=>$r->VerseID,
+									'ID'=>$r->ID
+								))
+							);
+						}
+					}
+				}
+				$j=0;
+				foreach($arrResult as $k) {
+					$total = count($arrResult[$j]['ayatList']);
+					$arrResult[$j]['surahLabel'] = $arrResult[$j]['surahName'].' ('.$total.')';
+					$j++;
+				}
+				$arr = array(
+					'success'=>true,
+					'data'=>array('cariKata'=>$cariKata,'jum'=>$jum,'hasil'=>$arrResult),
+					'msg'=>'Pencarian sedang dilakukan...'
+				);
+			} else {
+				$arr = array(
+					'success'=>false,
+					'data'=>null,
+					'msg'=>'Kata "'.$cariKata.'" tidak ditemukan'
+				);
+			}
+		}
+		if ( ! $memGetHasilCari = $this->cache->memcached->get('mem_get_hasil_cari'.$cariKata)) {
+			$memGetHasilCari = json_encode($arr);
+			$this->cache->memcached->save('mem_get_hasil_cari'.$cariKata, $memGetHasilCari, 300);
+		}
+        return $memGetHasilCari;
+		$this->db->cache_delete_all();
+	}
 }

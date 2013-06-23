@@ -54,6 +54,7 @@ class Mobile extends CI_Controller {
 		$config['total_rows'] = $data['bukutamu']->jum;
 		$this->pagination->initialize($config);
 		$data['pagination'] = $this->pagination->create_links();
+		$data['pageNo'] = $p;
 		$this->load->view('mobile_content/result/bukutamuPaging',$data);
 	}
 	
@@ -88,5 +89,9 @@ class Mobile extends CI_Controller {
 	
 	function getAyatInfo($id=1) {
 		echo $this->m_mobile->m_getAyatInfo($id);
+	}
+	
+	function getHasilCari() {
+		echo $this->m_mobile->m_getHasilCari();
 	}
 }

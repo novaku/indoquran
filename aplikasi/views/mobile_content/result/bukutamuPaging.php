@@ -1,6 +1,7 @@
 <?php
 	echo $pagination;
 	echo '<table class="table table-bordered table-condensed">
+		<caption>-- <code>Halaman '.$pageNo.'</code> --</caption>
 		<tr><th>#</th><th>Tanggal / Waktu</th><th>Nama</th></tr>
 	';
 	$i = $bukutamu->start+1;

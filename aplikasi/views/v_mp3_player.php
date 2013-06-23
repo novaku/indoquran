@@ -48,6 +48,6 @@ soundManager.setup({
 </script>
 </head>
 <body>
-<p><a href="<?=$this->config->item('quran_mp3').$mp3_file?>" class="sm2_button"><?=$mp3_info?></a> <?=$mp3_info?></p>
+<p><a href="<?=$this->config->item('quran_mp3').$mp3_file?>" class="sm2_button"><?=$mp3_info?></a> <?=$mp3_info?> (Murottal)</p>
 </body>
 </html>
