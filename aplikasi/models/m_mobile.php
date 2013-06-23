@@ -22,7 +22,25 @@ class M_mobile extends CI_Model {
 
         switch ($act) {
             case "insert" :
-				if (valid_email($email)) {
+				if($name=="") {
+					$arr = array(
+						'success' => false,
+						'msg' => 'Nama masih kosong'
+					);
+				}
+				else if($email=="") {
+					$arr = array(
+						'success' => false,
+						'msg' => 'Email masih kosong'
+					);
+				}
+				else if($newText=="") {
+					$arr = array(
+						'success' => false,
+						'msg' => 'Komentar masih kosong'
+					);
+				}
+				else if(valid_email($email)) {
 					$this->email->from($email, $name);
 					$this->email->to('kontak@indoquran.web.id');
 					$this->email->cc($email);
@@ -30,7 +48,7 @@ class M_mobile extends CI_Model {
 					$this->email->subject('Buku Tamu Baru IndoQuran.Web.Id Dari '.$name);
 					$this->email->message('Buku Tamu Dari : '.$name.'<br/>Email : <a href="mailto:'.$email.'">'.$email.'</a><br/>Isi : '.$text);
 
-					// $this->email->send();
+					$this->email->send();
 
 					$data = array(
 						'name' => $name,

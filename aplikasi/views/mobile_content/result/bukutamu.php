@@ -38,8 +38,8 @@
 	  </div>
 	  <div class="control-group">
 		<div class="controls">
-		  <button type="reset" class="btn btn-warning">Reset</button>
-		  <button type="submit" class="btn btn-primary">Kirim</button>
+		  <button type="reset" class="btn btn-warning">Reset <i class="icon-refresh"></i></button>
+		  <button type="submit" class="btn btn-primary">Kirim <i class="icon-ok"></i></button>
 		</div>
 	  </div>
 	  </fieldset>
@@ -47,6 +47,9 @@
   </div>
 </div>
 </div>
+<script type="text/javascript">
+$("#form-isi-bukutamu").submit(function(a){a.preventDefault();var b=$(this);$.ajax({type:"POST",url:base_url+"mobile/loadResult",data:b.serialize(),success:function(a){var c=$.parseJSON(a);c.success?(b.trigger("reset"),alert(c.msg),document.location.reload(!0)):alert(c.msg)}})});
+</script>
 <div id="bukutamuModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="bukutamuModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
