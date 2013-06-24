@@ -272,7 +272,7 @@ class M_mobile extends CI_Model {
 			$this->db->select('a.ID,a.VerseID,a.SuraID,b.nama')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id');
 			$pieces = explode(" ", $cariKata);
             foreach ($pieces as &$val) {
-                $this->db->or_like('a.AyahText', $val, 'both');
+                $this->db->like('a.AyahText', $val, 'both');
             }
 			$this->db->order_by('a.SuraID,a.ID');
 			$this->db->stop_cache();

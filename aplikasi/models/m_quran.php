@@ -85,11 +85,11 @@ class M_quran extends CI_Model {
         }
 
         if ($this->input->post('sesuai') == 'true') {
-            $this->db->or_like('a.AyahText', $kata, 'both');
+            $this->db->like('a.AyahText', $kata, 'both');
         } else {
             $pieces = explode(" ", $kata);
             foreach ($pieces as &$val) {
-                $this->db->or_like('a.AyahText', $val, 'both');
+                $this->db->like('a.AyahText', $val, 'both');
             }
         }
         $this->db->get('quran_indo a');
@@ -578,7 +578,7 @@ class M_quran extends CI_Model {
 		$this->db->start_cache();
 		$this->db->select('*')->from('quran_indo');
 		foreach ($cari as $v) {
-			$this->db->or_like('AyahText',$v);
+			$this->db->like('AyahText',$v);
 		}
 		$this->db->stop_cache();
         $total = $this->db->get()->num_rows();
