@@ -252,7 +252,7 @@ class M_mobile extends CI_Model {
 		$row = $query->row();
 		
 		if ( ! $memGetAyatInfo = $this->cache->memcached->get('mem_get_ayat_info'.$ayatId)) {
-			$memGetAyatInfo = '["' . $row->prev . '","' . $row->next . '"]';
+			$memGetAyatInfo = '["' . str_replace("'", "`", $row->prev) . '","' . str_replace("'", "`", $row->next) . '"]';
 			$this->cache->memcached->save('mem_get_ayat_info'.$ayatId, $memGetAyatInfo, 300);
 		}
         return $memGetAyatInfo;
