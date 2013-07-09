@@ -10,7 +10,8 @@
 }
 
 body {
- font:75% normal verdana,arial,tahoma,"sans serif";
+	font:75% normal verdana,arial,tahoma,"sans serif";
+	margin:0;padding:0;
 }
 </style>
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/sound/demo/mp3-player-button/css/mp3-player-button.css" />
@@ -48,6 +49,6 @@ soundManager.setup({
 </script>
 </head>
 <body>
-<p><a href="<?=$this->config->item('quran_mp3').$mp3_file?>" class="sm2_button"><?=$mp3_info?></a> <?=$mp3_info?> (Murottal)</p>
+<a href="<?=$this->config->item('quran_mp3').$mp3_file?>" class="sm2_button"><?=$mp3_info?></a> <?=$mp3_info?> (Murottal)
 </body>
 </html>

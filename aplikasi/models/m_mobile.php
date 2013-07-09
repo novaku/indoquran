@@ -196,7 +196,7 @@ class M_mobile extends CI_Model {
 			$text = '<div align="right">' . quran_img($key->img) .
 					'<br/><br/><font style="color:#666666; font-size:12px; line-height:16px;">'.$key->baca.'</font></div>
 					<hr noshade size=1>
-						<iframe src="'.base_url().'mobile/mp3player/'.$key->ID.'" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:30px;" allowtransparency="true"></iframe>
+						<iframe src="'.base_url().'mobile/mp3player/'.$key->ID.'" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px;" allowtransparency="true"></iframe>
 					<hr noshade size=1>
 						<font size="4"><b>"' . $key->AyahTextNew . '"</b></font>
 					<hr noshade size=1>
