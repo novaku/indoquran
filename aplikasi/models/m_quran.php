@@ -483,18 +483,19 @@ class M_quran extends CI_Model {
     function m_download() {
         $email = $this->input->post('emailField') == '' ? '' : $this->input->post('emailField');
         $url = $this->input->post('urlField') == '' ? '' : $this->input->post('urlField');
+		//kalo salah url
         if (($url == "http://www.adrive.com/public/Ma6rDh.html") || ($url == "http://www.adrive.com/public/9WEXDQ.html"))
-            $url = 'http://www.4shared.com/file/6F3hFxSJ/application.html?';
+            $url = 'http://www.4shared.com/file/6F3hFxSJ/application.html';
 
-        if (($url == "http://www.adrive.com/public/wKTRUt.html") || ($url == "http://www.4shared.com/file/Zex0WJ1N/Al_Quran_Digital.html?"))
-            $url = 'http://www.indoquran.web.id/download/AlQuranDigital.chm';
+        if (($url == "http://www.indoquran.web.id/download/AlQuranDigital.chm") || ($url == "http://www.4shared.com/file/Zex0WJ1N/Al_Quran_Digital.html?"))
+            $url = 'http://www.4shared.com/file/Zex0WJ1N/Al_Quran_Digital.html';
+		//===================================================
 
-
-        if ($url == 'http://www.indoquran.web.id/download/AlQuranDigital.chm') { //jika .chm
+        if ($url == 'http://www.4shared.com/file/Zex0WJ1N/Al_Quran_Digital.html') { //jika .chm
             $msg = '<i>Assalamualaikum Warrahmatullahi Wabaroklatuh.</i><br>Berikut alamat download aplikasi : <a href="' . $url . '">' . $url . '</a>.';
             $subjek = 'Download Aplikasi (CHM)';
         } else {
-            $msg = '<i>Assalamualaikum Warrahmatullahi Wabaroklatuh.</i><br>Berikut alamat download aplikasi : <a href="' . $url . '">' . $url . '</a><br>Harap konfirmasi melalui reply email ini jika file sudah berhasil download dan antum ingin mulai membuka aplikasi. Kami akan memberikan detail password untuk aplikasi tersebut.';
+            $msg = '<p><i>Assalamualaikum Warrahmatullahi Wabaroklatuh.</i></p><p>Berikut alamat download aplikasi : <a href="' . $url . '">' . $url . '</a></p><p>Aplikasi ini memiliki password untuk dibuka. Passwordnya adalah "BismillaH", harap diperhatikan huruf besar dan kecilnya karena menggunakan sistem case-sensitif.</p><p>Semoga dapat bermanfaat, salam.</p><p><br/>Admin Indoquran.Web.Id</p>';
             $subjek = 'Download Aplikasi (EXE)';
         }
 
