@@ -16,7 +16,7 @@
 	<hr noshade size="1">
 	<?=$display?>
 	<p align="center">
-	<a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436'); return false;"><?=image_asset('fb_share.png')?></a></p>
+	<a href="javascript:null(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436'); return false;"><?=image_asset('fb_share.png')?></a></p>
 	<center><?=$navi?></center>
 </div>
 <p id='msg'></p>
