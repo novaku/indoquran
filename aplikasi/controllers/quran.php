@@ -171,4 +171,12 @@ class Quran extends CI_Controller {
 		$cari = $this->input->get('query') != '' ? $this->input->get('query') : '';
 		echo $this->m_quran->m_autoCompleteSearch();
 	}
+	
+	function redisSet() {
+		$this->load->library('predis');
+		for($i=1;$i<=100;$i++) {
+			$this->predis->redis->hset("01","test ".$i,"hasil ".$i);
+			echo $i."<br>";
+		}
+	}
 }
