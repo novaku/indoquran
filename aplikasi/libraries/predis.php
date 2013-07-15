@@ -7,6 +7,7 @@ class Predis
 	public $port = 6379;
 	
 	function __construct() {
+		parent::__construct();
 		try {
 			// $this->redis = new Predis\Client();
 			$this->redis = new Predis\Client(array(
