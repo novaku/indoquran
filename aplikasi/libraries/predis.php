@@ -7,15 +7,8 @@ class Predis
 	public $port = 6379;
 	
 	function __construct() {
-		$this->redis = new Predis\Client(array(
-			"scheme" => "tcp",
-			"host" => $this->host,
-			"port" => $this->port
-			)
-		);
-	
 		try {
-			/* $this->redis = new Predis\Client(); */
+			// $this->redis = new Predis\Client();
 			$this->redis = new Predis\Client(array(
 				"scheme" => "tcp",
 				"host" => $this->host,
