@@ -42,6 +42,8 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 $config['quran_img'] = 'http://c00022506.cdn1.cloudfiles.rackspacecloud.com/';
 $config['quran_mp3'] = 'http://www.everyayah.com/data/Ibrahim_Akhdar_32kbps/';
+$config['redis_host'] = '50.112.178.129';
+$config['redis_port'] = 6379;
 $config['juz-data'] = array(
 	array(
 		'id' => 1,
