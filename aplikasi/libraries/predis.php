@@ -1,5 +1,5 @@
 <?php
-require 'predis/autoload.php';
+require 'vendor/autoload.php';
 class Predis
 {
 	public $redis = null;
