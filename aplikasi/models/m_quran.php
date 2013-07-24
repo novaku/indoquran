@@ -66,7 +66,11 @@ class M_quran extends CI_Model {
 						<h4>' . $hasil . '</h4>
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan.'
-					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a>&nbsp;<a href="https://twitter.com/share" class="twitter-share-button" data-url="'.$urlAyat.'" data-text="'.$datatext.'" data-lang="id" data-size="large" data-hashtags="indoquran.web.id">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\'://platform.twitter.com/widgets.js\';fjs.parentNode.insertBefore(js,fjs);}}(document, \'script\', \'twitter-wjs\');</script>
+					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a>&nbsp;
+					<iframe allowtransparency="true" frameborder="0" scrolling="no"
+						src="'.base_url().'quran/twitterShare/'.$key->ID.'"
+						style="width:130px; height:40px;">
+					</iframe>
 					</p>
 					';
         }
@@ -628,5 +632,16 @@ class M_quran extends CI_Model {
 			return $row->AyahText;
 		}
 		else return "";
+	}
+	
+	function m_twitterShare($ayatId = 1) {
+		$query = $this->db->select('*')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id')->where(array('a.ID' => $ayatId))->get();
+        foreach ($query->result() as $key) {
+			$urlAyat = base_url() . 'quran/viewAyat/' . $key->ID;
+			$urlEncode = urlencode($urlAyat);
+			$datatext = '['.$key->SuraID.':'.$key->VerseID.'] '.$key->nama.' ('.$key->arti.'):Ayat '.$key->VerseID.' - '.$key->arab;
+			return '<a href="https://twitter.com/share" class="twitter-share-button"'.$urlAyat.'" data-text="'.$datatext.'" data-size="large" data-lang="en" data-hashtags="indoquran.web.id">Tweet</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+		}
 	}
 }

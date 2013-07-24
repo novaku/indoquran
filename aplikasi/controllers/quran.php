@@ -179,4 +179,8 @@ class Quran extends CI_Controller {
 			echo $i."<br>";
 		}
 	}
+	
+	function twitterShare($ayatId=1) {
+		echo $this->m_quran->m_twitterShare($ayatId);
+	}
 }
