@@ -62,7 +62,9 @@ class M_quran extends CI_Model {
 					<hr noshade size=1>
 						<h4>' . $hasil . '</h4>
 					<hr noshade size=1>
-						'.$key->AyahPenjelasan;
+						'.$key->AyahPenjelasan.'
+					<p align="center"><a href="javascript:null(0)" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=\'+encodeURIComponent(\'' . base_url() . 'quran/viewAyat/' . $key->ID . '\'), \'facebook-share-dialog\', \'width=626,height=436\'); return false;">'.image_asset('fb_share.png').'</a></p>
+					';
         }
         if ( ! $memDisplayAyat = $this->cache->memcached->get('mem_display_ayat'.$id)) {
 			$memDisplayAyat = $text;

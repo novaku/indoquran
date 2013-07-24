@@ -26,7 +26,6 @@
 <b><?=$judul?></b>
 <hr noshade size="1">
 <p><?=$display?></p>
-<p align="center"><a href="javascript:null(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436'); return false;"><?=image_asset('fb_share.png')?></a></p>
 </div>
 <pre class="prettyprint"><p><?=$navi?></p></pre>
 <p id='msg'></p>
