@@ -95,15 +95,15 @@ class Quran extends CI_Controller {
 		
 		$titleNx = $nx == 6237 ? "" : $this->m_quran->m_getJudulAyat($nx);
 		$titlePr = $pr == 0 ? "" : $this->m_quran->m_getJudulAyat($pr);
-        $navNx = '<a href="' . base_url() . 'quran/viewAyat/' . $nx . '" title="'.$titleNx.'">' . image_asset('Arrow_right.png') . '</a><br/><sub>'.$titleNx.'</sub>';
-        $navPr = '<a href="' . base_url() . 'quran/viewAyat/' . $pr . '" title="'.$titlePr.'">' . image_asset('Arrow_left.png') . '</a><br/><sub>'.$titlePr.'</sub>';
+        $navNx = '<a href="' . base_url() . 'quran/viewAyat/' . $nx . '" title="Ayat Selanjutnya : '.$titleNx.'" class="btn"><i class="icon-arrow-right"></i> '.$titleNx.'</a><br/>';
+        $navPr = '<a href="' . base_url() . 'quran/viewAyat/' . $pr . '" title="Ayat Sebelumnya : '.$titlePr.'" class="btn">'.$titlePr.' <i class="icon-arrow-left"></i></a><br/>';
 
         if ($id == 1) {
-            $data['navi'] = $navNx;
+            $data['navi'] = '<p align="center">'.$navNx.'</p>';
         } elseif ($id == 6236) {
-            $data['navi'] = $navPr;
+            $data['navi'] = '<p align="center">'.$navPr.'</p>';
         } else {
-            $data['navi'] = '<table border="0"><tr><td align="right">'.$navPr.'</td><td>|<br/>|<br/>|<br/>|<br/>|</td><td>' . $navNx.'</td></tr></table>';
+            $data['navi'] = '<table border="0" align="center" width="100%"><tr><td align="right">'.$navPr.'</td><td>|<br/>|</td><td>' . $navNx.'</td></tr></table>';
         }
 		// $this->output->cache(60);
         $this->load->view('v_ayat', $data);

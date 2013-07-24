@@ -3,24 +3,35 @@
 <head>
 	<meta charset="utf-8">
 	<title><?=$judul?></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="<?=base_url()?>assets/ico/32.png">
+	<meta name="author" content="Nova Herdi Kusumah (novaherdi@gmail.com)">
+	<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<?=css_asset('quran.css')?>
-	<style type="text/css">
-		sup {background-color: green;color: yellow;font-size:12px}
-	</style>
+	<?=css_asset('docs.css')?>
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?=base_url()?>assets/ico/144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?=base_url()?>assets/ico/114.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?=base_url()?>assets/ico/72.png">
+	<link rel="apple-touch-icon-precomposed" href="<?=base_url()?>assets/ico/57.png">
+	<link rel="shortcut icon" href="<?=base_url()?>assets/ico/32.png">
 </head>
 <body>
-<h3 align="center"><a href="<?=base_url()?>">Kembali ke Website Utama</a></h3>
-<div style="margin-left:20px;margin-top:20px;margin-right:20px;">
-	<h2><?=$judul?></h2>
-	<hr noshade size="1">
-	<?=$display?>
-	<p align="center">
-	<a href="javascript:null(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436'); return false;"><?=image_asset('fb_share.png')?></a></p>
-	<center><?=$navi?></center>
+<p></p>
+<div class="container">
+<div class="row">
+<div class="bs-docs-example">
+<p align="center"><a class="btn btn-large btn-block" href="<?=base_url()?>"><i class="icon-home"></i> Kembali ke Website Utama</a></p>
+<hr noshade size="1">
+<b><?=$judul?></b>
+<hr noshade size="1">
+<p><?=$display?></p>
+<p align="center"><a href="javascript:null(0)" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436'); return false;"><?=image_asset('fb_share.png')?></a></p>
 </div>
+<pre class="prettyprint"><p><?=$navi?></p></pre>
 <p id='msg'></p>
-<h3 align="center"><a href="<?=base_url()?>">Kembali ke Website Utama</a></h3>
+</div>
+</div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -29,7 +40,6 @@
 
   ga('create', 'UA-40015895-1', 'indoquran.web.id');
   ga('send', 'pageview');
-
 </script>
 </body>
 </html>

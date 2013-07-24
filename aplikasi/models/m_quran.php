@@ -60,7 +60,7 @@ class M_quran extends CI_Model {
 					<hr noshade size=1>
 						' . quran_mp3($key->mp3) . '
 					<hr noshade size=1>
-						<font size="4"><b>"' . $hasil . '"</b></font>
+						<h4>' . $hasil . '</h4>
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan;
         }
@@ -470,7 +470,7 @@ class M_quran extends CI_Model {
 	}
 
     function m_getJudulAyat($id = 1) {
-        $query = $this->db->select("CONCAT('[',a.SuraID, ':', a.VerseID, '] ', b.nama, ' (', b.arti, '), Ayat ', a.VerseID) AS hasil", false)
+        $query = $this->db->select("CONCAT('[',a.SuraID, ':', a.VerseID, '] ', b.nama, ' (', b.arti, '):Ayat ', a.VerseID,' - ',b.arab) AS hasil", false)
                         ->from('quran_indo a')
                         ->join('surah b', 'a.SuraID = b.id')
                         ->where('a.ID', $id)->get();
