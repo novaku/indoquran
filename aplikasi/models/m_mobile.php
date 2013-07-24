@@ -191,9 +191,11 @@ class M_mobile extends CI_Model {
     }
 	
 	function m_displayAyat($id = 0) {
-        $query = $this->db->select('*')->from('quran_indo a')->where(array('a.ID' => $id))->get();
+        $query = $this->db->select('*')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id')->where(array('a.ID' => $id))->get();
         foreach ($query->result() as $key) {
-			$urlEncode = urlencode(base_url() . 'quran/viewAyat/' . $key->ID);
+			$urlAyat = base_url() . 'quran/viewAyat/' . $key->ID;
+			$urlEncode = urlencode($urlAyat);
+			$datatext = '['.$key->SuraID.':'.$key->VerseID.'] '.$key->nama.' ('.$key->arti.'):Ayat '.$key->VerseID.' - '.$key->arab;
 			$text = '<div align="right">' . quran_img($key->img) .
 					'<br/><br/><font style="color:#666666; font-size:12px; line-height:16px;">'.$key->baca.'</font></div>
 					<hr noshade size=1>
@@ -202,7 +204,7 @@ class M_mobile extends CI_Model {
 						<font size="4"><b>"' . $key->AyahTextNew . '"</b></font>
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan.'
-					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a></p>
+					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a>&nbsp;<a href="https://twitter.com/share" class="twitter-share-button" data-url="'.$urlAyat.'" data-text="'.$datatext.'" data-lang="id" data-size="large" data-hashtags="indoquran.web.id">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\'://platform.twitter.com/widgets.js\';fjs.parentNode.insertBefore(js,fjs);}}(document, \'script\', \'twitter-wjs\');</script></p>
 					';
         }
         

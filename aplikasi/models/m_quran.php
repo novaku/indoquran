@@ -36,7 +36,9 @@ class M_quran extends CI_Model {
         $query = $this->db->select('*')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id')->where(array('a.ID' => $id))->get();
         foreach ($query->result() as $key) {
 			$hasil = $key->AyahTextNew;
-			$urlEncode = urlencode(base_url() . 'quran/viewAyat/' . $key->ID);
+			$urlAyat = base_url() . 'quran/viewAyat/' . $key->ID;
+			$urlEncode = urlencode($urlAyat);
+			$datatext = '['.$key->SuraID.':'.$key->VerseID.'] '.$key->nama.' ('.$key->arti.'):Ayat '.$key->VerseID.' - '.$key->arab;
 			// $penjelasan = html_entity_decode($key->AyahPenjelasan);
 			if($cariKata != '') {
 				$arrKata = explode(" ",$cariKata);
@@ -64,7 +66,8 @@ class M_quran extends CI_Model {
 						<h4>' . $hasil . '</h4>
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan.'
-					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a></p>
+					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a>&nbsp;<a href="https://twitter.com/share" class="twitter-share-button" data-url="'.$urlAyat.'" data-text="'.$datatext.'" data-lang="id" data-size="large" data-hashtags="indoquran.web.id">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\'://platform.twitter.com/widgets.js\';fjs.parentNode.insertBefore(js,fjs);}}(document, \'script\', \'twitter-wjs\');</script>
+					</p>
 					';
         }
         if ( ! $memDisplayAyat = $this->cache->memcached->get('mem_display_ayat'.$id)) {
