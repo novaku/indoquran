@@ -193,6 +193,7 @@ class M_mobile extends CI_Model {
 	function m_displayAyat($id = 0) {
         $query = $this->db->select('*')->from('quran_indo a')->where(array('a.ID' => $id))->get();
         foreach ($query->result() as $key) {
+			$urlEncode = urlencode(base_url() . 'quran/viewAyat/' . $key->ID);
 			$text = '<div align="right">' . quran_img($key->img) .
 					'<br/><br/><font style="color:#666666; font-size:12px; line-height:16px;">'.$key->baca.'</font></div>
 					<hr noshade size=1>
@@ -201,7 +202,7 @@ class M_mobile extends CI_Model {
 						<font size="4"><b>"' . $key->AyahTextNew . '"</b></font>
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan.'
-					<p align="center"><a href="javascript:null(0)" onclick="window.open(\'https://www.facebook.com/sharer/sharer.php?u=\'+encodeURIComponent(\'' . base_url() . 'quran/viewAyat/' . $key->ID . '\'), \'facebook-share-dialog\', \'width=626,height=436\'); return false;">'.image_asset('fb_share.png').'</a></p>
+					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a></p>
 					';
         }
         
