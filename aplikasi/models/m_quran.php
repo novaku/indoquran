@@ -640,7 +640,7 @@ class M_quran extends CI_Model {
 			$urlAyat = base_url() . 'quran/viewAyat/' . $key->ID;
 			$urlEncode = urlencode($urlAyat);
 			$datatext = '['.$key->SuraID.':'.$key->VerseID.'] '.$key->nama.' ('.$key->arti.'):Ayat '.$key->VerseID.' - '.$key->arab;
-			return '<a href="https://twitter.com/share" class="twitter-share-button"'.$urlAyat.'" data-text="'.$datatext.'" data-size="large" data-lang="en" data-hashtags="indoquran.web.id">Tweet</a>
+			return '<a href="https://twitter.com/share" class="twitter-share-button" data-url="'.$urlAyat.'" data-text="'.$datatext.'" data-via="novaherdi" data-hashtags="indoquran.web.id">Tweet</a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
 		}
 	}
