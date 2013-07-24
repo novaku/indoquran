@@ -46,7 +46,7 @@ $obj = json_decode($surahJson);
 					<div id="collapseSurah<?=$v->id?>" class="accordion-body collapse">
 						<div class="accordion-inner">
 						<blockquote>
-						  <small><?=$v->head_body?></small>
+						  <font size="6"><?=$v->head?></font><br/><small><?=$v->head_body?></small>
 						</blockquote>
 						<div id="contentSurah<?=$v->id?>"></div>
 						</div>
