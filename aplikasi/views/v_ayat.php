@@ -17,7 +17,6 @@
 	<link rel="shortcut icon" href="<?=base_url()?>assets/ico/32.png">
 </head>
 <body>
-<p></p>
 <div class="container">
 <div class="row">
 <div class="bs-docs-example">
