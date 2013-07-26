@@ -69,7 +69,7 @@ class M_quran extends CI_Model {
 					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a>&nbsp;
 					<iframe allowtransparency="true" frameborder="0" scrolling="no"
 						src="'.base_url().'quran/twitterShare/'.$key->ID.'"
-						style="width:130px; height:40px;">
+						style="width:130px; height:28px;">
 					</iframe>
 					</p>
 					';
