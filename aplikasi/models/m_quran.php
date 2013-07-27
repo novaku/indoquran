@@ -76,10 +76,10 @@ class M_quran extends CI_Model {
 						<h4>' . $hasil . '</h4>
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan.'
-					<p align="center">
+					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a>&nbsp;
 					<iframe allowtransparency="true" frameborder="0" scrolling="no"
-						src="'.base_url().'quran/fbTwitterShare/'.$key->ID.'"
-						style="width:300px; height:28px;">
+						src="'.base_url().'quran/twitterShare/'.$key->ID.'"
+						style="width:130px; height:28px;">
 					</iframe>
 					</p>
 					';
@@ -644,28 +644,14 @@ class M_quran extends CI_Model {
 		else return "";
 	}
 	
-	function m_fbTwitterShare($ayatId = 1) {
+	function m_twitterShare($ayatId = 1) {
 		$query = $this->db->select('*')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id')->where(array('a.ID' => $ayatId))->get();
         foreach ($query->result() as $key) {
 			$urlAyat = base_url() . 'quran/viewAyat/' . $key->ID;
 			$urlEncode = urlencode($urlAyat);
 			$datatext = '['.$key->SuraID.':'.$key->VerseID.'] '.$key->nama.' ('.$key->arti.'):Ayat '.$key->VerseID.' - '.$key->arab;
-			return '<html>
-			<head></head>
-			<body style="margin: 0;padding: 0;">
-			<div id="fb-root"></div>
-			<script>(function(d, s, id) {
-			  var js, fjs = d.getElementsByTagName(s)[0];
-			  if (d.getElementById(id)) return;
-			  js = d.createElement(s); js.id = id;
-			  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=462282400477128";
-			  fjs.parentNode.insertBefore(js, fjs);
-			}(document, \'script\', \'facebook-jssdk\'));</script>
-			<div class="fb-like" data-href="'.$urlAyat.'" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-font="arial"></div>
-			<a href="https://twitter.com/share" class="twitter-share-button" data-url="'.$urlAyat.'" data-text="'.$datatext.'" data-via="novaherdi" data-hashtags="indoquran.web.id" data-size="large">Tweet</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-			</body>
-			</html>';
+			return '<html><head></head><body style="margin: 0;padding: 0;"><a href="https://twitter.com/share" class="twitter-share-button" data-url="'.$urlAyat.'" data-text="'.$datatext.'" data-via="novaherdi" data-hashtags="indoquran.web.id" data-size="large">Tweet</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></body></html>';
 		}
 	}
 }
