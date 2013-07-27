@@ -92,11 +92,14 @@ class M_mobile extends CI_Model {
                     $arr['jum'] = $this->db->count_all('bukutamu');
 					$arr['start'] = $start;
 					
+					/*  disable memcache
 					if ( ! $memGetBukuTamu = $this->cache->memcached->get('mem_get_bukutamu_mobile'.$sort.$dir.$limit.$start)) {
 						$memGetBukuTamu = json_encode($arr);
 						$this->cache->memcached->save('mem_get_bukutamu_mobile'.$sort.$dir.$limit.$start, $memGetBukuTamu, 300);
 					}
 			        return $memGetBukuTamu;
+					*/
+					return json_encode($arr);
 			        
                 break;
         }
