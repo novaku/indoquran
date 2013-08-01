@@ -427,11 +427,12 @@ class M_quran extends CI_Model {
                         );
                     }
                     $sum = $this->db->count_all('bukutamu');
-                    if ( ! $memGetBukuTamu = $this->cache->memcached->get('mem_get_bukutamu'.$sort.$dir.$limit.$start)) {
-						$memGetBukuTamu = '({success:true, total:' . $sum . ',rows:' . json_encode($arr) . '})';
-						$this->cache->memcached->save('mem_get_bukutamu'.$sort.$dir.$limit.$start, $memGetBukuTamu, 300);
-					}
-			        return $memGetBukuTamu;
+                    // if ( ! $memGetBukuTamu = $this->cache->memcached->get('mem_get_bukutamu'.$sort.$dir.$limit.$start)) {
+						// $memGetBukuTamu = '({success:true, total:' . $sum . ',rows:' . json_encode($arr) . '})';
+						// $this->cache->memcached->save('mem_get_bukutamu'.$sort.$dir.$limit.$start, $memGetBukuTamu, 300);
+					// }
+			        // return $memGetBukuTamu;
+			        return '({success:true, total:' . $sum . ',rows:' . json_encode($arr) . '})';
                 } break;
         }
     }
