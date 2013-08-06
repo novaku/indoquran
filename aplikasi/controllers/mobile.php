@@ -72,7 +72,7 @@ class Mobile extends CI_Controller {
 	}
 	
 	function displayAyat($id) {
-        echo $this->m_mobile->m_displayAyat($id);
+        echo $this->m_mobile->m_displayAyatCache($id);
     }
 	
 	function mp3player($id) {

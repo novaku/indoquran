@@ -4,7 +4,7 @@ function css_asset($asset_name) {
 }
 
 function image_asset($asset_name) {
-	list($width, $height, $type, $attr) = getimagesize(base_url().'assets/images/'.$asset_name);
+	list($width, $height, $type, $attr) = @getimagesize(base_url().'assets/images/'.$asset_name);
 	return "<img src=\"".base_url()."assets/images/".$asset_name."\" ".$attr." />";
 }
 
@@ -85,8 +85,8 @@ function quran_mp3_js($filenya,$ustadz='http://www.everyayah.com/data/Hudhaify_3
 }
 
 function quran_img($filenya,$src='http://c00022506.cdn1.cloudfiles.rackspacecloud.com/') {
-	// list($width, $height, $type, $attr) = getimagesize('assets/quran_img/'.$filenya);
-	list($width, $height, $type, $attr) = getimagesize($src.$filenya);
+	// list($width, $height, $type, $attr) = @getimagesize('assets/quran_img/'.$filenya);
+	list($width, $height, $type, $attr) = @getimagesize($src.$filenya);
 	$asset_local = "<img src=\"".base_url()."assets/quran_img/".$filenya."\" ".$attr." />";
 	$asset_cdn = "<img src=\"".$src.$filenya."\" ".$attr." />";
 	return $asset_cdn;

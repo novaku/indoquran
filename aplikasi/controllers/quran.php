@@ -7,6 +7,7 @@ class Quran extends CI_Controller {
         $this->load->library('user_agent');
         $this->load->library('email');
 		$this->load->model('m_quran');
+		$this->load->model('m_mobile');
         $config_mail['mailtype'] = 'html';
         $this->email->initialize($config_mail);
         $this->load->driver('cache');
@@ -32,7 +33,7 @@ class Quran extends CI_Controller {
 	}
 
     function displayAyat($id = 1) {
-        echo $this->m_quran->m_displayAyat($id);
+        echo $this->m_quran->m_displayAyatCache($id);
     }
 
     function getAllAyat() {
@@ -182,5 +183,22 @@ class Quran extends CI_Controller {
 	
 	function twitterShare($ayatId=1) {
 		echo $this->m_quran->m_twitterShare($ayatId);
+	}
+	
+	function writeAyatFile($type='web') {
+		ini_set('max_execution_time', 30000); //30000 seconds = 500 minutes
+		for($i=6236;$i>=1;$i--) {
+			if($type=='web') {
+				$fp = fopen('viewAyat/'.$i.'.html', 'w');
+				$content = $this->m_quran->m_displayAyat($i);
+				fwrite($fp, $content);
+				fclose($fp);
+			} else {
+				$fp = fopen('viewAyatMobile/'.$i.'.html', 'w');
+				$content = $this->m_mobile->m_displayAyat($i);
+				fwrite($fp, $content);
+				fclose($fp);
+			}
+		}
 	}
 }
