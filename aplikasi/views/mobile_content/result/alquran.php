@@ -5,20 +5,19 @@ $obj = json_decode($surahJson);
 ?>
 <div>
 <ul id="alquranTab" class="nav nav-tabs">
-  <li class="active"><a href="#pagealquran-cari" data-toggle="tab">Pencarian Tarjamah</a></li>
-  <li><a href="#pagealquran-surah" data-toggle="tab">Al-Qur'an Berdasarkan Surah</a></li>
-  <li><a href="#pagealquran-juz" data-toggle="tab">Alquran Berdasarkan Juz</a></li>
+  <li class="active"><a href="#pagealquran-cari" data-toggle="tab">Cari</a></li>
+  <li><a href="#pagealquran-surah" data-toggle="tab">Surah</a></li>
+  <li><a href="#pagealquran-juz" data-toggle="tab">Juz</a></li>
 </ul>
 <div id="bukutamuTabContent" class="tab-content">
   <div class="tab-pane fade in active" id="pagealquran-cari">
 	<fieldset>
 	    <legend>Pencarian Tarjamah</legend>
 		<div id="alquran-cari">
-			<form id="formCariTarjamah">
-				<div class="input-prepend input-append">
-				  <button class="btn" type="reset">Reset <i class="icon-refresh"></i></button>
-				  <input class="span9" id="appendedInputButton" type="text" name="cariKata" placeholder="Masukkan kata pencarian..">
-				  <button class="btn" type="submit">Cari <i class="icon-search"></i></button>
+			<form class="form-search" id="formCariTarjamah">
+				&nbsp;&nbsp;<div class="input-append">
+				  <input class="span4 search-query" id="appendedInputButton" type="text" name="cariKata" placeholder="Masukkan kata pencarian.." required>
+				  <button class="btn" type="submit"><i class="icon-search"></i> Cari!</button>
 				</div>
 			</form>
 			<div class="accordion" id="accordionCariQuran">
@@ -92,7 +91,7 @@ $obj = json_decode($surahJson);
 <!-- Modal -->
 <div id="ayatModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     <h3 id="myModalLabel">Judul</h3>
   </div>
   <div class="modal-body">

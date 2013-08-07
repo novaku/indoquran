@@ -1,7 +1,7 @@
 <div>
 <ul id="bukutamuTab" class="nav nav-tabs">
-  <li class="active"><a href="#pagebukutamu-daftar" data-toggle="tab">Daftar Buku Tamu</a></li>
-  <li><a href="#pagebukutamu-isi" data-toggle="tab">Isi Buku Tamu</a></li>
+  <li class="active"><a href="#pagebukutamu-daftar" data-toggle="tab">Daftar</a></li>
+  <li><a href="#pagebukutamu-isi" data-toggle="tab">Isi</a></li>
 </ul>
 <div id="bukutamuTabContent" class="tab-content">
   <div class="tab-pane fade in active" id="pagebukutamu-daftar">
