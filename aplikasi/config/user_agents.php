@@ -47,6 +47,11 @@ $platforms = array (
 					'playstation 3'     => 'Playstation 3',
                     'nintendo wii'      => 'Nintendo Wii',
 					'ubuntu'            => 'Ubuntu',
+					'J2ME/MIDP'         => 'Mobile Java App',
+					'Googlebot'         => 'Googlebot',
+					'Android'         	=> 'Android',
+					'BlackBerry'        => 'BlackBerry',
+					'iPhone'        	=> 'iPhone',
 				);
 
 
