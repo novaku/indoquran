@@ -47,11 +47,6 @@ $platforms = array (
 					'playstation 3'     => 'Playstation 3',
                     'nintendo wii'      => 'Nintendo Wii',
 					'ubuntu'            => 'Ubuntu',
-					'J2ME/MIDP'         => 'Mobile Java App',
-					'Googlebot'         => 'Googlebot',
-					'Android'         	=> 'Android',
-					'BlackBerry'        => 'BlackBerry',
-					'iPhone'        	=> 'iPhone',
 				);
 
 
@@ -152,6 +147,7 @@ $mobiles = array(
 					'mobilexplorer'			=> "Mobile Explorer",
 					'operamini'				=> "Opera Mini",
 					'opera mini'			=> "Opera Mini",
+					'opera mobi' 			=> "Opera Mobi",
 
 					// Other
 					'digital paths'			=> "Digital Paths",
