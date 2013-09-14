@@ -201,20 +201,20 @@ class M_mobile extends CI_Model {
 	function m_displayAyat($id = 0) {
         $query = $this->db->select('*')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id')->where(array('a.ID' => $id))->get();
         foreach ($query->result() as $key) {
-			$urlAyat = base_url() . 'quran/viewAyat/' . $key->ID;
+			$urlAyat = 'http://www.indoquran.web.id/quran/viewAyat/' . $key->ID;
 			$urlEncode = urlencode($urlAyat);
 			$datatext = '['.$key->SuraID.':'.$key->VerseID.'] '.$key->nama.' ('.$key->arti.'):Ayat '.$key->VerseID.' - '.$key->arab;
 			$text = '<div align="right">' . quran_img($key->img) .
 					'<br/><br/><font style="color:#666666; font-size:12px; line-height:16px;">'.$key->baca.'</font></div>
 					<hr noshade size=1>
-						<iframe src="'.base_url().'mobile/mp3player/'.$key->ID.'" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px;" allowtransparency="true"></iframe>
+						<iframe src="/mobile/mp3player/'.$key->ID.'" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:20px;" allowtransparency="true"></iframe>
 					<hr noshade size=1>
 						<font size="4"><b>"' . $key->AyahTextNew . '"</b></font>
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan.'
 					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a>&nbsp;
 					<iframe allowtransparency="true" frameborder="0" scrolling="no"
-						src="'.base_url().'quran/twitterShare/'.$key->ID.'"
+						src="/quran/twitterShare/'.$key->ID.'"
 						style="width:130px; height:28px;">
 					</iframe>
 					</p>

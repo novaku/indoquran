@@ -40,7 +40,7 @@ class M_quran extends CI_Model {
         $query = $this->db->select('*')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id')->where(array('a.ID' => $id))->get();
         foreach ($query->result() as $key) {
 			$hasil = $key->AyahTextNew;
-			$urlAyat = base_url() . 'quran/viewAyat/' . $key->ID;
+			$urlAyat = 'http://www.indoquran.web.id/quran/viewAyat/' . $key->ID;
 			$urlEncode = urlencode($urlAyat);
 			$datatext = '['.$key->SuraID.':'.$key->VerseID.'] '.$key->nama.' ('.$key->arti.'):Ayat '.$key->VerseID.' - '.$key->arab;
 			// $penjelasan = html_entity_decode($key->AyahPenjelasan);
@@ -50,28 +50,6 @@ class M_quran extends CI_Model {
 					$hasil = str_replace($v, '<font color="blue"><u>'.$v.'</u></font>', $hasil);
 				}
 			}
-			/*
-            $text = '<div align="right">' . quran_img($key->img) .
-					'<br/><br/><font style="color:#666666; font-size:12px; line-height:16px;">'.$key->baca.'</font></div>
-					<hr noshade size=1>
-						' . quran_mp3($key->mp3) . '
-					<hr noshade size=1>
-						"' . $hasil . '"
-					<hr noshade size=1>
-						MP3 : <a href="' . path_asset("quran_" . $key->mp3) . '">DOWNLOAD</a><br>
-						IMG : <a href="http://www.everyayah.com/data/quranpngs/' . $key->SuraID . '_' . $key->VerseID . '.png" target="_blank">DOWNLOAD</a><br>
-						LINK : <a href="' . base_url() . 'quran/viewAyat/' . $key->ID . '" target="_blank">' . base_url() . 'quran/viewAyat/' . $key->ID . '</a>';
-						
-					//fb share
-					<a href="javascript:void(0)" 
-						  onclick="
-							window.open(
-							  \'https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'\',
-							  \'facebook-share-dialog\', 
-							  \'width=626,height=436\'); 
-							return false;">
-						'.image_asset('fb_share.png').'</a>
-			*/
 			$text = '<div align="right">' . quran_img($key->img) .
 					'<br/><br/><font style="color:#666666; font-size:12px; line-height:16px;">'.$key->baca.'</font></div>
 					<hr noshade size=1>
@@ -80,9 +58,17 @@ class M_quran extends CI_Model {
 						<h4>' . $hasil . '</h4>
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan.'
-					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a>&nbsp;
+					LINK : <a href="http://www.indoquran.web.id/quran/viewAyat/' . $key->ID . '" target="_blank">http://www.indoquran.web.id/quran/viewAyat/' . $key->ID . '</a><br/><br/>
+					<p align="center"><a href="javascript:void(0)" 
+						  onclick="
+							window.open(
+							  \'https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'\',
+							  \'facebook-share-dialog\', 
+							  \'width=626,height=436\'); 
+							return false;">
+						'.image_asset('fb_share.png').'</a>&nbsp;
 					<iframe allowtransparency="true" frameborder="0" scrolling="no"
-						src="'.base_url().'quran/twitterShare/'.$key->ID.'"
+						src="/quran/twitterShare/'.$key->ID.'"
 						style="width:130px; height:28px;">
 					</iframe>
 					</p>
