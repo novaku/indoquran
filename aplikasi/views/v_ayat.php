@@ -6,6 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="<?=base_url()?>assets/ico/32.png">
 	<meta name="author" content="Nova Herdi Kusumah (novaherdi@gmail.com)">
+	<meta property="og:title" content="<?=$judul?>" />
+	<meta property="og:site_name" content="AL-Quran Digital Online : Indonesian Translation">
+	<meta property="og:description" content="Alquran Digital moderen dengan tarjamah bahasa Indonesia" />
+	<meta property="og:image" content="<?=$quran_image?>" />
+	<meta property="og:type" content="religious">
 	<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
 	<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<?=css_asset('quran.css')?>

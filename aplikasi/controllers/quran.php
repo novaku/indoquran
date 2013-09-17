@@ -90,7 +90,10 @@ class Quran extends CI_Controller {
     function viewAyat($id) {
         $data['display'] = $this->m_quran->m_displayAyat($id);
 		$data['judul'] = $this->m_quran->m_getJudulAyat($id);
+		$query = $this->db->select('img')->from('quran_indo')->where(array('ID' => $id))->get();
+        $key = $query->row();
 		$data['tarjamah'] = $this->m_quran->m_getTarjamah($id);
+		$data['quran_image'] = 'http://c00022506.cdn1.cloudfiles.rackspacecloud.com/'.$key->img;
         $nx = $id + 1;
         $pr = $id - 1;
 		
