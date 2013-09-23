@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="utf-8">
-	<title><?=$judul?></title>
+	<title>AL Quran Digital Online : Indonesian Translation &middot; <?=$judul?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="<?=base_url()?>assets/ico/32.png">
 	<meta name="author" content="Nova Herdi Kusumah (novaherdi@gmail.com)">

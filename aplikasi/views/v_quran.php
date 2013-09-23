@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AL-Quran Digital Online : Indonesian Translation</title>
+    <title>AL Quran Digital Online : Indonesian Translation</title>
 	<link rel="shortcut icon" href="<?=base_url()?>assets/ico/32.png">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Al-Quran Digital : Indonesian Translation">
