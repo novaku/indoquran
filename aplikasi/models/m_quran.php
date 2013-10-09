@@ -74,12 +74,12 @@ class M_quran extends CI_Model {
 					</p>
 					';
         }
-        // if ( ! $memDisplayAyat = $this->cache->memcached->get('mem_display_ayat'.$id)) {
-			// $memDisplayAyat = $text;
-			// $this->cache->memcached->save('mem_display_ayat'.$id, $memDisplayAyat, 300);
-		// }
-        // return $memDisplayAyat;
-        return $text;
+        if ( ! $memDisplayAyat = $this->cache->memcached->get('mem_display_ayat'.$id)) {
+			$memDisplayAyat = $text;
+			$this->cache->memcached->save('mem_display_ayat'.$id, $memDisplayAyat, 300);
+		}
+        return $memDisplayAyat;
+        // return $text;
     }
 
     function m_getAllAyat() {
@@ -179,12 +179,12 @@ class M_quran extends CI_Model {
 
         // $total = $this->db->select('*')->from('quran_indo')->like('AyahText', $kata, 'both')->get()->num_rows();
         
-        // if ( ! $memGetAllAyat = $this->cache->memcached->get('mem_get_all_ayat'.$kata.$SuraID.$juzID.$start)) {
-			// $memGetAllAyat = '({total:' . $total . ',data:' . json_encode($query->result()) . '})';
-			// $this->cache->memcached->save('mem_get_all_ayat'.$kata.$SuraID.$juzID.$start, $memGetAllAyat, 300);
-		// }
-        // return $memGetAllAyat;
-        return '({total:' . $total . ',data:' . json_encode($query->result()) . '})';
+        if ( ! $memGetAllAyat = $this->cache->memcached->get('mem_get_all_ayat'.$kata.$SuraID.$juzID.$start)) {
+			$memGetAllAyat = '({total:' . $total . ',data:' . json_encode($query->result()) . '})';
+			$this->cache->memcached->save('mem_get_all_ayat'.$kata.$SuraID.$juzID.$start, $memGetAllAyat, 300);
+		}
+        return $memGetAllAyat;
+        // return '({total:' . $total . ',data:' . json_encode($query->result()) . '})';
     }
 
     function m_getPengunjung() {
@@ -466,12 +466,12 @@ class M_quran extends CI_Model {
 		");
 		$row = $query->row();
 		
-		// if ( ! $memGetAyatInfo = $this->cache->memcached->get('mem_get_ayat_info'.$ayatId)) {
-			// $memGetAyatInfo = '["' . $row->prev . '","' . $row->current . '","' . $row->next . '"]';
-			// $this->cache->memcached->save('mem_get_ayat_info'.$ayatId, $memGetAyatInfo, 300);
-		// }
-        // return $memGetAyatInfo;
-        return '["' . $row->prev . '","' . $row->current . '","' . $row->next . '"]';
+		if ( ! $memGetAyatInfo = $this->cache->memcached->get('mem_get_ayat_info'.$ayatId)) {
+			$memGetAyatInfo = '["' . $row->prev . '","' . $row->current . '","' . $row->next . '"]';
+			$this->cache->memcached->save('mem_get_ayat_info'.$ayatId, $memGetAyatInfo, 300);
+		}
+        return $memGetAyatInfo;
+        // return '["' . $row->prev . '","' . $row->current . '","' . $row->next . '"]';
     }
 	
 	function m_getAyatId() {
@@ -535,12 +535,12 @@ class M_quran extends CI_Model {
 			$arr['rows'][] = array('id'=>$r->id,'head'=>$r->arab,'head_body'=>$r->head_body,'nama_surah'=>$r->nama_surah);
 		}
 		
-		// if ( ! $memGetListSurah = $this->cache->memcached->get('mem_get_list_surah')) {
-			// $memGetListSurah = json_encode($arr);
-			// $this->cache->memcached->save('mem_get_list_surah', $memGetListSurah, 300);
-		// }
-        // return $memGetListSurah;
-        return json_encode($arr);
+		if ( ! $memGetListSurah = $this->cache->memcached->get('mem_get_list_surah')) {
+			$memGetListSurah = json_encode($arr);
+			$this->cache->memcached->save('mem_get_list_surah', $memGetListSurah, 300);
+		}
+        return $memGetListSurah;
+        // return json_encode($arr);
 	}
 	
 	function m_getListSurahId() {
@@ -550,12 +550,12 @@ class M_quran extends CI_Model {
 			$arr['rows'][] = array('id'=>$r->id,'head'=>'Nama Surah','txt'=>$r->txt);
 		}
 		
-		// if ( ! $memGetListSurahId = $this->cache->memcached->get('mem_get_list_surah_id')) {
-			// $memGetListSurahId = json_encode($arr);
-			// $this->cache->memcached->save('mem_get_list_surah_id', $memGetListSurahId, 300);
-		// }
-        // return $memGetListSurahId;
-        return json_encode($arr);
+		if ( ! $memGetListSurahId = $this->cache->memcached->get('mem_get_list_surah_id')) {
+			$memGetListSurahId = json_encode($arr);
+			$this->cache->memcached->save('mem_get_list_surah_id', $memGetListSurahId, 300);
+		}
+        return $memGetListSurahId;
+        // return json_encode($arr);
 	}
 	
 	function m_getListAyatId() {
@@ -568,23 +568,23 @@ class M_quran extends CI_Model {
 			$arr['rows'][] = array('id'=>$i,'head'=>'Nama Ayat','txt'=>$namaSurah.' : ayat('.$i.')');
 		}
 		
-		// if ( ! $memGetListAyatId = $this->cache->memcached->get('mem_get_list_ayat_id'.$SuraID)) {
-			// $memGetListAyatId = json_encode($arr);
-			// $this->cache->memcached->save('mem_get_list_ayat_id'.$SuraID, $memGetListAyatId, 300);
-		// }
-        // return $memGetListAyatId;
-        return json_encode($arr);
+		if ( ! $memGetListAyatId = $this->cache->memcached->get('mem_get_list_ayat_id'.$SuraID)) {
+			$memGetListAyatId = json_encode($arr);
+			$this->cache->memcached->save('mem_get_list_ayat_id'.$SuraID, $memGetListAyatId, 300);
+		}
+        return $memGetListAyatId;
+        // return json_encode($arr);
 	}
 	
 	function m_getListPlatform() {
 		$q = $this->db->select('VisPlatform as id,VisPlatform as text')->from('logs')->group_by('VisPlatform')->order_by('VisPlatform')->get();
 		
-		// if ( ! $memGetListPlatform = $this->cache->memcached->get('mem_get_list_platform')) {
-			// $memGetListPlatform = json_encode($q->result());
-			// $this->cache->memcached->save('mem_get_list_platform', $memGetListPlatform, 300);
-		// }
-        // return $memGetListPlatform;
-        return json_encode($q->result());
+		if ( ! $memGetListPlatform = $this->cache->memcached->get('mem_get_list_platform')) {
+			$memGetListPlatform = json_encode($q->result());
+			$this->cache->memcached->save('mem_get_list_platform', $memGetListPlatform, 300);
+		}
+        return $memGetListPlatform;
+        // return json_encode($q->result());
 	}
 	
 	function m_autoCompleteSearch() {
@@ -603,12 +603,12 @@ class M_quran extends CI_Model {
         $total = $this->db->get()->num_rows();
         $query = $this->db->limit($count, $start)->get();
         
-        // if ( ! $memGetAutoComplete = $this->cache->memcached->get('mem_get_list_autocomplete'.json_encode($cari))) {
-			// $memGetAutoComplete = $callback . '({"total":"' . $total . '","data":' . json_encode($query->result_object()) . '})';
-			// $this->cache->memcached->save('mem_get_list_autocomplete'.json_encode($cari), $memGetAutoComplete, 300);
-		// }
-        // return $memGetAutoComplete;
-        return $callback . '({"total":"' . $total . '","data":' . json_encode($query->result_object()) . '})';
+        if ( ! $memGetAutoComplete = $this->cache->memcached->get('mem_get_list_autocomplete'.json_encode($cari))) {
+			$memGetAutoComplete = $callback . '({"total":"' . $total . '","data":' . json_encode($query->result_object()) . '})';
+			$this->cache->memcached->save('mem_get_list_autocomplete'.json_encode($cari), $memGetAutoComplete, 300);
+		}
+        return $memGetAutoComplete;
+        // return $callback . '({"total":"' . $total . '","data":' . json_encode($query->result_object()) . '})';
 	}
 
 	function m_setLogActivity($txt='') {
