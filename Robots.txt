@@ -1,2 +1,4 @@
 User-Agent: *
-Allow: /
+Disallow: 
+
+Sitemap: http://www.indoquran.web.id/quran/sitemap.xml
