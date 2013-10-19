@@ -9,8 +9,8 @@ class M_mobile extends CI_Model {
     function m_bukuTamu($act='read',$p=1) {
         $name = $this->input->post('name') == '' ? '' : $this->input->post('name');
         $email = $this->input->post('email') == '' ? '' : $this->input->post('email');
-        $text = $this->input->post('text') == '' ? '' : $this->input->post('text')."<br/>--dikirim dari mobile website--";
-        $newText = preg_replace('/[^[:print:]]/', '', $this->input->post('text'));
+        $text = $this->input->post('text') == '' ? '' : $this->input->post('text').'<br/>Dari Mobile Website http://www.indoquran.web.id/mobile';
+        $newText = preg_replace('/[^[:print:]]/', '', $text);
         $newText = htmlspecialchars($newText, ENT_QUOTES);
 		
         $limit = 10;
@@ -46,7 +46,7 @@ class M_mobile extends CI_Model {
 					$this->email->cc($email);
 
 					$this->email->subject('Buku Tamu Baru IndoQuran.Web.Id Dari '.$name);
-					$this->email->message('Buku Tamu Dari : '.$name.'<br/>Email : <a href="mailto:'.$email.'">'.$email.'</a><br/>Isi : '.$text.'<br/>Dari Mobile Website http://www.indoquran.web.id/mobile');
+					$this->email->message('Buku Tamu Dari : '.$name.'<br/>Email : <a href="mailto:'.$email.'">'.$email.'</a><br/>Isi : '.$text);
 
 					$this->email->send();
 
