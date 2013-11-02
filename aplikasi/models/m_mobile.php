@@ -9,7 +9,7 @@ class M_mobile extends CI_Model {
     function m_bukuTamu($act='read',$p=1) {
         $name = $this->input->post('name') == '' ? '' : $this->input->post('name');
         $email = $this->input->post('email') == '' ? '' : $this->input->post('email');
-        $text = $this->input->post('text') == '' ? '' : $this->input->post('text').'<br/>Dari Mobile Website http://www.indoquran.web.id/mobile';
+        $text = $this->input->post('text') == '' ? '' : $this->input->post('text').'<br/><br/>--<i>Dari Mobile Website http://www.indoquran.web.id/mobile</i>--';
         $newText = preg_replace('/[^[:print:]]/', '', $text);
         $newText = htmlspecialchars($newText, ENT_QUOTES);
 		
