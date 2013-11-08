@@ -210,4 +210,8 @@ class Quran extends CI_Controller {
         header("Content-Type: text/xml;charset=iso-8859-1");
         $this->load->view("sitemap",$data);
 	}
+	
+	function jadwalTab() {
+		$this->load->view("v_jadwal");
+	}
 }
