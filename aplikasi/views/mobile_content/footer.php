@@ -1,3 +1,5 @@
-<div class="container">
-	<p class="muted credit">&copy; 2013 | <a href="mailto:kontak@indoquran.web.id">Indoquran.web.id</a></p>
-</div>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="mailto:kontak@indoquran.web.id">&copy; <?= date('Y') ?> | Indoquran.web.id</a>
+	</div>
+</nav>

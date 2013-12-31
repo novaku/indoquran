@@ -93,13 +93,13 @@ class M_mobile extends CI_Model {
 					$arr['start'] = $start;
 					
 					/*  disable memcache */
-					if ( ! $memGetBukuTamu = $this->cache->memcached->get('mem_get_bukutamu_mobile'.$sort.$dir.$limit.$start)) {
-						$memGetBukuTamu = json_encode($arr);
-						$this->cache->memcached->save('mem_get_bukutamu_mobile'.$sort.$dir.$limit.$start, $memGetBukuTamu, 300);
-					}
-			        return $memGetBukuTamu;
+//					if ( ! $memGetBukuTamu = $this->cache->memcached->get('mem_get_bukutamu_mobile'.$sort.$dir.$limit.$start)) {
+//						$memGetBukuTamu = json_encode($arr);
+//						$this->cache->memcached->save('mem_get_bukutamu_mobile'.$sort.$dir.$limit.$start, $memGetBukuTamu, 300);
+//					}
+//			        return $memGetBukuTamu;
 					
-					// return json_encode($arr);
+					 return json_encode($arr);
 			        
                 break;
         }
@@ -107,12 +107,12 @@ class M_mobile extends CI_Model {
 	
 	function m_getBukuTamuId($id) {
 		$qry = $this->db->select("id,DATE_FORMAT(date,'%d-%M-%Y %H:%i:%s') as date,name,email,REPLACE(text,'&lt;br&gt;','') as text",false)->get_where('bukutamu',array('id'=>$id));
-		if ( ! $memGetBukuTamuId = $this->cache->memcached->get('mem_get_bukutamu_id_mobile'.$id)) {
-			$memGetBukuTamuId = json_encode($qry->result());
-			$this->cache->memcached->save('mem_get_bukutamu_id_mobile'.$id, $memGetBukuTamuId, 300);
-		}
-        return $memGetBukuTamuId;
-        // return json_encode($qry->result());
+//		if ( ! $memGetBukuTamuId = $this->cache->memcached->get('mem_get_bukutamu_id_mobile'.$id)) {
+//			$memGetBukuTamuId = json_encode($qry->result());
+//			$this->cache->memcached->save('mem_get_bukutamu_id_mobile'.$id, $memGetBukuTamuId, 300);
+//		}
+//        return $memGetBukuTamuId;
+         return json_encode($qry->result());
 	}
 	
 	function m_getAllAyat() {
@@ -221,12 +221,12 @@ class M_mobile extends CI_Model {
 					';
         }
         
-        if ( ! $memGetAyatId = $this->cache->memcached->get('mem_get_ayat_id_mobile'.$id)) {
-			$memGetAyatId = $text;
-			$this->cache->memcached->save('mem_get_ayat_id_mobile'.$id, $memGetAyatId, 300);
-		}
-        return $memGetAyatId;
-        // return $text;
+//        if ( ! $memGetAyatId = $this->cache->memcached->get('mem_get_ayat_id_mobile'.$id)) {
+//			$memGetAyatId = $text;
+//			$this->cache->memcached->save('mem_get_ayat_id_mobile'.$id, $memGetAyatId, 300);
+//		}
+//        return $memGetAyatId;
+         return $text;
     }
 	
 	function m_getJumAyat($surahId) {
@@ -247,12 +247,12 @@ class M_mobile extends CI_Model {
 			$ayatId++;
 		}
 		
-		if ( ! $memGetJumAyatId = $this->cache->memcached->get('mem_get_jum_ayat_mobile'.$surahId)) {
-			$memGetJumAyatId = json_encode($arr);
-			$this->cache->memcached->save('mem_get_jum_ayat_mobile'.$surahId, $memGetJumAyatId, 300);
-		}
-        return $memGetJumAyatId;
-        // return json_encode($arr);
+//		if ( ! $memGetJumAyatId = $this->cache->memcached->get('mem_get_jum_ayat_mobile'.$surahId)) {
+//			$memGetJumAyatId = json_encode($arr);
+//			$this->cache->memcached->save('mem_get_jum_ayat_mobile'.$surahId, $memGetJumAyatId, 300);
+//		}
+//        return $memGetJumAyatId;
+         return json_encode($arr);
 	}
 	
 	function m_getAyatInfo() {
@@ -271,12 +271,12 @@ class M_mobile extends CI_Model {
 		");
 		$row = $query->row();
 		
-		if ( ! $memGetAyatInfo = $this->cache->memcached->get('mem_get_ayat_info'.$ayatId)) {
-			$memGetAyatInfo = '["' . str_replace("'", "`", $row->prev) . '","' . str_replace("'", "`", $row->next) . '"]';
-			$this->cache->memcached->save('mem_get_ayat_info'.$ayatId, $memGetAyatInfo, 300);
-		}
-        return $memGetAyatInfo;
-        // return '["' . str_replace("'", "`", $row->prev) . '","' . str_replace("'", "`", $row->next) . '"]';
+//		if ( ! $memGetAyatInfo = $this->cache->memcached->get('mem_get_ayat_info'.$ayatId)) {
+//			$memGetAyatInfo = '["' . str_replace("'", "`", $row->prev) . '","' . str_replace("'", "`", $row->next) . '"]';
+//			$this->cache->memcached->save('mem_get_ayat_info'.$ayatId, $memGetAyatInfo, 300);
+//		}
+//        return $memGetAyatInfo;
+         return '["' . str_replace("'", "`", $row->prev) . '","' . str_replace("'", "`", $row->next) . '"]';
     }
 	
 	function m_getHasilCari() {
@@ -335,7 +335,7 @@ class M_mobile extends CI_Model {
 				$j=0;
 				foreach($arrResult as $k) {
 					$total = count($arrResult[$j]['ayatList']);
-					$arrResult[$j]['surahLabel'] = $arrResult[$j]['surahName'].' ('.$total.')';
+					$arrResult[$j]['surahLabel'] = $arrResult[$j]['surahName'].' ('.$total.' ayat)';
 					$j++;
 				}
 				$arr = array(
@@ -351,12 +351,12 @@ class M_mobile extends CI_Model {
 				);
 			}
 		}
-		if ( ! $memGetHasilCari = $this->cache->memcached->get('mem_get_hasil_cari'.$cariKata)) {
-			$memGetHasilCari = json_encode($arr);
-			$this->cache->memcached->save('mem_get_hasil_cari'.$cariKata, $memGetHasilCari, 300);
-		}
-        return $memGetHasilCari;
-        // return json_encode($arr);
+//		if ( ! $memGetHasilCari = $this->cache->memcached->get('mem_get_hasil_cari'.$cariKata)) {
+//			$memGetHasilCari = json_encode($arr);
+//			$this->cache->memcached->save('mem_get_hasil_cari'.$cariKata, $memGetHasilCari, 300);
+//		}
+//        return $memGetHasilCari;
+         return json_encode($arr);
 		$this->db->cache_delete_all();
 	}
 }

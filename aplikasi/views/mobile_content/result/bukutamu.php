@@ -5,60 +5,66 @@
 </ul>
 <div id="bukutamuTabContent" class="tab-content">
   <div class="tab-pane fade in active" id="pagebukutamu-daftar">
-  <fieldset>
 	    <legend>Daftar Buku Tamu</legend>
 		<div id="bukutamu-daftar">
 		<?=$bukutamu?>
 		</div>
-	</fieldset>
   </div>
-  <div class="tab-pane fade" id="pagebukutamu-isi">
-	<form class="form-horizontal" id="form-isi-bukutamu">
-	<input type="hidden" name="page" value="bukutamu">
-	<input type="hidden" name="act" value="insert">
-	<fieldset>
-	    <legend>Isi Buku Tamu</legend>
-	  <div class="control-group">
-		<label class="control-label" for="inputNama">Nama</label>
-		<div class="controls">
-		  <input type="text" id="inputNama" placeholder="Nama" name="name">
-		</div>
-	  </div>
-	  <div class="control-group">
-		<label class="control-label" for="inputEmail">Email</label>
-		<div class="controls">
-		  <input type="text" id="inputEmail" name="email" placeholder="Email">
-		</div>
-	  </div>
-	  <div class="control-group">
-		<label class="control-label" for="inputKomentar">Komentar</label>
-		<div class="controls">
-			<textarea rows="3" id="inputKomentar" placeholder="Komentar" name="text"></textarea>
-		</div>
-	  </div>
-	  <div class="control-group">
-		<div class="controls">
-		  <button type="reset" class="btn btn-warning">Reset <i class="icon-refresh"></i></button>
-		  <button type="submit" class="btn btn-primary">Kirim <i class="icon-ok"></i></button>
-		</div>
-	  </div>
-	  </fieldset>
-	</form>
-  </div>
+	<div class="tab-pane fade in" id="pagebukutamu-isi">
+		<legend>Isi Buku Tamu</legend>
+		<form class="form-horizontal" id="form-isi-bukutamu" role="form">
+			<input type="hidden" name="page" value="bukutamu">
+			<input type="hidden" name="act" value="insert">
+
+			<div class="form-group">
+				<label for="inputNama" class="col-sm-2 control-label">Nama</label>
+
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="inputNama" placeholder="Masukkan Nama..." name="name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="inputEmail" placeholder="Masukkan Email..." name="email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputKomentar" class="col-sm-2 control-label">Komentar</label>
+
+				<div class="col-sm-10">
+					<textarea rows="3" class="form-control" id="inputKomentar" placeholder="Masukkan Komentar..." name="text"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="reset" class="btn btn-warning btn-lg">Reset
+						<span class="glyphicon glyphicon-refresh"></span></button>
+					<button type="submit" class="btn btn-primary btn-lg">Kirim
+						<span class="glyphicon glyphicon-check"></span></button>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
 </div>
 <script type="text/javascript">
 $("#form-isi-bukutamu").submit(function(a){a.preventDefault();var b=$(this);$.ajax({type:"POST",url:base_url+"mobile/loadResult",data:b.serialize(),success:function(a){var c=$.parseJSON(a);c.success?(b.trigger("reset"),alert(c.msg),document.location.reload(!0)):alert(c.msg)}})});
 </script>
-<div id="bukutamuModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="bukutamuModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3 id="bukutamuModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <span id="bukutamuModalBody"></span>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-  </div>
+<div class="modal fade" id="bukutamuModal" tabindex="-1" role="dialog" aria-labelledby="bukutamuModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="bukutamuModalLabel">Modal title</h4>
+			</div>
+			<div class="modal-body">
+				<span id="bukutamuModalBody"></span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+			</div>
+		</div>
+	</div>
 </div>

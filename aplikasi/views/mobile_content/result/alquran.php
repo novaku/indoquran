@@ -14,14 +14,16 @@ $obj = json_decode($surahJson);
 	<fieldset>
 	    <legend>Pencarian Tarjamah</legend>
 		<div id="alquran-cari">
-			<form class="form-search" id="formCariTarjamah">
-				&nbsp;&nbsp;<div class="input-append">
-				  <input class="span4 search-query" id="appendedInputButton" type="text" name="cariKata" placeholder="Masukkan kata pencarian.." required>
-				  <button class="btn" type="submit"><i class="icon-search"></i> Cari!</button>
-				</div>
-			</form>
-			<div class="accordion" id="accordionCariQuran">
-				
+					<form class="form-inline" role="form" id="formCariTarjamah">
+						<div class="input-group">
+							<input type="text" class="form-control" name="cariKata" placeholder="Masukkan kata pencarian...">
+							<div class="input-group-btn">
+								<button type="reset" class="btn btn-default" tabindex="-1" id="resetPencarian">Kosongkan <span class="glyphicon glyphicon-remove"></span></button>
+								<button type="submit" class="btn btn-default" tabindex="-1">Cari <span class="glyphicon glyphicon-search"></span></button>
+							</div>
+						</div>
+					</form>
+			<div class="panel-group" id="accordionCariQuran">
 			</div>
 		</div>
 	</fieldset>
@@ -30,24 +32,24 @@ $obj = json_decode($surahJson);
   <fieldset>
 	    <legend>Al-Qur'an Berdasarkan Surah</legend>
 		<div id="alquran-surah">
-			<div class="accordion" id="accordionSurahQuran">
+			<div class="panel-group" id="accordionSurahQuran">
 			<?php
 			$i = 0;
 			foreach($obj->rows as $v) {
 				if($i!=0) {
 				?>
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionSurahQuran" href="#collapseSurah<?=$v->id?>">
-						<?=$v->nama_surah?>
-						</a>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordionSurahQuran" href="#collapseSurah<?=$v->id?>"><?=$v->nama_surah?></a>
+						</h4>
 					</div>
-					<div id="collapseSurah<?=$v->id?>" class="accordion-body collapse">
-						<div class="accordion-inner">
-						<blockquote>
-						  <font size="6"><?=$v->head?></font><br/><small><?=$v->head_body?></small>
-						</blockquote>
-						<div id="contentSurah<?=$v->id?>"></div>
+					<div id="collapseSurah<?=$v->id?>" class="panel-collapse collapse">
+						<div class="panel-body">
+							<blockquote>
+								<font size="6"><?=$v->head?></font><br/><small><?=$v->head_body?></small>
+							</blockquote>
+							<div id="contentSurah<?=$v->id?>"></div>
 						</div>
 					</div>
 				</div>
@@ -62,21 +64,19 @@ $obj = json_decode($surahJson);
   </div>
   <div class="tab-pane fade" id="pagealquran-juz">
 	<fieldset>
-	    <legend>Alquran Berdasarkan Juz</legend>
+	    <legend>Al-Qur'an Berdasarkan Juz</legend>
 		<div id="alquran-juz">
-			<div class="accordion" id="accordionJuzQuran">
+			<div class="panel-group" id="accordionJuzQuran">
 			<?php
 			foreach($juz as $k => $v) {
 			?>
-				<div class="accordion-group">
-					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionJuzQuran" href="#collapse<?=$v['id']?>">
-						<?=$v['desc']?>
-						</a>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordionJuzQuran" href="#collapse<?=$v['id']?>"><?=$v['desc']?></a>
 					</div>
-					<div id="collapse<?=$v['id']?>" class="accordion-body collapse">
-						<div class="accordion-inner">
-						<p class="text-info"></p>
+					<div id="collapse<?=$v['id']?>" class="panel-collapse collapse">
+						<div class="panel-body">
 						</div>
 					</div>
 				</div>
@@ -89,20 +89,47 @@ $obj = json_decode($surahJson);
   </div>
 </div>
 <!-- Modal -->
-<div id="ayatModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    <h3 id="myModalLabel">Judul</h3>
-  </div>
-  <div class="modal-body">
-    <div id="loadingDiv" style="align:center"><img src="<?=base_url()?>assets/images/loading-min.gif" /></div>
-  </div>
-  <div class="modal-footer">
-	<span id="prevBtn"><a class="btn btn-info">Prev</a></span>
-	<a class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Tutup</a>
-	<span id="nextBtn"><a class="btn btn-info">Next</a></span>
-  </div>
+<div class="modal fade" id="ayatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Judul</h4>
+			</div>
+			<div class="modal-body">
+				<div id="loadingDiv" style="align:center"><img src="<?=path_asset('images/loading-min.gif')?>" /></div>
+			</div>
+			<div class="modal-footer">
+				<span id="prevBtn"><a class="btn">Prev</a></span>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+				<span id="nextBtn"><a class="btn">Next</a></span>
+			</div>
+		</div>
+	</div>
 </div>
 <script type="text/javascript">
-$("#formCariTarjamah").submit(function(a){a.preventDefault();var b=$(this);$.ajax({type:"POST",url:base_url+"mobile/getHasilCari",data:b.serialize(),success:function(a){var b=$.parseJSON(a);if(b.success){var c='<p class="text-center text-success">Ditemukan '+b.data.jum+' ayat dalam pencarian kata "'+b.data.cariKata+'"</p>';$("#accordionCariQuran").html(b.msg),$.each(b.data.hasil,function(a,b){var d="";$.each(b.ayatList,function(a,c){d+='<a href="#ayatModal" role="button" class="btn btn-small" data-toggle="modal" onclick="getAyatId('+c.ID+",'"+b.surahName+" : "+c.VerseID+"')\">Buka QS. "+b.surahName+":"+c.VerseID+'<i class="icon-ok-circle"></i></a>'}),c+='<div class="accordion-group"><div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionCariQuran" href="#collapseCari'+a+'">'+"["+b.surahId+"] "+b.surahLabel+"</a>"+"</div>"+'<div id="collapseCari'+a+'" class="accordion-body collapse">'+'<div class="accordion-inner">'+'<p class="text-info">'+d+"</p>"+"</div>"+"</div>"+"</div>"}),$("#accordionCariQuran").html(c)}else alert(b.msg)}})});
+	$("#formCariTarjamah").submit(function (a) {
+		a.preventDefault();
+		var b = $(this);
+		$.ajax({
+			type: "POST",
+			url: base_url + "mobile/getHasilCari",
+			data: b.serialize(),
+			success: function (a) {
+				var b = $.parseJSON(a);
+				if (b.success) {
+					var c = '<h3 class="text-center text-success">Ditemukan ' + b.data.jum + ' ayat dalam pencarian kata "' + b.data.cariKata + '"</h3>';
+					$("#accordionCariQuran").html(b.msg), $.each(b.data.hasil, function (a, b) {
+						var d = "";
+						$.each(b.ayatList, function (a, c) {
+							d += '<button class="btn" data-toggle="modal" data-target="#ayatModal" onclick="getAyatId(' + c.ID + ",'" + b.surahName + " : " + c.VerseID + "')\">Buka QS. " + b.surahName + ":" + c.VerseID + '</button>&nbsp;';
+						}), c += '<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordionCariQuran" href="#collapseCari' + a + '">' + "[" + b.surahId + "] " + b.surahLabel + "</a>" + "</h4></div>" + '<div id="collapseCari' + a + '" class="panel-collapse collapse">' + '<div class="panel-body">' + '<p class="text-info">' + d + "</p>" + "</div>" + "</div>" + "</div>"
+					}), $("#accordionCariQuran").html(c)
+				} else alert(b.msg)
+			}
+		})
+	});
+	$("#resetPencarian").click(function() {
+		$("#accordionCariQuran").html('');
+	});
 </script>
