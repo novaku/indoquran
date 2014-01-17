@@ -72,6 +72,6 @@
 			$( "#loadingDiv" ).hide();
 		});
 	</script>
-	<script src="<?=base_url()?>assets/js/quran-juz.js"></script>
+	<script src="<?=base_url()?>assets/js/quran-juz.js?v=2"></script>
   </body>
 </html>

@@ -2,5 +2,6 @@ aplikasi/config/database.php
 .settings/
 .buildpath
 .project
-viewAyat/
-viewAyatMobile/
+.idea
+viewAyat
+viewAyatMobile
