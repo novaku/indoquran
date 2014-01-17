@@ -212,7 +212,7 @@ class M_mobile extends CI_Model {
 						<font size="4"><b>"' . $key->AyahTextNew . '"</b></font>
 					<hr noshade size=1>
 						'.$key->AyahPenjelasan.'
-					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank">'.image_asset('fb_share.png').'</a>&nbsp;
+					<p align="center"><a href="https://www.facebook.com/sharer/sharer.php?u='.$urlEncode.'" target="_blank"><img src="http://www.indoquran.web.id/assets/images/fb_share.png" width="82" height="28" /></a>&nbsp;
 					<iframe allowtransparency="true" frameborder="0" scrolling="no"
 						src="/quran/twitterShare/'.$key->ID.'"
 						style="width:130px; height:28px;">
