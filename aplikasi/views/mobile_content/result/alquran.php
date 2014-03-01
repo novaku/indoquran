@@ -15,13 +15,8 @@ $obj = json_decode($surahJson);
 	    <legend>Pencarian Tarjamah</legend>
 		<div id="alquran-cari">
 					<form class="form-inline" role="form" id="formCariTarjamah">
-						<div class="input-group">
-							<input type="text" class="form-control" name="cariKata" placeholder="Masukkan kata pencarian...">
-							<div class="input-group-btn">
-								<button type="reset" class="btn btn-default" tabindex="-1" id="resetPencarian">Kosongkan <span class="glyphicon glyphicon-remove"></span></button>
-								<button type="submit" class="btn btn-default" tabindex="-1">Cari <span class="glyphicon glyphicon-search"></span></button>
-							</div>
-						</div>
+						<input type="text" class="form-control" name="cariKata" placeholder="Masukkan kata pencarian...">
+						<button type="submit" class="btn btn-default btn-block">Cari <span class="glyphicon glyphicon-search"></span></button>
 					</form>
 			<div class="panel-group" id="accordionCariQuran">
 			</div>
@@ -128,8 +123,5 @@ $obj = json_decode($surahJson);
 				} else alert(b.msg)
 			}
 		})
-	});
-	$("#resetPencarian").click(function() {
-		$("#accordionCariQuran").html('');
 	});
 </script>
