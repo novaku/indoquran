@@ -17,7 +17,7 @@
 	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	  <![endif]-->
 	<style>
-		.modal-body{position:relative;max-height:240px;padding:15px;overflow-y:auto}
+		.modal-lg{width:95%;}
 	</style>
     <link href="<?=path_asset('css/custom.css')?>" rel="stylesheet">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?=path_asset('ico/144.png')?>">

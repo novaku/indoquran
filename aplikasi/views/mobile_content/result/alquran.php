@@ -85,10 +85,10 @@ $obj = json_decode($surahJson);
 </div>
 <!-- Modal -->
 <div class="modal fade" id="ayatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&cross;</button>
 				<h4 class="modal-title" id="myModalLabel">Judul</h4>
 			</div>
 			<div class="modal-body">
@@ -96,7 +96,7 @@ $obj = json_decode($surahJson);
 			</div>
 			<div class="modal-footer">
 				<span id="prevBtn"><a class="btn">Prev</a></span>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+				<a class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-off" /> Tutup</a>
 				<span id="nextBtn"><a class="btn">Next</a></span>
 			</div>
 		</div>

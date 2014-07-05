@@ -53,17 +53,17 @@
 $("#form-isi-bukutamu").submit(function(a){a.preventDefault();var b=$(this);$.ajax({type:"POST",url:base_url+"mobile/loadResult",data:b.serialize(),success:function(a){var c=$.parseJSON(a);c.success?(b.trigger("reset"),alert(c.msg),document.location.reload(!0)):alert(c.msg)}})});
 </script>
 <div class="modal fade" id="bukutamuModal" tabindex="-1" role="dialog" aria-labelledby="bukutamuModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&cross;</button>
 				<h4 class="modal-title" id="bukutamuModalLabel">Modal title</h4>
 			</div>
 			<div class="modal-body">
 				<span id="bukutamuModalBody"></span>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-off" /> Tutup</button>
 			</div>
 		</div>
 	</div>
