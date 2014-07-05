@@ -140,7 +140,9 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
             "couldn't connect to host",
             'timeout was reached',
             'connection time-out',
-            'connect() timed out!'
+            'connect() timed out!',
+            'failed connect to 127.0.0.1:123; connection refused',
+            'failed to connect to 127.0.0.1 port 123: connection refused'
         );
         $this->assertTrue(in_array(strtolower($h->getError()), $errors), $h->getError() . ' was not the error');
 
@@ -155,11 +157,9 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
 
     public function testGetInfoWithoutDebugMode()
     {
+        $this->getServer()->enqueue("HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n");
         $client = new Client($this->getServer()->getUrl());
-        $this->getServer()->enqueue("HTTP/1.1 200 OK\r\nContent-Length: 4\r\n\r\ndata");
-        $request = RequestFactory::getInstance()->create('PUT', $this->getServer()->getUrl());
-        $request->getCurlOptions()->set('debug', false);
-        $request->setClient($client);
+        $request = $client->get($this->getServer()->getUrl());
         $response = $request->send();
 
         $info = $response->getInfo();
@@ -446,9 +446,24 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
                 'Content-Length'   => '4',
                 '!Expect'            => null,
                 '!Transfer-Encoding' => null
-            ))
-        );
+            )),
 
+            /**
+             * Send a request with empty path and a fragment - the fragment must be
+             * stripped out before sending it to curl
+             *
+             * @issue 453
+             * @link https://github.com/guzzle/guzzle/issues/453
+             */
+            array('GET', 'http://www.google.com#head', null, null, array(
+                CURLOPT_RETURNTRANSFER => 0,
+                CURLOPT_HEADER => 0,
+                CURLOPT_CONNECTTIMEOUT => 150,
+                CURLOPT_WRITEFUNCTION => 'callback',
+                CURLOPT_HEADERFUNCTION => 'callback',
+                CURLOPT_HTTPHEADER => array('Accept:', 'Host: www.google.com', 'User-Agent: ' . $userAgent),
+            )),
+        );
 
         $postTest = array('POST', 'http://localhost:8124/post.php', null, $postBody, array(
             CURLOPT_RETURNTRANSFER => 0,

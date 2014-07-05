@@ -14,7 +14,6 @@ namespace Predis\Protocol\Text;
 use Predis\CommunicationException;
 use Predis\ResponseError;
 use Predis\ResponseQueued;
-use Predis\ServerException;
 use Predis\Command\CommandInterface;
 use Predis\Connection\ComposableConnectionInterface;
 use Predis\Iterator\MultiBulkResponseSimple;
@@ -73,7 +72,7 @@ class TextProtocol implements ProtocolInterface
         $payload = substr($chunk, 1);
 
         switch ($prefix) {
-            case '+':    // inline
+            case '+':
                 switch ($payload) {
                     case 'OK':
                         return true;
@@ -85,14 +84,15 @@ class TextProtocol implements ProtocolInterface
                         return $payload;
                 }
 
-            case '$':    // bulk
+            case '$':
                 $size = (int) $payload;
                 if ($size === -1) {
                     return null;
                 }
+
                 return substr($connection->readBytes($size + 2), 0, -2);
 
-            case '*':    // multi bulk
+            case '*':
                 $count = (int) $payload;
 
                 if ($count === -1) {
@@ -110,10 +110,10 @@ class TextProtocol implements ProtocolInterface
 
                 return $multibulk;
 
-            case ':':    // integer
+            case ':':
                 return (int) $payload;
 
-            case '-':    // error
+            case '-':
                 return new ResponseError($payload);
 
             default:

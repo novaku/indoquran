@@ -1,8 +1,8 @@
 {
     "require": {
-        "mobiledetect/mobiledetectlib": "2.*",
-		"predis/predis": "0.*",
-		"facebook/php-sdk": "3.*",
-		"aws/aws-sdk-php": "2.*"
+        "mobiledetect/mobiledetectlib": "*",
+		"predis/predis": "*",
+		"facebook/php-sdk": "*",
+        "guzzle/guzzle": "*"
     }
 }

@@ -11,10 +11,6 @@
 
 namespace Predis;
 
-use Predis\Connection\AggregatedConnectionInterface;
-use Predis\Connection\ClusterConnectionInterface;
-use Predis\Connection\ConnectionInterface;
-
 /**
  * Defines a few helper methods.
  *
@@ -47,7 +43,7 @@ class Helpers
      * Normalizes the arguments array passed to a Redis command.
      *
      * @deprecated Deprecated since v0.8.3 - moved in Predis\Command\AbstractCommand::normalizeArguments()
-     * @param array $arguments Arguments for a command.
+     * @param  array $arguments Arguments for a command.
      * @return array
      */
     public static function filterArrayArguments(Array $arguments)
@@ -63,7 +59,7 @@ class Helpers
      * Normalizes the arguments array passed to a variadic Redis command.
      *
      * @deprecated Deprecated since v0.8.3 - moved in Predis\Command\AbstractCommand::normalizeVariadic()
-     * @param array $arguments Arguments for a command.
+     * @param  array $arguments Arguments for a command.
      * @return array
      */
     public static function filterVariadicValues(Array $arguments)

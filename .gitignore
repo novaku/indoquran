@@ -5,3 +5,8 @@ aplikasi/config/database.php
 .idea
 viewAyat
 viewAyatMobile
+json
+cache
+SQL
+/nbproject/private/
+aplikasi/libraries/vendor/

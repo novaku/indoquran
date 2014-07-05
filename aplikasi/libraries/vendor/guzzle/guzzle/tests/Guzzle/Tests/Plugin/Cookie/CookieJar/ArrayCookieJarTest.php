@@ -268,7 +268,7 @@ class ArrayCookieJarTest extends \Guzzle\Tests\GuzzleTestCase
             array('https://example.com', array(0)),
             array('http://example.com', array()),
             array('https://example.com:8912', array()),
-            array('https://foo.example.com', array()),
+            array('https://foo.example.com', array(0)),
             array('http://foo.example.com/test/acme/', array(4))
         );
     }
@@ -330,7 +330,7 @@ class ArrayCookieJarTest extends \Guzzle\Tests\GuzzleTestCase
 
         $request = new Request('GET', $url);
         $results = $this->jar->getMatchingCookies($request);
-        $this->assertEquals(count($results), count($cookies));
+        $this->assertEquals(count($cookies), count($results));
         foreach ($cookies as $i) {
             $this->assertContains($bag[$i], $results);
         }
@@ -349,5 +349,37 @@ class ArrayCookieJarTest extends \Guzzle\Tests\GuzzleTestCase
             'value'  => 'foo',
             'domain' => 'bar'
         )));
+    }
+
+    public function testRemoveExistingCookieIfEmpty()
+    {
+        // Add a cookie that should not be affected
+        $a = new Cookie(array(
+            'name' => 'foo',
+            'value' => 'nope',
+            'domain' => 'foo.com',
+            'path' => '/abc'
+        ));
+        $this->jar->add($a);
+
+        $data = array(
+            'name' => 'foo',
+            'value' => 'bar',
+            'domain' => 'foo.com',
+            'path' => '/'
+        );
+
+        $b = new Cookie($data);
+        $this->assertTrue($this->jar->add($b));
+        $this->assertEquals(2, count($this->jar));
+
+        // Try to re-set the same cookie with no value: assert that cookie is not added
+        $data['value'] = null;
+        $this->assertFalse($this->jar->add(new Cookie($data)));
+        // assert that original cookie has been deleted
+        $cookies = $this->jar->all('foo.com');
+        $this->assertTrue(in_array($a, $cookies, true));
+        $this->assertFalse(in_array($b, $cookies, true));
+        $this->assertEquals(1, count($this->jar));
     }
 }

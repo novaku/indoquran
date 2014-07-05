@@ -11,13 +11,11 @@
 
 namespace Predis\Command;
 
-use \PHPUnit_Framework_TestCase as StandardTestCase;
-
 /**
  * @group commands
  * @group realm-zset
  */
-class ZSetScoreTest extends CommandTestCase
+class ZSetScoreTest extends PredisCommandTestCase
 {
     /**
      * {@inheritdoc}
@@ -69,6 +67,17 @@ class ZSetScoreTest extends CommandTestCase
         $command->prefixKeys('prefix:');
 
         $this->assertSame($expected, $command->getArguments());
+    }
+
+    /**
+     * @group disconnected
+     */
+    public function testPrefixKeysIgnoredOnEmptyArguments()
+    {
+        $command = $this->getCommand();
+        $command->prefixKeys('prefix:');
+
+        $this->assertSame(array(), $command->getArguments());
     }
 
     /**

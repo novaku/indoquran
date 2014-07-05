@@ -658,4 +658,20 @@ class ResponseTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertEquals('bar', (string) $r->getHeader('Foo'));
         $this->assertEquals('test', (string) $r->getBody());
     }
+
+    public function testPreventsComplexExternalEntities()
+    {
+        $xml = '<?xml version="1.0"?><!DOCTYPE scan[<!ENTITY test SYSTEM "php://filter/read=convert.base64-encode/resource=ResponseTest.php">]><scan>&test;</scan>';
+        $response = new Response(200, array(), $xml);
+
+        $oldCwd = getcwd();
+        chdir(__DIR__);
+        try {
+            $xml = $response->xml();
+            chdir($oldCwd);
+            $this->markTestIncomplete('Did not throw the expected exception! XML resolved as: ' . $xml->asXML());
+        } catch (\Exception $e) {
+            chdir($oldCwd);
+        }
+    }
 }

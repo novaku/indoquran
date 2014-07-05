@@ -71,6 +71,15 @@ class ParameterTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertEquals('foo', $p->getValue('foo'));
     }
 
+    public function testZeroValueDoesNotCauseDefaultToBeReturned()
+    {
+        $d = $this->data;
+        $d['default'] = '1';
+        $d['static'] = null;
+        $p = new Parameter($d);
+        $this->assertEquals('0', $p->getValue('0'));
+    }
+
     public function testFiltersValues()
     {
         $d = $this->data;
@@ -314,22 +323,17 @@ class ParameterTest extends \Guzzle\Tests\GuzzleTestCase
 
     public function testResolvesRefKeysRecursively()
     {
-        $jarJar = array('type' => 'string', 'default' => 'Mesa address tha senate!');
-        $anakin = array('type' => 'array', 'items' => array('$ref' => 'JarJar'));
         $description = new ServiceDescription(array(
             'models' => array(
-                'JarJar' => $jarJar,
-                'Anakin' => $anakin
+                'JarJar' => array('type' => 'string', 'default' => 'Mesa address tha senate!'),
+                'Anakin' => array('type' => 'array', 'items' => array('$ref' => 'JarJar'))
             )
         ));
-        // description attribute will be removed
-        $p = new Parameter(array('$ref' => 'Anakin', 'description' => 'missing'), $description);
+        $p = new Parameter(array('$ref' => 'Anakin', 'description' => 'added'), $description);
         $this->assertEquals(array(
-            'type'  => 'array',
-            'items' => array(
-                'type'    => 'string',
-                'default' => 'Mesa address tha senate!'
-            )
+            'type' => 'array',
+            'items' => array('type' => 'string', 'default' => 'Mesa address tha senate!'),
+            'description' => 'added'
         ), $p->toArray());
     }
 

@@ -3,6 +3,7 @@
 namespace Guzzle\Tests\Plugin\Oauth;
 
 use Guzzle\Http\Message\RequestFactory;
+use Guzzle\Http\QueryAggregator\CommaAggregator;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Common\Event;
 
@@ -50,6 +51,7 @@ class OauthPluginTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertEquals('dracula', $config['token_secret']);
         $this->assertEquals('1.0', $config['version']);
         $this->assertEquals('HMAC-SHA1', $config['signature_method']);
+        $this->assertEquals('header', $config['request_method']);
     }
 
     public function testCreatesStringToSignFromPostRequest()
@@ -149,6 +151,21 @@ class OauthPluginTest extends \Guzzle\Tests\GuzzleTestCase
     }
 
     /**
+     * @depends testMultiDimensionalArray
+     */
+    public function testMultiDimensionalArrayWithNonDefaultQueryAggregator()
+    {
+        $p = new OauthPlugin($this->config);
+        $request = $this->getRequest();
+        $aggregator = new CommaAggregator();
+        $query = $request->getQuery()->setAggregator($aggregator)
+            ->set('g', array('h', 'i', 'j'))
+            ->set('k', array('l'))
+            ->set('m', array('n', 'o'));
+        $this->assertContains('a%3Db%26c%3Dd%26e%3Df%26g%3Dh%2Ci%2Cj%26k%3Dl%26m%3Dn%2Co', $p->getStringToSign($request, self::TIMESTAMP, self::NONCE));
+    }
+
+    /**
      * @depends testCreatesStringToSignFromPostRequest
      */
     public function testSignsStrings()
@@ -169,6 +186,10 @@ class OauthPluginTest extends \Guzzle\Tests\GuzzleTestCase
         );
     }
 
+    /**
+     * Test that the Oauth is signed correctly and that extra strings haven't been added
+     * to the authorization header.
+     */
     public function testSignsOauthRequests()
     {
         $p = new OauthPlugin($this->config);
@@ -180,15 +201,103 @@ class OauthPluginTest extends \Guzzle\Tests\GuzzleTestCase
 
         $this->assertTrue($event['request']->hasHeader('Authorization'));
 
-        $this->assertEquals('OAuth oauth_consumer_key="foo", '
-            . 'oauth_nonce="'.urlencode($params['oauth_nonce']).'", '
-            . 'oauth_signature="'.urlencode($params['oauth_signature']).'", '
-            . 'oauth_signature_method="HMAC-SHA1", '
-            . 'oauth_timestamp="' . self::TIMESTAMP . '", '
-            . 'oauth_token="count", '
-            . 'oauth_version="1.0"',
-            (string) $event['request']->getHeader('Authorization')
+        $authorizationHeader = (string)$event['request']->getHeader('Authorization');
+
+        $this->assertStringStartsWith('OAuth ', $authorizationHeader);
+
+        $stringsToCheck = array(
+            'oauth_consumer_key="foo"',
+            'oauth_nonce="'.urlencode($params['oauth_nonce']).'"',
+            'oauth_signature="'.urlencode($params['oauth_signature']).'"',
+            'oauth_signature_method="HMAC-SHA1"',
+            'oauth_timestamp="' . self::TIMESTAMP . '"',
+            'oauth_token="count"',
+            'oauth_version="1.0"',
         );
+
+        $totalLength = strlen('OAuth ');
+
+        //Separator is not used before first parameter.
+        $separator = '';
+
+        foreach ($stringsToCheck as $stringToCheck) {
+            $this->assertContains($stringToCheck, $authorizationHeader);
+            $totalLength += strlen($separator);
+            $totalLength += strlen($stringToCheck);
+            $separator = ', ';
+        }
+
+        // Technically this test is not universally valid. It would be allowable to have extra \n characters
+        // in the Authorization header. However Guzzle does not do this, so we just perform a simple check
+        // on length to validate the Authorization header is composed of only the strings above.
+        $this->assertEquals($totalLength, strlen($authorizationHeader), 'Authorization has extra characters i.e. contains extra elements compared to stringsToCheck.');
+    }
+
+    public function testSignsOauthQueryStringRequest()
+    {
+        $config = array_merge(
+            $this->config,
+            array('request_method' => OauthPlugin::REQUEST_METHOD_QUERY)
+        );
+
+        $p = new OauthPlugin($config);
+        $event = new Event(array(
+            'request' => $this->getRequest(),
+            'timestamp' => self::TIMESTAMP
+        ));
+        $params = $p->onRequestBeforeSend($event);
+
+        $this->assertFalse($event['request']->hasHeader('Authorization'));
+
+        $stringsToCheck = array(
+            'a=b',
+            'c=d',
+            'oauth_consumer_key=foo',
+            'oauth_nonce='.urlencode($params['oauth_nonce']),
+            'oauth_signature='.urlencode($params['oauth_signature']),
+            'oauth_signature_method=HMAC-SHA1',
+            'oauth_timestamp='.self::TIMESTAMP,
+            'oauth_token=count',
+            'oauth_version=1.0',
+        );
+
+        $queryString = (string) $event['request']->getQuery();
+
+        $totalLength = strlen('?');
+
+        //Separator is not used before first parameter.
+        $separator = '';
+
+        foreach ($stringsToCheck as $stringToCheck) {
+            $this->assertContains($stringToCheck, $queryString);
+            $totalLength += strlen($separator);
+            $totalLength += strlen($stringToCheck);
+            $separator = '&';
+        }
+
+        // Removes the last query string separator '&'
+        $totalLength -= 1;
+
+        $this->assertEquals($totalLength, strlen($queryString), 'Query string has extra characters i.e. contains extra elements compared to stringsToCheck.');
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidArgumentExceptionOnMethodError()
+    {
+        $config = array_merge(
+            $this->config,
+            array('request_method' => 'FakeMethod')
+        );
+
+        $p = new OauthPlugin($config);
+        $event = new Event(array(
+            'request' => $this->getRequest(),
+            'timestamp' => self::TIMESTAMP
+        ));
+
+        $p->onRequestBeforeSend($event);
     }
 
     public function testDoesNotAddFalseyValuesToAuthorization()
@@ -199,5 +308,38 @@ class OauthPluginTest extends \Guzzle\Tests\GuzzleTestCase
         $p->onRequestBeforeSend($event);
         $this->assertTrue($event['request']->hasHeader('Authorization'));
         $this->assertNotContains('oauth_token=', (string) $event['request']->getHeader('Authorization'));
+    }
+
+    public function testOptionalOauthParametersAreNotAutomaticallyAdded()
+    {
+        // The only required Oauth parameters are the consumer key and secret. That is enough credentials
+        // for signing oauth requests.
+         $config = array(
+            'consumer_key'    => 'foo',
+            'consumer_secret' => 'bar',
+        );
+
+        $plugin = new OauthPlugin($config);
+        $event = new Event(array(
+            'request' => $this->getRequest(),
+            'timestamp' => self::TIMESTAMP
+        ));
+
+        $timestamp = $plugin->getTimestamp($event);
+        $request = $event['request'];
+        $nonce = $plugin->generateNonce($request);
+
+        $paramsToSign = $plugin->getParamsToSign($request, $timestamp, $nonce);
+
+        $optionalParams = array(
+            'callback'      => 'oauth_callback',
+            'token'         => 'oauth_token',
+            'verifier'      => 'oauth_verifier',
+            'token_secret'  => 'token_secret'
+        );
+
+        foreach ($optionalParams as $optionName => $oauthName) {
+            $this->assertArrayNotHasKey($oauthName, $paramsToSign, "Optional Oauth param '$oauthName' was not set via config variable '$optionName', but it is listed in getParamsToSign().");
+        }
     }
 }

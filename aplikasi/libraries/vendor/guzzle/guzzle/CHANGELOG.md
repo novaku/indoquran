@@ -1,6 +1,116 @@
 CHANGELOG
 =========
 
+3.9.1 (2014-05-07)
+------------------
+
+* Added a fix to ReadLimitEntityBody to ensure it doesn't infinitely loop.
+* Added a fix to the stream checksum function so that when the first read
+  returns a falsey value, it still continues to consume the stream until EOF.
+
+3.9.0 (2014-04-23)
+------------------
+
+* `null`, `false`, and `"_guzzle_blank_"` all now serialize as an empty value
+  with no trailing "=". See dc1d824277.
+* No longer performing an MD5 check on the cacert each time the phar is used,
+  but rather copying the cacert to the temp directory.
+* `"0"` can now be added as a URL path
+* Deleting cookies that are set to empty
+* If-Modified-Since is no longer unnecessarily added to the CachePlugin
+* Cookie path matching now follows RFC 6265 s5.1.4
+* Updated service descriptions are now added to a service client's composite
+  factory.
+* MockPlugin now throws an exception if the queue is empty.
+* Properly parsing URLs that start with "http" but are not absolute
+* Added the ability to configure the curl_multi_select timeout setting
+* OAuth parameters are now sorted using lexicographical byte value ordering
+* Fixing invalid usage of an out of range PHP feature in the ErrorResponsePlugin
+
+3.8.1 (2014-01-28)
+------------------
+
+* Bug: Always using GET requests when redirecting from a 303 response
+* Bug: CURLOPT_SSL_VERIFYHOST is now correctly set to false when setting `$certificateAuthority` to false in
+  `Guzzle\Http\ClientInterface::setSslVerification()`
+* Bug: RedirectPlugin now uses strict RFC 3986 compliance when combining a base URL with a relative URL
+* Bug: The body of a request can now be set to `"0"`
+* Sending PHP stream requests no longer forces `HTTP/1.0`
+* Adding more information to ExceptionCollection exceptions so that users have more context, including a stack trace of
+  each sub-exception
+* Updated the `$ref` attribute in service descriptions to merge over any existing parameters of a schema (rather than
+  clobbering everything).
+* Merging URLs will now use the query string object from the relative URL (thus allowing custom query aggregators)
+* Query strings are now parsed in a way that they do no convert empty keys with no value to have a dangling `=`.
+  For example `foo&bar=baz` is now correctly parsed and recognized as `foo&bar=baz` rather than `foo=&bar=baz`.
+* Now properly escaping the regular expression delimiter when matching Cookie domains.
+* Network access is now disabled when loading XML documents
+
+3.8.0 (2013-12-05)
+------------------
+
+* Added the ability to define a POST name for a file
+* JSON response parsing now properly walks additionalProperties
+* cURL error code 18 is now retried automatically in the BackoffPlugin
+* Fixed a cURL error when URLs contain fragments
+* Fixed an issue in the BackoffPlugin retry event where it was trying to access all exceptions as if they were
+  CurlExceptions
+* CURLOPT_PROGRESS function fix for PHP 5.5 (69fcc1e)
+* Added the ability for Guzzle to work with older versions of cURL that do not support `CURLOPT_TIMEOUT_MS`
+* Fixed a bug that was encountered when parsing empty header parameters
+* UriTemplate now has a `setRegex()` method to match the docs
+* The `debug` request parameter now checks if it is truthy rather than if it exists
+* Setting the `debug` request parameter to true shows verbose cURL output instead of using the LogPlugin
+* Added the ability to combine URLs using strict RFC 3986 compliance
+* Command objects can now return the validation errors encountered by the command
+* Various fixes to cache revalidation (#437 and 29797e5)
+* Various fixes to the AsyncPlugin
+* Cleaned up build scripts
+
+3.7.4 (2013-10-02)
+------------------
+
+* Bug fix: 0 is now an allowed value in a description parameter that has a default value (#430)
+* Bug fix: SchemaFormatter now returns an integer when formatting to a Unix timestamp
+  (see https://github.com/aws/aws-sdk-php/issues/147)
+* Bug fix: Cleaned up and fixed URL dot segment removal to properly resolve internal dots
+* Minimum PHP version is now properly specified as 5.3.3 (up from 5.3.2) (#420)
+* Updated the bundled cacert.pem (#419)
+* OauthPlugin now supports adding authentication to headers or query string (#425)
+
+3.7.3 (2013-09-08)
+------------------
+
+* Added the ability to get the exception associated with a request/command when using `MultiTransferException` and
+  `CommandTransferException`.
+* Setting `additionalParameters` of a response to false is now honored when parsing responses with a service description
+* Schemas are only injected into response models when explicitly configured.
+* No longer guessing Content-Type based on the path of a request. Content-Type is now only guessed based on the path of
+  an EntityBody.
+* Bug fix: ChunkedIterator can now properly chunk a \Traversable as well as an \Iterator.
+* Bug fix: FilterIterator now relies on `\Iterator` instead of `\Traversable`.
+* Bug fix: Gracefully handling malformed responses in RequestMediator::writeResponseBody()
+* Bug fix: Replaced call to canCache with canCacheRequest in the CallbackCanCacheStrategy of the CachePlugin
+* Bug fix: Visiting XML attributes first before visting XML children when serializing requests
+* Bug fix: Properly parsing headers that contain commas contained in quotes
+* Bug fix: mimetype guessing based on a filename is now case-insensitive
+
+3.7.2 (2013-08-02)
+------------------
+
+* Bug fix: Properly URL encoding paths when using the PHP-only version of the UriTemplate expander
+  See https://github.com/guzzle/guzzle/issues/371
+* Bug fix: Cookie domains are now matched correctly according to RFC 6265
+  See https://github.com/guzzle/guzzle/issues/377
+* Bug fix: GET parameters are now used when calculating an OAuth signature
+* Bug fix: Fixed an issue with cache revalidation where the If-None-Match header was being double quoted
+* `Guzzle\Common\AbstractHasDispatcher::dispatch()` now returns the event that was dispatched
+* `Guzzle\Http\QueryString::factory()` now guesses the most appropriate query aggregator to used based on the input.
+  See https://github.com/guzzle/guzzle/issues/379
+* Added a way to add custom domain objects to service description parsing using the `operation.parse_class` event. See
+  https://github.com/guzzle/guzzle/pull/380
+* cURL multi cleanup and optimizations
+
 3.7.1 (2013-07-05)
 ------------------
 

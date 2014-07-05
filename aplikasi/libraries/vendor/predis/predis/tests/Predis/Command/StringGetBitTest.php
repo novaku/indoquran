@@ -11,13 +11,11 @@
 
 namespace Predis\Command;
 
-use \PHPUnit_Framework_TestCase as StandardTestCase;
-
 /**
  * @group commands
  * @group realm-string
  */
-class StringGetBitTest extends CommandTestCase
+class StringGetBitTest extends PredisCommandTestCase
 {
     /**
      * {@inheritdoc}
@@ -71,6 +69,17 @@ class StringGetBitTest extends CommandTestCase
         $command->prefixKeys('prefix:');
 
         $this->assertSame($expected, $command->getArguments());
+    }
+
+    /**
+     * @group disconnected
+     */
+    public function testPrefixKeysIgnoredOnEmptyArguments()
+    {
+        $command = $this->getCommand();
+        $command->prefixKeys('prefix:');
+
+        $this->assertSame(array(), $command->getArguments());
     }
 
     /**

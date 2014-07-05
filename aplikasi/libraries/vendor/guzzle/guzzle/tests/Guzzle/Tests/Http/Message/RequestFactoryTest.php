@@ -421,7 +421,10 @@ class HttpRequestFactoryTest extends \Guzzle\Tests\GuzzleTestCase
 
     public function testCanAddPlugins()
     {
-        $mock = new MockPlugin(array(new Response(200)));
+        $mock = new MockPlugin(array(
+            new Response(200),
+            new Response(200)
+        ));
         $client = new Client();
         $client->addSubscriber($mock);
         $request = $client->get('/', array(), array(
@@ -437,6 +440,17 @@ class HttpRequestFactoryTest extends \Guzzle\Tests\GuzzleTestCase
             'plugins' => array(new MockPlugin(array(new Response(500)))),
             'exceptions' => false
         ));
+        $this->assertEquals(500, $request->send()->getStatusCode());
+    }
+
+    public function testCanDisableExceptionsWithErrorListener()
+    {
+        $client = new Client();
+        $client->getEventDispatcher()->addListener('request.error', function () {});
+        $request = $client->get('/', array(), array(
+                'plugins' => array(new MockPlugin(array(new Response(500)))),
+                'exceptions' => false
+            ));
         $this->assertEquals(500, $request->send()->getStatusCode());
     }
 
@@ -510,14 +524,7 @@ class HttpRequestFactoryTest extends \Guzzle\Tests\GuzzleTestCase
     {
         $client = new Client();
         $request = $client->get('/', array(), array('debug' => true));
-        $match = false;
-        foreach ($request->getEventDispatcher()->getListeners('request.sent') as $l) {
-            if ($l[0] instanceof LogPlugin) {
-                $match = true;
-                break;
-            }
-        }
-        $this->assertTrue($match);
+        $this->assertTrue($request->getCurlOptions()->get(CURLOPT_VERBOSE));
     }
 
     public function testCanSetVerifyToOff()
@@ -599,5 +606,11 @@ class HttpRequestFactoryTest extends \Guzzle\Tests\GuzzleTestCase
         $request = $client->get('/', array(), array('cert' => array('/foo.pem', 'bar')));
         $this->assertEquals('/foo.pem', $request->getCurlOptions()->get(CURLOPT_SSLCERT));
         $this->assertEquals('bar', $request->getCurlOptions()->get(CURLOPT_SSLCERTPASSWD));
+    }
+
+    public function testCreatesBodyWithoutZeroString()
+    {
+        $request = RequestFactory::getInstance()->create('PUT', 'http://test.com', array(), '0');
+        $this->assertSame('0', (string) $request->getBody());
     }
 }

@@ -11,13 +11,11 @@
 
 namespace Predis\Command;
 
-use \PHPUnit_Framework_TestCase as StandardTestCase;
-
 /**
  * @group commands
  * @group realm-list
  */
-class ListPopLastTest extends CommandTestCase
+class ListPopLastTest extends PredisCommandTestCase
 {
     /**
      * {@inheritdoc}
@@ -69,6 +67,17 @@ class ListPopLastTest extends CommandTestCase
         $command->prefixKeys('prefix:');
 
         $this->assertSame($expected, $command->getArguments());
+    }
+
+    /**
+     * @group disconnected
+     */
+    public function testPrefixKeysIgnoredOnEmptyArguments()
+    {
+        $command = $this->getCommand();
+        $command->prefixKeys('prefix:');
+
+        $this->assertSame(array(), $command->getArguments());
     }
 
     /**

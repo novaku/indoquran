@@ -16,7 +16,13 @@
     "require": {
         "php": ">=5.0.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
     "autoload": {
-        "classmap": ["Mobile_Detect.php"]
+        "classmap": ["Mobile_Detect.php"],
+        "psr-0": {
+            "Detection": "namespaced/"
+        }
     }
 }

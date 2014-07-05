@@ -11,13 +11,11 @@
 
 namespace Predis\Command;
 
-use \PHPUnit_Framework_TestCase as StandardTestCase;
-
 /**
  * @group commands
  * @group realm-zset
  */
-class ZSetReverseRangeByScoreTest extends CommandTestCase
+class ZSetReverseRangeByScoreTest extends PredisCommandTestCase
 {
     /**
      * {@inheritdoc}
@@ -125,6 +123,35 @@ class ZSetReverseRangeByScoreTest extends CommandTestCase
         $command->prefixKeys('prefix:');
 
         $this->assertSame($expected, $command->getArguments());
+    }
+
+    /**
+     * @group disconnected
+     */
+    public function testPrefixKeysIgnoredOnEmptyArguments()
+    {
+        $command = $this->getCommand();
+        $command->prefixKeys('prefix:');
+
+        $this->assertSame(array(), $command->getArguments());
+    }
+
+    /**
+     * @group disconnected
+     */
+    public function testAddsWithscoresModifiersOnlyWhenOptionIsTrue()
+    {
+        $command = $this->getCommandWithArguments('zset', 0, 100, array('withscores' => true));
+        $this->assertSame(array('zset', 0, 100, 'WITHSCORES'), $command->getArguments());
+
+        $command = $this->getCommandWithArguments('zset', 0, 100, array('withscores' => 1));
+        $this->assertSame(array('zset', 0, 100, 'WITHSCORES'), $command->getArguments());
+
+        $command = $this->getCommandWithArguments('zset', 0, 100, array('withscores' => false));
+        $this->assertSame(array('zset', 0, 100), $command->getArguments());
+
+        $command = $this->getCommandWithArguments('zset', 0, 100, array('withscores' => 0));
+        $this->assertSame(array('zset', 0, 100), $command->getArguments());
     }
 
     /**

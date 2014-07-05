@@ -44,7 +44,7 @@ class StandardExecutor implements PipelineExecutorInterface
      * connection before starting to execute the commands stored
      * in the pipeline.
      *
-     * @param ConnectionInterface Connection instance.
+     * @param ConnectionInterface $connection Connection instance.
      */
     protected function checkConnection(ConnectionInterface $connection)
     {
@@ -56,9 +56,9 @@ class StandardExecutor implements PipelineExecutorInterface
     /**
      * Handles a response object.
      *
-     * @param ConnectionInterface $connection
-     * @param CommandInterface $command
-     * @param ResponseObjectInterface $response
+     * @param  ConnectionInterface     $connection
+     * @param  CommandInterface        $command
+     * @param  ResponseObjectInterface $response
      * @return mixed
      */
     protected function onResponseObject(ConnectionInterface $connection, CommandInterface $command, ResponseObjectInterface $response)
@@ -77,8 +77,9 @@ class StandardExecutor implements PipelineExecutorInterface
     /**
      * Handles -ERR responses returned by Redis.
      *
-     * @param ConnectionInterface $connection The connection that returned the error.
-     * @param ResponseErrorInterface $response The error response instance.
+     * @param  ConnectionInterface    $connection The connection that returned the error.
+     * @param  ResponseErrorInterface $response   The error response instance.
+     * @return ResponseErrorInterface
      */
     protected function onResponseError(ConnectionInterface $connection, ResponseErrorInterface $response)
     {
