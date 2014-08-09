@@ -1,9 +1,5 @@
 {
     "require": {
-        "mobiledetect/mobiledetectlib": "*",
-		"predis/predis": "*",
-		"facebook/php-sdk": "*",
-        "guzzle/guzzle": "*",
 		"dropbox-php/dropbox-php": "1.0.0"
     }
 }
