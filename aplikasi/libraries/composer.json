@@ -3,6 +3,7 @@
         "mobiledetect/mobiledetectlib": "*",
 		"predis/predis": "*",
 		"facebook/php-sdk": "*",
-        "guzzle/guzzle": "*"
+        "guzzle/guzzle": "*",
+		"dropbox/dropbox-sdk": "1.1.3"
     }
 }
