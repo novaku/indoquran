@@ -9,11 +9,11 @@ class Artikel extends CI_Controller
 		$this->load->library('pagination');
 	}
 
-	function index($act = 'depan', $artikel_id = null, $page = 1)
+	function index($act = 'depan', $artikel_id = 'all', $page = 1)
 	{
-		$config['base_url']   = base_url('artikel/');
+		$config['base_url']   = base_url('artikel/index/depan/all');
 		$config['total_rows'] = 200;
-		$config['per_page']   = 20;
+		$config['per_page']   = 10;
 		$this->pagination->initialize($config);
 		$data = array (
 			'body'           => null,
@@ -39,8 +39,10 @@ class Artikel extends CI_Controller
 					$data['artikel_id'] = $artikel_detail['artikel_id'];
 					$data['tgl_tulis']  = $this->m_artikel->datetime_id_format($artikel_detail['tgl_tulis']);
 					$data['kategori_txt']   = ucwords($artikel_detail['kategori']);
+					$data['body'] = 'v_artikel_preview';
+				} else {
+					$data['body'] = 'v_artikel_tulis_baru';
 				}
-				$data['body'] = 'v_artikel_tulis_baru';
 				break;
 			case 'baca' :
 				$data['body']        = 'v_artikel_baca';

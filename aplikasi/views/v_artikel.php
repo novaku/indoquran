@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 	<meta property="fb:app_id" content="462282400477128"/>
-<!--	<meta property="og:title" content="Workday Sets Price Range for I.P.O." />-->
-<!--	<meta property="og:site_name" content="My Favorite News"/>-->
-<!--	<meta property="og:url" content="http://www.myfavnews.com/2013/1/1/workday-price-range" />-->
-<!--	<meta property="og:type" content="article" />-->
-<!--	<meta property="og:locale" content="id_ID" />-->
-<!--	<meta property="article:author" content="https://www.facebook.com/fareedzakaria" />-->
-<!--	<meta property="article:publisher" content="https://www.facebook.com/cnn" />-->
+	<meta property="og:title" content="Daftar Artikel IndoQuran.Web.Id" />
+	<meta property="og:site_name" content="IndoQuran.Web.Id"/>
+	<meta property="og:url" content="http://www.myfavnews.com/2013/1/1/workday-price-range" />
+	<meta property="og:type" content="article" />
+	<meta property="og:locale" content="id_ID" />
+	<meta property="article:author" content="https://www.facebook.com/indoquran.web.id" />
+	<meta property="article:publisher" content="https://www.facebook.com/indoquran.web.id" />
 
-	<title>Artikel</title>
+	<title>Daftar Artikel IndoQuran.Web.Id</title>
 	<!-- include libries(jQuery, bootstrap, fontawesome) -->
 	<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
