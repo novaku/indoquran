@@ -6,6 +6,7 @@ class Mobile extends CI_Controller {
 		$this->load->model('m_mobile');
 		$this->load->library('email');
 		$this->load->helper('email');
+		$this->load->helper('misc');
 		$this->load->driver('cache');
 		$this->load->helper('html');
     }
@@ -25,6 +26,8 @@ class Mobile extends CI_Controller {
 				ob_end_clean();
 				$data['bukutamu'] = $out;
 			}
+		} elseif($page == 'alquran') {
+			$data['mainTopik'] = $this->m_mobile->getMainTitleTopik();
 		}
 		$this->load->view('v_mobile',$data);
 	}
@@ -94,5 +97,22 @@ class Mobile extends CI_Controller {
 	
 	function getHasilCari() {
 		echo $this->m_mobile->m_getHasilCari();
+	}
+
+	function ajax($action = "getTopik", $id = null)
+	{
+		if($action == 'getTopik') {
+			if(!is_null($id)) {
+				$data = $this->m_mobile->getTopikGroup($id);
+				$this->load->view('mobile_content/ajax-topik', $data);
+			}
+		}
+	}
+
+	function printSubTopik($id = null)
+	{
+		if(!is_null($id)) {
+			$this->m_mobile->printSubTopik($id);
+		}
 	}
 }

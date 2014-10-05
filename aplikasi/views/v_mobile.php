@@ -71,6 +71,13 @@
 		$(document).ajaxStop(function() {
 			$( "#loadingDiv" ).hide();
 		});
+		function printSubtopik(id, dest) {
+			var destination = "#"+dest+" .sub-topik-content";
+			$(destination).html('<img class="img-responsive" src="' + base_url + 'assets/images/loading-min.gif" />');
+			$.get(base_url+"mobile/printSubTopik/"+id, function (data, status) {
+				$(destination).html(data);
+			});
+		}
 	</script>
 	<script src="<?=base_url()?>assets/js/quran-juz.js?v=2"></script>
   </body>
