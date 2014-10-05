@@ -454,7 +454,8 @@ class M_mobile extends CI_Model
 			foreach ($sub as $k) {
 				if ($k) {
 					$info = $this->getAyatInfoMobile($k);
-					$content .= '<button class="btn" data-toggle="modal" data-target="#ayatModal" onclick="getAyatId(' . $info['quranId'] . ',\'' . htmlspecialchars($info['surah'], ENT_QUOTES) . ' : ' . $info['ayatId'] . '\')">Buka QS. ' . $info['surah'] . ':' . $info['ayatId'] . '<i class="icon-ok-circle"></i></button>&nbsp;';
+					$infoSurah = str_replace("'","\\'",$info['surah']);
+					$content .= '<button class="btn" data-toggle="modal" data-target="#ayatModal" onclick="getAyatId(' . $info['quranId'] . ',\'' . $infoSurah . ' : ' . $info['ayatId'] . '\')">Buka QS. ' . $info['surah'] . ':' . $info['ayatId'] . '<i class="icon-ok-circle"></i></button>&nbsp;';
 				}
 			}
 			return $content;
