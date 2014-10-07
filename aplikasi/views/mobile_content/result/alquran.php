@@ -3,13 +3,37 @@ $juz = $this->config->item('juz-data');
 $surahJson = file_get_contents('json/getListSurah.json');
 $obj = json_decode($surahJson);
 ?>
-<div>
-<ul id="alquranTab" class="nav nav-tabs">
-  <li class="active"><a href="#pagealquran-cari" data-toggle="tab">Cari</a></li>
-  <li><a href="#pagealquran-surah" data-toggle="tab">Surah</a></li>
-  <li><a href="#pagealquran-juz" data-toggle="tab">Juz</a></li>
+<ul id="alquranTab" class="nav nav-tabs" role="tablist">
+	<li class="active"><a href="#pagealquran-cari" data-toggle="tab">Cari</a></li>
+	<li><a href="#pagealquran-surah" data-toggle="tab">Surah</a></li>
+	<li><a href="#pagealquran-juz" data-toggle="tab">Juz</a></li>
+	<li class="dropdown">
+		<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown"><sup>(*)</sup> Topik <span class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+			<?php
+			foreach($mainTopik as $k => $v) :
+				?>
+				<li>
+					<a href="#topik-tab" tabindex="-1" role="tab" data-toggle="tab" onclick='getTopik(<?= $v['id'] ?>)'><?= $v['text'] ?></a>
+				</li>
+			<?php
+			endforeach;
+			?>
+		</ul>
+	</li>
+	<script type="application/javascript">
+		function getTopik(id) {
+			$("#topik-content").html('<img src="<?=path_asset('images/loading-min.gif')?>" />');
+			$.get( "/mobile/ajax/getTopik/"+id, function( data ) {$("#topik-content").html(data)});
+		}
+	</script>
 </ul>
-<div id="bukutamuTabContent" class="tab-content">
+<div id="alquranTabContent" class="tab-content">
+	<div class="tab-pane fade" id="topik-tab">
+		<fieldset>
+			<legend id="topik-content">Pencarian Tarjamah</legend>
+		</fieldset>
+	</div>
   <div class="tab-pane fade in active" id="pagealquran-cari">
 	<fieldset>
 	    <legend>Pencarian Tarjamah</legend>
