@@ -46,6 +46,8 @@ $config['redis_host']           = '50.112.178.129';
 $config['redis_port']           = 6379;
 $config['usecdn']               = true;
 $config['usememcached']         = false;
+$config['use_solr']             = true;
+
 $config['juz-data']             = array (
 	array (
 		'id'   => 1,
