@@ -44,9 +44,11 @@
 		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
+
+	  var base_url = '<?=base_url()?>';
 	</script>
-<!--	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
-	<script src="<?=path_asset('js/jquery-2.0.1.min.js')?>"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!--	<script src="--><?//=path_asset('js/jquery-2.0.1.min.js')?><!--"></script>-->
   </head>
   <body>
     <div id="wrap">
@@ -62,23 +64,7 @@
 	<?php $this->load->view('mobile_content/footer'); ?>
 <!--    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
     <script src="<?=path_asset('bootstrap3/js/bootstrap.min.js')?>"></script>
-	<script type="text/javascript">
-		var base_url = '<?=base_url()?>';
-		$('#loadingDiv').hide();
-		$(document).ajaxStart(function() {
-			$( "#loadingDiv" ).show();
-		});
-		$(document).ajaxStop(function() {
-			$( "#loadingDiv" ).hide();
-		});
-		function printSubtopik(id, dest) {
-			var destination = "#"+dest+" .sub-topik-content";
-			$(destination).html('<img class="img-responsive" src="' + base_url + 'assets/images/loading-min.gif" />');
-			$.get(base_url+"mobile/printSubTopik/"+id, function (data, status) {
-				$(destination).html(data);
-			});
-		}
-	</script>
+
 	<script src="<?=base_url()?>assets/js/quran-juz.js?v=2"></script>
   </body>
 </html>

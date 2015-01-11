@@ -14,7 +14,7 @@ $obj = json_decode($surahJson);
 			foreach($mainTopik as $k => $v) :
 				?>
 				<li>
-					<a href="#topik-tab" tabindex="-1" role="tab" data-toggle="tab" onclick='getTopik(<?= $v['id'] ?>)'><?= $v['text'] ?></a>
+					<a href="#topik-tab" tabindex="-1" role="tab" data-toggle="tab" onclick='getTopik(<?= $v['id'] ?>); _gaq.push(["_trackEvent", "Mobile: Topik", "Klik Topik", "<?= $v['text'] ?>"])'><?= $v['text'] ?></a>
 				</li>
 			<?php
 			endforeach;
@@ -39,8 +39,8 @@ $obj = json_decode($surahJson);
 	    <legend>Pencarian Tarjamah</legend>
 		<div id="alquran-cari">
 					<form class="form-inline" role="form" id="formCariTarjamah">
-						<input type="text" class="form-control" name="cariKata" placeholder="Masukkan kata pencarian...">
-						<button type="submit" class="btn btn-default btn-block">Cari <span class="glyphicon glyphicon-search"></span></button>
+						<input type="text" class="form-control" name="cariKata" placeholder="Masukkan kata pencarian..." id="inputCariKata">
+						<button type="submit" class="btn btn-default btn-block" onclick='_gaq.push(["_trackEvent", "Mobile: Quran", "Klik Cari", $("#inputCariKata").val()]);'>Cari <span class="glyphicon glyphicon-search"></span></button>
 					</form>
 			<div class="panel-group" id="accordionCariQuran">
 			</div>
@@ -63,7 +63,7 @@ $obj = json_decode($surahJson);
 							<a data-toggle="collapse" data-parent="#accordionSurahQuran" href="#collapseSurah<?=$v->id?>"><?=$v->nama_surah?></a>
 						</h4>
 					</div>
-					<div id="collapseSurah<?=$v->id?>" class="panel-collapse collapse">
+					<div id="collapseSurah<?=$v->id?>" class="panel-collapse collapse collapse-surah" data-surah-id="<?=$v->id?>">
 						<div class="panel-body">
 							<blockquote>
 								<font size="6"><?=$v->head?></font><br/><small><?=$v->head_body?></small>
@@ -94,7 +94,7 @@ $obj = json_decode($surahJson);
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordionJuzQuran" href="#collapse<?=$v['id']?>"><?=$v['desc']?></a>
 					</div>
-					<div id="collapse<?=$v['id']?>" class="panel-collapse collapse">
+					<div id="collapse<?=$v['id']?>" class="panel-collapse collapse collapse-juz" data-juz-id="<?=$v['id']?>">
 						<div class="panel-body">
 						</div>
 					</div>
@@ -126,26 +126,3 @@ $obj = json_decode($surahJson);
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	$("#formCariTarjamah").submit(function (a) {
-		a.preventDefault();
-		var b = $(this);
-		$.ajax({
-			type: "POST",
-			url: base_url + "mobile/getHasilCari",
-			data: b.serialize(),
-			success: function (a) {
-				var b = $.parseJSON(a);
-				if (b.success) {
-					var c = '<h3 class="text-center text-success">Ditemukan ' + b.data.jum + ' ayat dalam pencarian kata "' + b.data.cariKata + '"</h3>';
-					$("#accordionCariQuran").html(b.msg), $.each(b.data.hasil, function (a, b) {
-						var d = "";
-						$.each(b.ayatList, function (a, c) {
-							d += '<button class="btn" data-toggle="modal" data-target="#ayatModal" onclick="getAyatId(' + c.ID + ",'" + b.surahName + " : " + c.VerseID + "')\">Buka QS. " + b.surahName + ":" + c.VerseID + '</button>&nbsp;';
-						}), c += '<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordionCariQuran" href="#collapseCari' + a + '">' + "[" + b.surahId + "] " + b.surahLabel + "</a>" + "</h4></div>" + '<div id="collapseCari' + a + '" class="panel-collapse collapse">' + '<div class="panel-body">' + '<p class="text-info">' + d + "</p>" + "</div>" + "</div>" + "</div>"
-					}), $("#accordionCariQuran").html(c)
-				} else alert(b.msg)
-			}
-		})
-	});
-</script>

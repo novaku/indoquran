@@ -6,7 +6,7 @@ echo '<table class="table table-condensed">
 	';
 	$i = $bukutamu->start+1;
 	foreach($bukutamu->data as $k=>$v) {
-		echo '<tr><td>' . $i . '</td><td>' . $v->tgl . '</td><td><button data-target="#bukutamuModal" onclick="getBukutamuId(' . $v->id . ')" class="btn btn-info" data-toggle="modal">' . $v->name . '</button></td></tr>';
+		echo '<tr><td>' . $i . '</td><td>' . $v->tgl . '</td><td><button data-target="#bukutamuModal" onclick="getBukutamuId(' . $v->id . '); _gaq.push([\'_trackEvent\', \'Mobile: Buku Tamu\', \'Klik Detail\', \'' . $v->name . '\']);" class="btn btn-info" data-toggle="modal">' . $v->name . '</button></td></tr>';
 		$i++;
 	}
 	echo '</table>';

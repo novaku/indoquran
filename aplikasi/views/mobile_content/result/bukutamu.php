@@ -41,7 +41,7 @@
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="reset" class="btn btn-warning btn-lg">Reset
 						<span class="glyphicon glyphicon-refresh"></span></button>
-					<button type="submit" class="btn btn-primary btn-lg">Kirim
+					<button type="submit" class="btn btn-primary btn-lg" onclick='_gaq.push(["_trackEvent", "Mobile: Buku Tamu", "Klik Isi", $("#inputNama").val()+" : "+$("#inputEmail").val()]);'>Kirim
 						<span class="glyphicon glyphicon-check"></span></button>
 				</div>
 			</div>
