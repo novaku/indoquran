@@ -42,12 +42,9 @@ class Mobile extends CI_Controller {
 		if ( $page == 'bukutamu' ) {
 			if ( $act == 'insert' ) {
 				$secret = "6LevZvsSAAAAACRurQ9P6CXyJydGhTapFLeBaXrs";
-				$lang = "id";
-				// The response from reCAPTCHA
 				$resp = null;
-				// The error code from reCAPTCHA, if any
 				$error = null;
-				$reCaptcha = $this->recaptcha->ReCaptcha($secret);
+				$this->recaptcha->ReCaptcha($secret); // set ReCaptcha secret
 				if ($_POST["g-recaptcha-response"]) {
 					$resp = $this->recaptcha->verifyResponse(
 						$_SERVER["REMOTE_ADDR"],
@@ -56,8 +53,14 @@ class Mobile extends CI_Controller {
 					if ($resp != null && $resp->success) {
 						echo $this->m_mobile->m_bukuTamu('insert');
 					} else {
-						echo "Harap isi reCAPTCHA dengan benar!";
+						echo json_encode_new( array (
+							                      'success' => false,
+							                      'msg'     => 'Anda belum tervalidasi oleh reCAPTCHA' ) );
 					}
+				} else {
+					echo json_encode_new( array (
+						                      'success' => false,
+						                      'msg'     => 'Anda belum tervalidasi oleh reCAPTCHA' ) );
 				}
 			} else {
 				ob_start();

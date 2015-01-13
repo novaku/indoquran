@@ -85,7 +85,7 @@ class Recaptcha {
 			$recaptchaResponse->success = true;
 		} else {
 			$recaptchaResponse->success    = false;
-			$recaptchaResponse->errorCodes = $answers ['error-codes'];
+			$recaptchaResponse->errorCodes = isset($answers ['error-codes']) ? $answers ['error-codes'] : '';
 		}
 
 		return $recaptchaResponse;
