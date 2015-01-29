@@ -41,32 +41,39 @@ class M_mobile extends CI_Model
 						'msg'     => 'Komentar masih kosong'
 					);
 				} else if (valid_email($email)) {
-					$this->email->from($email, $name);
-					$this->email->to('kontak@indoquran.web.id');
-					$this->email->cc($email);
-
-					$this->email->subject('Buku Tamu Baru IndoQuran.Web.Id Dari ' . $name);
-					$this->email->message('Buku Tamu Dari : ' . $name . '<br/>Email : <a href="mailto:' . $email . '">' . $email . '</a><br/>Isi : ' . $text);
-
-					$this->email->send();
-
-					$data = array (
-						'name'         => $name,
-						'email'        => $email,
-						'text'         => $newText,
-						'email_status' => $this->email->print_debugger()
-					);
-
-					if ($this->db->insert('bukutamu', $data)) {
-						$arr = array (
-							'success' => true,
-							'msg'     => 'Sukses memasukkan bukutamu dari ' . $name
-						);
-					} else {
+					// spam assassin (beta)
+					if ( $this->isSpam( $email ) ) {
 						$arr = array (
 							'success' => false,
-							'msg'     => 'Gagal memasukkan bukutamu dari ' . $name
+							'msg'     => 'Email Anda "'.$email.'" sudah ditandai sebagai SPAM, harap kontak kami jika ini bukan spam, ke kontak@indoquran.web.id' );
+					} else {
+						$this->email->from($email, $name);
+						$this->email->to('kontak@indoquran.web.id');
+						$this->email->cc($email);
+
+						$this->email->subject('Buku Tamu Baru IndoQuran.Web.Id Dari ' . $name);
+						$this->email->message('Buku Tamu Dari : ' . $name . '<br/>Email : <a href="mailto:' . $email . '">' . $email . '</a><br/>Isi : ' . $text);
+
+						$this->email->send();
+
+						$data = array (
+							'name'         => $name,
+							'email'        => $email,
+							'text'         => $newText,
+							'email_status' => $this->email->print_debugger()
 						);
+
+						if ($this->db->insert('bukutamu', $data)) {
+							$arr = array (
+								'success' => true,
+								'msg'     => 'Sukses memasukkan bukutamu dari ' . $name
+							);
+						} else {
+							$arr = array (
+								'success' => false,
+								'msg'     => 'Gagal memasukkan bukutamu dari ' . $name
+							);
+						}
 					}
 				} else {
 					$arr = array (
@@ -103,6 +110,19 @@ class M_mobile extends CI_Model
 
 				break;
 		}
+	}
+
+	private function isSpam( $email = null ) {
+		$spam  = false;
+		$query = $this->db->get( 'spams' );
+		foreach ( $query->result() as $row ) {
+			$idn = $row->indentifier;
+			$pos = strpos( $email, $idn );
+			if (is_numeric($pos)){
+				$spam = true;
+			}
+		}
+		return $spam;
 	}
 
 	function m_getBukuTamuId($id)

@@ -1,3 +1,4 @@
+<script src='https://www.google.com/recaptcha/api.js?hl=id'></script>
 <div>
 <ul id="bukutamuTab" class="nav nav-tabs">
   <li class="active"><a href="#pagebukutamu-daftar" data-toggle="tab">Daftar</a></li>
@@ -36,12 +37,22 @@
 				<div class="col-sm-10">
 					<textarea rows="3" class="form-control" id="inputKomentar" placeholder="Masukkan Komentar..." name="text"></textarea>
 				</div>
+				<div class="col-sm-12">
+					<hr/>
+				</div>
+				<label for="inputKomentar" class="col-sm-2 control-label">reCAPTCHA</label>
+				<div class="col-sm-10">
+					<div class="g-recaptcha" data-sitekey="6LevZvsSAAAAAJIzOfFyD8VAJNKSFFNfQ80O5j3F"></div>
+				</div>
+				<div class="col-sm-12">
+					<hr/>
+				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="reset" class="btn btn-warning btn-lg">Reset
 						<span class="glyphicon glyphicon-refresh"></span></button>
-					<button type="submit" class="btn btn-primary btn-lg">Kirim
+					<button type="submit" class="btn btn-primary btn-lg" onclick='_gaq.push(["_trackEvent", "Mobile: Buku Tamu", "Klik Isi", $("#inputNama").val()+" : "+$("#inputEmail").val()]);'>Kirim
 						<span class="glyphicon glyphicon-check"></span></button>
 				</div>
 			</div>
@@ -49,9 +60,6 @@
 	</div>
 </div>
 </div>
-<script type="text/javascript">
-$("#form-isi-bukutamu").submit(function(a){a.preventDefault();var b=$(this);$.ajax({type:"POST",url:base_url+"mobile/loadResult",data:b.serialize(),success:function(a){var c=$.parseJSON(a);c.success?(b.trigger("reset"),alert(c.msg),document.location.reload(!0)):alert(c.msg)}})});
-</script>
 <div class="modal fade" id="bukutamuModal" tabindex="-1" role="dialog" aria-labelledby="bukutamuModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
