@@ -2,6 +2,14 @@
 
 class M_quran extends CI_Model
 {
+    private $cache_timer = 86400; // 24 hour
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->driver('cache');
+    }
+
 	function m_insertLogPengunjung()
 	{
 		//tipe agent
@@ -43,24 +51,18 @@ class M_quran extends CI_Model
 	{
 		$usememcached = $this->config->item('usememcached');
 		if ($usememcached) {
-			$memDisplayAyat = $this->cache->memcached->get('mem_display_ayat' . $id, 300);
+			$memDisplayAyat = $this->cache->memcached->get(__FUNCTION__ . $id);
 			if ($memDisplayAyat) {
 				return $memDisplayAyat;
 			} else {
-				goto save_m_displayAyat;
-			}
-		}
-
-		save_m_displayAyat :
-		// $cariKata = $this->input->post('cariKata') == '' ? '' : $this->input->post('cariKata');//disable highlight
-		$query = $this->db->select('*')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id')->where(array ('a.ID' => $id))->get();
-		foreach ($query->result() as $key) {
-			$urlAyat = 'http://www.indoquran.web.id/quran/viewAyat/' . $key->ID;
-			$urlEncode = urlencode($urlAyat);
-			// $datatext  = '[' . $key->SuraID . ':' . $key->VerseID . '] ' . $key->nama . ' (' . $key->arti . '):Ayat ' . $key->VerseID . ' - ' . $key->arab;
-			// $penjelasan = html_entity_decode($key->AyahPenjelasan);
-			$text = '<div align="right">' . quran_img($key->img) .
-			        '<br/><br/><font style="color:#666666; font-size:12px; line-height:16px;">' . $key->baca . '</font></div>
+                $query = $this->db->select('*')->from('quran_indo a')->join('surah b', 'a.SuraID=b.id')->where(array ('a.ID' => $id))->get();
+                foreach ($query->result() as $key) {
+                    $urlAyat = 'http://www.indoquran.web.id/quran/viewAyat/' . $key->ID;
+                    $urlEncode = urlencode($urlAyat);
+                    // $datatext  = '[' . $key->SuraID . ':' . $key->VerseID . '] ' . $key->nama . ' (' . $key->arti . '):Ayat ' . $key->VerseID . ' - ' . $key->arab;
+                    // $penjelasan = html_entity_decode($key->AyahPenjelasan);
+                    $text = '<div align="right">' . quran_img($key->img) .
+                        '<br/><br/><font style="color:#666666; font-size:12px; line-height:16px;">' . $key->baca . '</font></div>
 					<hr noshade size=1>
 						' . quran_mp3($key->mp3) . '
 					<hr noshade size=1>
@@ -82,10 +84,12 @@ class M_quran extends CI_Model
 					</iframe>
 					</p>
 					';
-			if ($usememcached) {
-				$this->cache->memcached->save('mem_display_ayat' . $id, $text, 300);
+                    if ($usememcached) {
+                        $this->cache->memcached->save(__FUNCTION__ . $id, $text, $this->cache_timer);
+                    }
+                    return $text;
+                }
 			}
-			return $text;
 		}
 	}
 
@@ -98,7 +102,7 @@ class M_quran extends CI_Model
 
 		$usememcached = $this->config->item('usememcached');
 		if ($usememcached) {
-			$memGetAllAyat = $this->cache->memcached->get('mem_get_all_ayat' . $kata . $SuraID . $juzID . $start);
+			$memGetAllAyat = $this->cache->memcached->get(__FUNCTION__ . $kata . $SuraID . $juzID . $start);
 			if ($memGetAllAyat) {
 				return $memGetAllAyat;
 			} else {
@@ -227,7 +231,7 @@ class M_quran extends CI_Model
 		$query = $this->db->get();
 		$text  = '({total:' . $total . ',data:' . json_encode($query->result()) . '})';
 		if ($usememcached) {
-			$this->cache->memcached->save('mem_get_all_ayat' . $kata . $SuraID . $juzID . $start, $text, 300);
+			$this->cache->memcached->save(__FUNCTION__ . $kata . $SuraID . $juzID . $start, $text, 300);
 		}
 		return $text;
 	}
@@ -512,7 +516,7 @@ class M_quran extends CI_Model
 		$usememcached = $this->config->item('usememcached');
 		$ayatId       = $this->input->post('ayatId') == '' ? 0 : $this->input->post('ayatId');
 		if ($usememcached) {
-			$memGetAyatInfo = $this->cache->memcached->get('mem_get_ayat_info' . $ayatId);
+			$memGetAyatInfo = $this->cache->memcached->get(__FUNCTION__ . $ayatId);
 			if ($memGetAyatInfo) {
 				return $memGetAyatInfo;
 			} else {
@@ -537,7 +541,7 @@ class M_quran extends CI_Model
 		$row   = $query->row();
 		$text  = '["' . $row->prev . '","' . $row->current . '","' . $row->next . '"]';
 		if ($usememcached) {
-			$this->cache->memcached->save('mem_get_ayat_info' . $ayatId, $text, 300);
+			$this->cache->memcached->save(__FUNCTION__ . $ayatId, $text, $this->cache_timer);
 		}
 		return $text;
 	}
@@ -548,11 +552,11 @@ class M_quran extends CI_Model
 		$ayat = $this->input->post('ayat') == '' ? 0 : $this->input->post('ayat');
 		$usememcached = $this->config->item('usememcached');
 		if ($usememcached) {
-			$memGetAyatId = $this->cache->memcached->get('mem_getAyatId' . $surah . '_' . $ayat);
+			$memGetAyatId = $this->cache->memcached->get(__FUNCTION__ . $surah . '_' . $ayat);
 			if ($memGetAyatId) {
 				return $memGetAyatId;
 			} else {
-
+                goto save_m_getAyatId;
 			}
 		}
 
@@ -561,7 +565,7 @@ class M_quran extends CI_Model
 		$row  = $q->row();
 		$text = $row->ID;
 		if ($usememcached) {
-			$this->cache->memcached->save('mem_getAyatId' . $surah . '_' . $ayat, $text, 300);
+			$this->cache->memcached->save(__FUNCTION__ . $surah . '_' . $ayat, $text, $this->cache_timer);
 		}
 		return $text;
 	}
@@ -570,7 +574,7 @@ class M_quran extends CI_Model
 	{
 		$usememcached = $this->config->item('usememcached');
 		if ($usememcached) {
-			$memgetJudulAyat = $this->cache->memcached->get('mem_getJudulAyat' . $id);
+			$memgetJudulAyat = $this->cache->memcached->get(__FUNCTION__ . $id);
 			if ($memgetJudulAyat) {
 				return $memgetJudulAyat;
 			} else {
@@ -586,7 +590,7 @@ class M_quran extends CI_Model
 		$row   = $query->row();
 		$text  = $row->hasil;
 		if ($usememcached) {
-			$this->cache->memcached->save('mem_getJudulAyat' . $id, $text, 300);
+			$this->cache->memcached->save(__FUNCTION__ . $id, $text, $this->cache_timer);
 		}
 		return $text;
 	}
@@ -629,7 +633,7 @@ class M_quran extends CI_Model
 	{
 		$usememcached = $this->config->item('usememcached');
 		if ($usememcached) {
-			$memGetListSurah = $this->cache->memcached->get('mem_get_list_surah');
+			$memGetListSurah = $this->cache->memcached->get(__FUNCTION__);
 			if ($memGetListSurah) {
 				return $memGetListSurah;
 			} else {
@@ -645,7 +649,7 @@ class M_quran extends CI_Model
 		}
 		$text = json_encode($arr);
 		if ($usememcached) {
-			$this->cache->memcached->save('mem_get_list_surah', $text, 300);
+			$this->cache->memcached->save(__FUNCTION__, $text, $this->cache_timer);
 		}
 		return $text;
 	}
@@ -654,7 +658,7 @@ class M_quran extends CI_Model
 	{
 		$usememcached = $this->config->item('usememcached');
 		if ($usememcached) {
-			$memGetListSurahId = $this->cache->memcached->get('mem_get_list_surah_id');
+			$memGetListSurahId = $this->cache->memcached->get(__FUNCTION__);
 			if ($memGetListSurahId) {
 				return $memGetListSurahId;
 			} else {
@@ -670,7 +674,7 @@ class M_quran extends CI_Model
 		}
 		$text = json_encode($arr);
 		if ($usememcached) {
-			$this->cache->memcached->save('mem_get_list_surah_id', $text, 300);
+			$this->cache->memcached->save(__FUNCTION__, $text, $this->cache_timer);
 		}
 		return $text;
 	}
@@ -680,7 +684,7 @@ class M_quran extends CI_Model
 		$SuraID       = $this->input->post('SuraID') == '' ? '' : $this->input->post('SuraID');
 		$usememcached = $this->config->item('usememcached');
 		if ($usememcached) {
-			$memGetListAyatId = $this->cache->memcached->get('mem_get_list_ayat_id' . $SuraID);
+			$memGetListAyatId = $this->cache->memcached->get(__FUNCTION__ . $SuraID);
 			if ($memGetListAyatId) {
 				return $memGetListAyatId;
 			} else {
@@ -698,7 +702,7 @@ class M_quran extends CI_Model
 		}
 		$text = json_encode($arr);
 		if ($usememcached) {
-			$this->cache->memcached->save('mem_get_list_ayat_id' . $SuraID, $text, 300);
+			$this->cache->memcached->save(__FUNCTION__ . $SuraID, $text, $this->cache_timer);
 		}
 		return $text;
 	}
@@ -719,7 +723,7 @@ class M_quran extends CI_Model
 
 		$usememcached = $this->config->item('usememcached');
 		if ($usememcached) {
-			$memGetAutoComplete = $this->cache->memcached->get('mem_get_list_autocomplete' . json_encode($cari));
+			$memGetAutoComplete = $this->cache->memcached->get(__FUNCTION__ . $cari);
 			if ($memGetAutoComplete) {
 				return $memGetAutoComplete;
 			} else {
@@ -738,7 +742,7 @@ class M_quran extends CI_Model
 		$query = $this->db->limit($count, $start)->get();
 		$text  = $callback . '({"total":"' . $total . '","data":' . json_encode($query->result_object()) . '})';
 		if ($usememcached) {
-			$this->cache->memcached->save('mem_get_list_autocomplete' . json_encode($cari), $text, 300);
+			$this->cache->memcached->save(__FUNCTION__ . $cari, $text, $this->cache_timer);
 		}
 		return $text;
 	}
@@ -771,7 +775,7 @@ class M_quran extends CI_Model
 	{
 		$usememcached = $this->config->item('usememcached');
 		if ($usememcached) {
-			$memGetTarjamah = $this->cache->memcached->get('mem_get_tarjamah' . $id);
+			$memGetTarjamah = $this->cache->memcached->get(__FUNCTION__ . $id);
 			if ($memGetTarjamah) {
 				return $memGetTarjamah;
 			} else {
@@ -788,7 +792,7 @@ class M_quran extends CI_Model
 			$text = '';
 		}
 		if ($usememcached) {
-			$this->cache->memcached->save('mem_get_tarjamah' . $id, $text, 300);
+			$this->cache->memcached->save(__FUNCTION__ . $id, $text, $this->cache_timer);
 		}
 		return $text;
 	}

@@ -38,7 +38,7 @@ class Quran extends CI_Controller
 
     function displayAyat($id = 1)
     {
-        echo $this->m_quran->m_displayAyatCache($id);
+        echo $this->m_quran->m_displayAyat($id);
     }
 
     function getAllAyat()

@@ -45,7 +45,7 @@ $config['quran_mp3']            = 'http://www.everyayah.com/data/Ibrahim_Akhdar_
 $config['redis_host']           = '50.112.178.129';
 $config['redis_port']           = 6379;
 $config['usecdn']               = true;
-$config['usememcached']         = false;
+$config['usememcached']         = true;
 $config['juz-data']             = array (
 	array (
 		'id'   => 1,
