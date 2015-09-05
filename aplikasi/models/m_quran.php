@@ -28,9 +28,7 @@ class M_quran extends CI_Model
 		);
 		$visId      = $this->session->userdata('visitId');
 
-		// to disable add to log for newrelic
-		$pos = strpos($nama_user_agent, 'NewRelicPinger');
-		if ((empty($visId)) || ($pos === false) || (!$this->agent->is_robot())) {
+		if ((empty($visId)) && ($this->agent->is_robot() == false)) {
 			$this->db->insert('logs', $clientData);
 			$this->session->set_userdata(array ('visitId' => $this->db->insert_id()));
 		}
