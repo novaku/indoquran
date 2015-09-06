@@ -10,3 +10,4 @@ cache
 SQL
 /nbproject/private/
 aplikasi/libraries/vendor/
+aplikasi/libraries/composer.lock
