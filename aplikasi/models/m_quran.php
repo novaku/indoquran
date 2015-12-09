@@ -443,6 +443,7 @@ class M_quran extends CI_Model
 		$email   = $this->input->post('email') == '' ? '' : $this->input->post('email');
 		$text    = $this->input->post('text') == '' ? '' : $this->input->post('text');
 		$newText = preg_replace('/[^[:print:]]/', '', $this->input->post('text'));
+		$newText = nl2br($newText);
 		$newText = htmlspecialchars($newText, ENT_QUOTES);
 		$limit   = $this->input->post('limit') == '' ? 10 : $this->input->post('limit');
 		$start   = $this->input->post('start') == '' ? 0 : $this->input->post('start');

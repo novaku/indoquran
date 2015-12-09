@@ -14,6 +14,7 @@ class M_mobile extends CI_Model
 		$email   = $this->input->post('email') == '' ? '' : $this->input->post('email');
 		$text    = $this->input->post('text') == '' ? '' : $this->input->post('text') . '<br/><br/>--<i>Dari Mobile Website http://www.indoquran.web.id/mobile</i>--';
 		$newText = preg_replace('/[^[:print:]]/', '', $text);
+		$newText = nl2br($newText);
 		$newText = htmlspecialchars($newText, ENT_QUOTES);
 
 		$limit = 10;
