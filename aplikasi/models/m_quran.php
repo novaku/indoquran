@@ -442,7 +442,7 @@ class M_quran extends CI_Model
 		$name    = $this->input->post('name') == '' ? '' : $this->input->post('name');
 		$email   = $this->input->post('email') == '' ? '' : $this->input->post('email');
 		$text    = $this->input->post('text') == '' ? '' : $this->input->post('text');
-		$newText = preg_replace('/[^[:print:]]/', '', $this->input->post('text'));
+		$newText = preg_replace('/[^[:print:]]/', '', $text);
 		$newText = nl2br($newText);
 		$newText = htmlspecialchars($newText, ENT_QUOTES);
 		$limit   = $this->input->post('limit') == '' ? 10 : $this->input->post('limit');
@@ -453,6 +453,7 @@ class M_quran extends CI_Model
 		if ($act == 'insert') {
 			$this->email->from($email, $name);
 			$this->email->to('kontak@indoquran.web.id');
+			$this->email->reply_to('kontak@indoquran.web.id', 'Kontak Indoquran');
 			$this->email->cc($email);
 
 			$this->email->subject('Buku Tamu Baru IndoQuran.Web.Id Dari ' . $name);
@@ -468,9 +469,9 @@ class M_quran extends CI_Model
 			);
 
 			if ($this->db->insert('bukutamu', $data)) {
-				return "{success:true, Msg:'Sukses memasukkan bukutamu dari $_REQUEST[name]'}";
+				return "{success:true, Msg:'Sukses memasukkan bukutamu dari " . $name . "'}";
 			} else {
-				return "{success:false, Msg:'Gagal memasukkan bukutamu dari $_REQUEST[name]'}";
+				return "{success:false, Msg:'Gagal memasukkan bukutamu dari " . $name . "'}";
 			}
 		} elseif ($act == 'read') {
 			$query = $this->db->select('*')->from('bukutamu')->order_by($sort, $dir)->limit($limit, $start)->get();
@@ -619,6 +620,7 @@ class M_quran extends CI_Model
 		$this->email->from('kontak@indoquran.web.id', 'Alquran Digital:Indonesian Transalation');
 		$this->email->to($email);
 		$this->email->cc('kontak@indoquran.web.id');
+		$this->email->reply_to('kontak@indoquran.web.id', 'Kontak Indoquran');
 
 		$this->email->subject($subjek);
 		$this->email->message($msg);

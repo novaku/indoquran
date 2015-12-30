@@ -10,8 +10,6 @@ class Quran extends CI_Controller
         $this->load->library('email');
         $this->load->model('m_quran');
         $this->load->model('m_mobile');
-        $config_mail['mailtype'] = 'html';
-        $this->email->initialize($config_mail);
         $this->load->driver('cache');
     }
 
@@ -70,7 +68,6 @@ class Quran extends CI_Controller
 
     function bukuTamu($act = "insert")
     {
-        $start = $this->input->post('start') == '' ? '' : $this->input->post('start');
         switch ($act) {
             case "insert" :
             {
