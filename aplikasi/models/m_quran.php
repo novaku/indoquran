@@ -64,7 +64,7 @@ class M_quran extends CI_Model
                     $text = '<div align="right">' . quran_img($key->img) .
                         '<br/><br/><font style="color:#666666; font-size:12px; line-height:16px;">' . $key->baca . '</font></div>
 					<hr noshade size=1>
-						' . quran_mp3($key->mp3) . '
+						' . quran_mp3($key->mp3, $this->config->item('quran_mp3')) . '
 					<hr noshade size=1>
 						<h4>' . $key->AyahTextNew . '</h4>
 					<hr noshade size=1>

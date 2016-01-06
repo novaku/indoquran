@@ -43,7 +43,7 @@ function extjs_asset_css()
 <link rel="stylesheet" type="text/css" href="' . base_url('assets/extjs/examples/ux/grid/css/GridFilters.css') . '" />
 <link rel="stylesheet" type="text/css" href="' . base_url('assets/extjs/examples/ux/grid/css/RangeMenu.css') . '" />
 	';
-	$asset_cdn   = '
+	$asset_cdn = '
 <link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/resources/css/ext-all.css" />
 <link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux/css/TabScrollerMenu.css" />
 <link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux/css/CheckHeader.css" />
@@ -92,11 +92,11 @@ function extjs_asset_js()
 function quran_mp3($filenya, $ustadz = 'http://www.everyayah.com/data/Hudhaify_32kbps/')
 {
 	$asset_local = '
-<object width="480" height="24" id="audioplayer1" data="' . base_url('assets/swf/player.swf') . '" type="application/x-shockwave-flash"><param value="assets/swf/player.swf" name="movie"><param value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp;                 rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp;   text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile=assets/quran_mp3/' . $filenya . '" name="FlashVars"><param value="high" name="quality"><param value="false" name="menu"><param value="transparent" name="wmode"></object>
+<object width="480" height="24" id="audioplayer1" data="' . base_url('assets/swf/player.swf') . '" type="application/x-shockwave-flash"><param value="assets/swf/player.swf" name="movie"><param value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp; rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp; text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile=assets/quran_mp3/' . $filenya . '" name="FlashVars"><param value="high" name="quality"><param value="false" name="menu"><param value="transparent" name="wmode"></object>
 	';
 
 	$asset_cdn = '
-<object width="480" height="24" id="audioplayer1" data="' . base_url('assets/swf/player.swf') . '" type="application/x-shockwave-flash"><param value="' . base_url() . 'assets/swf/player.swf" name="movie"><param value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp;                 rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp;   text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile=' . $ustadz . $filenya . '" name="FlashVars"><param value="high" name="quality"><param value="false" name="menu"><param value="transparent" name="wmode"></object>
+<object width="480" height="24" id="audioplayer1" data="' . base_url('assets/swf/player.swf') . '" type="application/x-shockwave-flash"><param value="' . base_url() . 'assets/swf/player.swf" name="movie"><param value="playerID=1&amp;bg=0xEFEFEF&amp;leftbg=0xCCCCCC&amp;lefticon=0x666666&amp;rightbg=0xB6E1E1&amp; rightbghover=0x9BA948&amp;righticon=0x798732&amp;righticonhover=0xFFFFFF&amp; text=0x666666&amp;slider=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;loader=0xEDF4CA&amp;soundFile=' . $ustadz . $filenya . '" name="FlashVars"><param value="high" name="quality"><param value="false" name="menu"><param value="transparent" name="wmode"></object>
 	';
 	if (usecdnfunc()) {
 		return $asset_cdn;

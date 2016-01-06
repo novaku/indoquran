@@ -110,7 +110,7 @@ class Quran extends CI_Controller
         $query               = $this->db->select('img')->from('quran_indo')->where(array('ID' => $id))->get();
         $key                 = $query->row();
         $data['tarjamah']    = $this->m_quran->m_getTarjamah($id);
-        $data['quran_image'] = 'http://c00022506.cdn1.cloudfiles.rackspacecloud.com/' . $key->img;
+        $data['quran_image'] = $this->config->item('quran_img') . $key->img;
         $nx                  = $id + 1;
         $pr                  = $id - 1;
 

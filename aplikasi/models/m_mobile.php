@@ -275,12 +275,12 @@ class M_mobile extends CI_Model
 					';
 		}
 
-//        if ( ! $memGetAyatId = $this->cache->memcached->get('mem_get_ayat_id_mobile'.$id)) {
-//			$memGetAyatId = $text;
-//			$this->cache->memcached->save('mem_get_ayat_id_mobile'.$id, $memGetAyatId, 300);
-//		}
-//        return $memGetAyatId;
-		return $text;
+        if ( ! $memGetAyatId = $this->cache->memcached->get('mem_get_ayat_id_mobile'.$id)) {
+			$memGetAyatId = $text;
+			$this->cache->memcached->save('mem_get_ayat_id_mobile'.$id, $memGetAyatId, 300);
+		}
+        return $memGetAyatId;
+//		return $text;
 	}
 
 	function m_getJumAyat($surahId)
