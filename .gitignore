@@ -1,13 +1,2 @@
-aplikasi/config/database.php
-.settings/
-.buildpath
-.project
-.idea
-viewAyat
-viewAyatMobile
-json
-cache
-SQL
-/nbproject/private/
-aplikasi/libraries/vendor/
-aplikasi/libraries/composer.lock
+/vendor
+.env

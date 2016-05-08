@@ -1,1 +1,0 @@
-<p class="lead">Selamat Datang di Indoquran.Web.Id (Mobile Version)</p>
