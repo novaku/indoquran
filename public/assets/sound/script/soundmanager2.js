@@ -66,7 +66,7 @@ function SoundManager(smURL, smID) {
     'bgColor': '#ffffff',               // SWF background color. N/A when wmode = 'transparent'
     'useHighPerformance': false,        // position:fixed flash movie can help increase js/flash speed, minimize lag
     'flashPollingInterval': null,       // msec affecting whileplaying/loading callback frequency. If null, default of 50 msec is used.
-    'html5PollingInterval': null,       // msec affecting whileplaying() for HTML5 audio, excluding mobile devices. If null, native HTML5 update events are used.
+    'html5PollingInterval': null,       // msec affecting whileplaying() for HTML5 audio, excluding Mobile devices. If null, native HTML5 update events are used.
     'flashLoadTimeout': 1000,           // msec to wait for flash movie to load before failing (0 = infinity)
     'wmode': null,                      // flash rendering mode - null, 'transparent', or 'opaque' (last two allow z-index to work)
     'allowScriptAccess': 'always',      // for scripting the SWF (object/embed property), 'always' or 'sameDomain'
@@ -4234,7 +4234,7 @@ function SoundManager(smURL, smID) {
     as2loop: 'Note: Setting stream:false so looping can work (flash 8 limitation)',
     noNSLoop: 'Note: Looping not implemented for MovieStar formats',
     needfl9: 'Note: Switching to flash 9, required for MP4 formats.',
-    mfTimeout: 'Setting flashLoadTimeout = 0 (infinite) for off-screen, mobile flash case',
+    mfTimeout: 'Setting flashLoadTimeout = 0 (infinite) for off-screen, Mobile flash case',
     needFlash: smc + 'Fatal error: Flash is needed to play some required formats, but is not available.',
     gotFocus: smc + 'Got window focus.',
     policy: 'Enabling usePolicyFile for data access',
@@ -5868,7 +5868,7 @@ function SoundManager(smURL, smID) {
 
     if (mobileHTML5) {
 
-      // prefer HTML5 for mobile + tablet-like devices, probably more reliable vs. flash at this point.
+      // prefer HTML5 for Mobile + tablet-like devices, probably more reliable vs. flash at this point.
 
       // <d>
       if (!sm2.setupOptions.useHTML5Audio || sm2.setupOptions.preferFlash) {

@@ -8,7 +8,10 @@
         "php": ">=5.5.9",
         "laravel/lumen-framework": "5.2.*",
         "vlucas/phpdotenv": "~2.2",
-        "mongodb/mongodb" : "^1.0.2"
+        "jenssegers/mongodb" : "^v3.0.2",
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "kriswallsmith/assetic" : "^v1.3.2",
+        "packagist/yuicompressor-bin" : "^v2.4.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

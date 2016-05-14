@@ -41,7 +41,7 @@ function loadPage(url){
 	$('#loading').css('visibility','visible');
 	$.ajax({
 		type: "POST",
-		url: "mobile/loadResult",
+		url: "Mobile/loadResult",
 		data: 'page='+url,
 		dataType: "html",
 		success: function(msg){
@@ -54,7 +54,7 @@ function loadPage(url){
 }
 
 function loadPageAttrib(attr, attrId) {
-	$.get('mobile/loadPageAttrib/'+attr, function(data) {
+	$.get('Mobile/loadPageAttrib/'+attr, function(data) {
 		$('#'+attrId).html(data);
 	});
 }

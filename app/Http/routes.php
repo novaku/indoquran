@@ -11,6 +11,28 @@
 |
 */
 
+/**
+ * To handle view usage, using desktop or mobile
+ */
 $app->get('/', function () use ($app) {
-    return $app->version();
+    $detect = new Mobile_Detect;
+
+    if($detect->isMobile() || $detect->isTablet()) {
+        $view = 'mobile';
+    } else {
+        $view = 'desktop';
+    }
+
+    return view($view, ['browser' => $detect->getUserAgent()]);
+});
+
+$app->group([
+    'middleware' => [
+        'logger',
+        //        'auth',
+    ],
+    'prefix'     => 'api',
+    'namespace'  => 'App\Http\Controllers',
+], function ($app) {
+    $app->get('quran', 'Desktop\Read@index');
 });

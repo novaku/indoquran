@@ -25,7 +25,7 @@
 
 	var nsNormalizeDict = {};
 
-	// jQuery.mobile configurable options
+	// jQuery.Mobile configurable options
 	$.mobile = $.extend( {}, {
 
 		// Version of the jQuery Mobile Framework
@@ -194,7 +194,7 @@
 			return ltr || defaultTheme || "a";
 		},
 
-		// TODO the following $ and $.fn extensions can/probably should be moved into jquery.mobile.core.helpers
+		// TODO the following $ and $.fn extensions can/probably should be moved into jquery.Mobile.core.helpers
 		//
 		// Find the closest javascript page element to gather settings data jsperf test
 		// http://jsperf.com/single-complex-selector-vs-many-complex-selectors/edit
@@ -319,7 +319,7 @@
 		return $( "<div/>" ).text( $( this ).text() ).html();
 	};
 
-	// fluent helper function for the mobile namespaced equivalent
+	// fluent helper function for the Mobile namespaced equivalent
 	$.fn.jqmEnhanceable = function() {
 		return $.mobile.enhanceable( this );
 	};
@@ -920,7 +920,7 @@ $.widget( "mobile.widget", {
 
 (function( $, window ) {
 	// DEPRECATED
-	// NOTE global mobile object settings
+	// NOTE global Mobile object settings
 	$.extend( $.mobile, {
 		// DEPRECATED Should the text be visble in the loading message?
 		loadingMessageTextVisible: undefined,
@@ -934,7 +934,7 @@ $.widget( "mobile.widget", {
 		// DEPRECATED
 		// Turn on/off page loading message. Theme doubles as an object argument
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
-		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
+		// NOTE that the $.Mobile.loading* settings and params past the first are deprecated
 		showPageLoadingMsg: function( theme, msgText, textonly ) {
 			$.mobile.loading( 'show', theme, msgText, textonly );
 		},
@@ -1007,7 +1007,7 @@ $.widget( "mobile.widget", {
 
 		// Turn on/off page loading message. Theme doubles as an object argument
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
-		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
+		// NOTE that the $.Mobile.loading* settings and params past the first are deprecated
 		// TODO sweet jesus we need to break some of this out
 		show: function( theme, msgText, textonly ) {
 			var textVisible, message, $header, loadSettings;
@@ -1015,7 +1015,7 @@ $.widget( "mobile.widget", {
 			this.resetHtml();
 
 			// use the prototype options so that people can set them globally at
-			// mobile init. Consistency, it's what's for dinner
+			// Mobile init. Consistency, it's what's for dinner
 			if ( $.type(theme) === "object" ) {
 				loadSettings = $.extend( {}, this.options, theme );
 
@@ -1868,7 +1868,7 @@ if ( eventCaptureSupported ) {
 	// Note that we used to use a media query to figure out what the orientation the browser
 	// thinks it is in:
 	//
-	//     initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
+	//     initial_orientation_is_landscape = $.Mobile.media("all and (orientation: landscape)");
 	//
 	// but there was an iPhone/iPod Touch bug beginning with iOS 4.2, up through iOS 5.1,
 	// where the browser *ALWAYS* applied the landscape media query. This bug does not
@@ -1996,12 +1996,12 @@ if ( eventCaptureSupported ) {
 var $window = $( window ),
 	$html = $( "html" );
 
-/* $.mobile.media method: pass a CSS media type or query and get a bool return
+/* $.Mobile.media method: pass a CSS media type or query and get a bool return
 	note: this feature relies on actual media query support for media queries, though types will work most anywhere
 	examples:
-		$.mobile.media('screen') // tests for screen media type
-		$.mobile.media('screen and (min-width: 480px)') // tests for screen media type with window width > 480px
-		$.mobile.media('@media screen and (-webkit-min-device-pixel-ratio: 2)') // tests for webkit 2x pixel ratio (iPhone 4)
+		$.Mobile.media('screen') // tests for screen media type
+		$.Mobile.media('screen and (min-width: 480px)') // tests for screen media type with window width > 480px
+		$.Mobile.media('@media screen and (-webkit-min-device-pixel-ratio: 2)') // tests for webkit 2x pixel ratio (iPhone 4)
 */
 $.mobile.media = (function() {
 	// TODO: use window.matchMedia once at least one UA implements it
@@ -2172,7 +2172,7 @@ $.extend( $.support, {
 fakeBody.remove();
 
 
-// $.mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
+// $.Mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
 // or that generally work better browsing in regular http for full page refreshes (Opera Mini)
 // Note: This detection below is used as a last resort.
 // We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
@@ -2213,7 +2213,7 @@ if ( nokiaLTE7_3 ) {
 
 // For ruling out shadows via css
 if ( !$.support.boxShadow ) {
-	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
+	$( "html" ).addClass( "ui-Mobile-nosupport-boxshadow" );
 }
 
 })( jQuery );
@@ -2325,7 +2325,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 // About: Release History
 // 
 // 1.3   - (7/21/2010) Reorganized IE6/7 Iframe code to make it more
-//         "removable" for mobile-only development. Added IE6/7 document.title
+//         "removable" for Mobile-only development. Added IE6/7 document.title
 //         support. Attempted to make Iframe as hidden as possible by using
 //         techniques from http://www.paciellogroup.com/blog/?p=604. Added 
 //         support for the "shortcut" format $(window).hashchange( fn ) and
@@ -2673,7 +2673,7 @@ var createHandler = function( sequential ) {
 			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $( window ).scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
 			toPreClass = " ui-page-pre-in",
 			toggleViewportClass = function() {
-				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
+				$.mobile.pageContainer.toggleClass( "ui-Mobile-viewport-transitioning viewport-" + name );
 			},
 			scrollPage = function() {
 				// By using scrollTo instead of silentScroll, we can keep things better in order
@@ -3320,7 +3320,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 		setLastScrollEnabled = true;
 	});
 
-	// wait until the mobile page container has been determined to bind to pagechange
+	// wait until the Mobile page container has been determined to bind to pagechange
 	$window.one( "pagecontainercreate", function() {
 		// once the page has changed, re-enable the scroll recording
 		$.mobile.pageContainer.bind( "pagechange", function() {
@@ -3404,7 +3404,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 		$page.page();
 	}
 
-	/* exposed $.mobile methods */
+	/* exposed $.Mobile methods */
 
 	//animation complete callback
 	$.fn.animationComplete = function( callback ) {
@@ -3418,10 +3418,10 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 		}
 	};
 
-	//expose path object on $.mobile
+	//expose path object on $.Mobile
 	$.mobile.path = path;
 
-	//expose base object on $.mobile
+	//expose base object on $.Mobile
 	$.mobile.base = base;
 
 	//history stack
@@ -4064,7 +4064,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			if ( !$.mobile.ajaxEnabled ||
 					// test that the form is, itself, ajax false
 					$this.is( ":jqmData(ajax='false')" ) ||
-					// test that $.mobile.ignoreContentEnabled is set and
+					// test that $.Mobile.ignoreContentEnabled is set and
 					// the form or one of it's parents is ajax=false
 					!$this.jqmHijackable().length ) {
 				return;
@@ -4121,7 +4121,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			var link = findClosestLink( event.target );
 
 			// split from the previous return logic to avoid find closest where possible
-			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+			// TODO teach $.Mobile.hijackable to operate on raw dom elements so the link wrapping
 			// can be avoided
 			if ( !$( link ).jqmHijackable().length ) {
 				return;
@@ -4146,7 +4146,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 
 			// If there is no link associated with the click or its not a left
 			// click we want to ignore the click
-			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+			// TODO teach $.Mobile.hijackable to operate on raw dom elements so the link wrapping
 			// can be avoided
 			if ( !link || event.which > 1 || !$link.jqmHijackable().length ) {
 				return;
@@ -4363,7 +4363,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 })( jQuery );
 
 (function( $, window ) {
-	// For now, let's Monkeypatch this onto the end of $.mobile._registerInternalEvents
+	// For now, let's Monkeypatch this onto the end of $.Mobile._registerInternalEvents
 	// Scope self to pushStateHandler so we can reference it sanely within the
 	// methods handed off as event handlers
 	var	pushStateHandler = {},
@@ -4452,7 +4452,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			// Note that in some cases we might be replacing an url with the
 			// same url. We do this anyways because we need to make sure that
 			// all of our history entries have a state object associated with
-			// them. This allows us to work around the case where $.mobile.back()
+			// them. This allows us to work around the case where $.Mobile.back()
 			// is called to transition from an external page to an embedded page.
 			// In that particular case, a hashchange event is *NOT* generated by the browser.
 			// Ensuring each history entry has a state object means that onPopState()
@@ -5586,7 +5586,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	// called many times and we want to avoid having to lowercase
 	// the nodeName from the element every time to ensure we have
 	// a match. Note that this function lives here for now, but may
-	// be moved into $.mobile if other components need a similar method.
+	// be moved into $.Mobile if other components need a similar method.
 	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName ) {
 		var dict = {};
 		dict[ lcName ] = dict[ ucName ] = true;
@@ -6372,7 +6372,7 @@ $.fn.controlgroup = function( options ) {
 	});
 };
 
-// The pagecreate handler for controlgroup is in jquery.mobile.init because of the soft-dependency on the wrapped widgets
+// The pagecreate handler for controlgroup is in jquery.Mobile.init because of the soft-dependency on the wrapped widgets
 
 })(jQuery);
 
@@ -6541,7 +6541,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 
 			// define the container for navigation event bindings
-			// TODO this would be nice at the the mobile widget level
+			// TODO this would be nice at the the Mobile widget level
 			this.options.container = this.options.container || $.mobile.pageContainer;
 
 			// Apply the proto
@@ -8068,7 +8068,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 		// Opera does not properly support opacity on select elements
 		// In Mini, it hides the element, but not its text
-		// On the desktop,it seems to do the opposite
+		// On the Desktop,it seems to do the opposite
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
 		if ( options.nativeMenu && window.opera && window.opera.version ) {
 			button.addClass( "ui-select-nativeonly" );
@@ -9022,10 +9022,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 	//remove initial build class (only present on first pageshow)
 	function hideRenderingClass() {
-		$html.removeClass( "ui-mobile-rendering" );
+		$html.removeClass( "ui-Mobile-rendering" );
 	}
 
-	// trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
+	// trigger mobileinit event - useful hook for configuring $.Mobile settings before they're used
 	$( window.document ).trigger( "mobileinit" );
 
 	// support conditions
@@ -9041,8 +9041,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 		$.mobile.ajaxEnabled = false;
 	}
 
-	// Add mobile, initial load "rendering" classes to docEl
-	$html.addClass( "ui-mobile ui-mobile-rendering" );
+	// Add Mobile, initial load "rendering" classes to docEl
+	$html.addClass( "ui-Mobile ui-Mobile-rendering" );
 
 	// This is a fallback. If anything goes wrong (JS errors, etc), or events don't fire,
 	// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
@@ -9075,7 +9075,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			$.mobile.firstPage = $pages.first();
 
 			// define page container
-			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-Mobile-viewport" );
 
 			// alert listeners that the pagecontainer has been determined for binding
 			// to events triggered on it
