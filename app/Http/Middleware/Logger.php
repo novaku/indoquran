@@ -24,7 +24,7 @@ class Logger
         $maxId++;
 
         $logVisitor->VisID = $maxId;
-        $logVisitor->VisIP = $request->server('SERVER_ADDR');
+        $logVisitor->VisIP = $request->getClientIp();
         $logVisitor->VisRef = $request->server('HTTP_REFERER');
         $logVisitor->VisUrl = $request->server('REQUEST_URI');
         $logVisitor->VisDate = date('Y-m-d H:i:s');

@@ -18,10 +18,8 @@
 $app->group([
     'middleware' => [
         'logger',
-        //        'auth',
+        // 'auth',
     ],
-//    'prefix'     => 'api',
-//    'namespace'  => 'App\Http\Controllers',
 ], function ($app) {
     $app->get('/', function () use ($app) {
         $detect = new Jenssegers\Agent\Agent();
@@ -38,5 +36,5 @@ $app->group([
         return $parser->compress($htmlView);
     });
 
-    $app->get('quran', 'Desktop\Read@index');
+    $app->get('api/quran', 'App\Http\Controllers\Desktop\Read@index');
 });
