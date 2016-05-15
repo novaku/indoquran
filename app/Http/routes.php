@@ -15,7 +15,7 @@
  * To handle view usage, using desktop or mobile
  */
 $app->get('/', function () use ($app) {
-    $detect = new Mobile_Detect;
+    $detect = new Jenssegers\Agent\Agent();
 
     if($detect->isMobile() || $detect->isTablet()) {
         $view = 'mobile';

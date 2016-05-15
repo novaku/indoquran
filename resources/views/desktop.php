@@ -1,5 +1,5 @@
 <?php
-echo "INI DESKTOP";
+echo "INI DESKTOP<br>".$browser;
 exit;
 ?>
 <!DOCTYPE html>
