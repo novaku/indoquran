@@ -76,11 +76,11 @@ return [
             'host'     => env('MONGODB_HOST'),
             'port'     => env('MONGODB_PORT'),
             'database' => env('MONGODB_DATABASE'),
-            //            'username' => env('MONGODB_USERNAME'),
-            //            'password' => env('MONGODB_PASSWORD'),
-            //            'options' => array(
-            //                'db' => env('MONGODB_AUTHDATABASE') //Sets the auth DB
-            //            )
+            'username' => env('MONGODB_USERNAME'),
+            'password' => env('MONGODB_PASSWORD'),
+            'options'  => [
+                'db' => env('MONGODB_AUTHDATABASE') //Sets the auth DB
+            ],
         ],
 
         'pgsql' => [

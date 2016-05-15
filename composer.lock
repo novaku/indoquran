@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "134ae44ab281195dad1e38b137b93d58",
-    "content-hash": "4e6de7bb6ab3787ea50c2d890c9f57a1",
+    "hash": "d3616e14d726050ed39d73d69546c614",
+    "content-hash": "3cc63043bf4645f616d622acaf601f2a",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1413,6 +1413,100 @@
             "time": "2016-03-18 15:23:13"
         },
         {
+            "name": "linkorb/jsmin-php",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/linkorb/jsmin-php.git",
+                "reference": "be85d87fc9c27730e7e9ced742b13010dafc1026"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/linkorb/jsmin-php/zipball/be85d87fc9c27730e7e9ced742b13010dafc1026",
+                "reference": "be85d87fc9c27730e7e9ced742b13010dafc1026",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joost Faassen",
+                    "email": "j.faassen@linkorb.com",
+                    "role": "Packaging for composer"
+                },
+                {
+                    "name": "Ryan Grove",
+                    "email": "ryan@wonko.com",
+                    "role": "PHP port"
+                },
+                {
+                    "name": "Adam Gofort",
+                    "email": "aag@adamgoforth.com",
+                    "role": "Updates to the PHP port"
+                },
+                {
+                    "name": "Douglas Crockford",
+                    "email": "douglas@crockford.com"
+                }
+            ],
+            "description": "Unofficial package of jsmin-php",
+            "homepage": "http://www.github.com/linkorb/jsmin-php",
+            "keywords": [
+                "javascript",
+                "jsmin",
+                "minify"
+            ],
+            "time": "2013-03-15 13:16:35"
+        },
+        {
+            "name": "meenie/javascript-packer",
+            "version": "1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/meenie/javascript-packer.git",
+                "reference": "dcab0159ae1ed9d7535c034fb8afe1e4c3495d22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/meenie/javascript-packer/zipball/dcab0159ae1ed9d7535c034fb8afe1e4c3495d22",
+                "reference": "dcab0159ae1ed9d7535c034fb8afe1e4c3495d22",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "class.JavaScriptPacker.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL 2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Martin",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Composer hosted mirror of the PHP Version of Dean Edwards' JavaScript Packer",
+            "homepage": "http://joliclic.free.fr/php/javascript-packer/en/",
+            "keywords": [
+                "javascript packer"
+            ],
+            "time": "2013-03-25 21:54:33"
+        },
+        {
             "name": "mobiledetect/mobiledetectlib",
             "version": "2.8.22",
             "source": {
@@ -1644,6 +1738,53 @@
             "time": "2016-01-26 21:23:30"
         },
         {
+            "name": "natxet/CssMin",
+            "version": "v3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/natxet/CssMin.git",
+                "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/natxet/CssMin/zipball/92de3fe3ccb4f8298d31952490ef7d5395855c39",
+                "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joe Scylla",
+                    "email": "joe.scylla@gmail.com",
+                    "homepage": "https://profiles.google.com/joe.scylla"
+                }
+            ],
+            "description": "Minifying CSS",
+            "homepage": "http://code.google.com/p/cssmin/",
+            "keywords": [
+                "css",
+                "minify"
+            ],
+            "time": "2015-09-25 11:13:11"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "1.21.0",
             "source": {
@@ -1824,6 +1965,53 @@
                 "random"
             ],
             "time": "2016-03-18 20:34:03"
+        },
+        {
+            "name": "patchwork/jsqueeze",
+            "version": "v2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tchwork/jsqueeze.git",
+                "reference": "693d64850eab2ce6a7c8f7cf547e1ab46e69d542"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tchwork/jsqueeze/zipball/693d64850eab2ce6a7c8f7cf547e1ab46e69d542",
+                "reference": "693d64850eab2ce6a7c8f7cf547e1ab46e69d542",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Patchwork\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "(Apache-2.0 or GPL-2.0)"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                }
+            ],
+            "description": "Efficient JavaScript minification in PHP",
+            "homepage": "https://github.com/tchwork/jsqueeze",
+            "keywords": [
+                "compression",
+                "javascript",
+                "minification"
+            ],
+            "time": "2016-04-19 09:28:22"
         },
         {
             "name": "psr/log",
@@ -2553,6 +2741,112 @@
                 "environment"
             ],
             "time": "2016-04-15 10:48:49"
+        },
+        {
+            "name": "websharks/css-minifier",
+            "version": "150820",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/websharks/css-minifier.git",
+                "reference": "da1d0254c41e1f59c7337aa444d743e6056046ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/websharks/css-minifier/zipball/da1d0254c41e1f59c7337aa444d743e6056046ff",
+                "reference": "da1d0254c41e1f59c7337aa444d743e6056046ff",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WebSharks\\CssMinifier\\": "src/includes/classes"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "websharks",
+                    "homepage": "http://websharks-inc.com/",
+                    "role": "company"
+                },
+                {
+                    "name": "jaswsinc",
+                    "homepage": "http://jaswsinc.com/",
+                    "role": "developer"
+                },
+                {
+                    "name": "raamdev",
+                    "homepage": "http://raam.org/",
+                    "role": "developer"
+                }
+            ],
+            "description": "Compresses CSS.",
+            "homepage": "https://github.com/websharks/css-minifier",
+            "keywords": [
+                "compressor",
+                "css",
+                "websharks"
+            ],
+            "time": "2015-08-21 03:19:25"
+        },
+        {
+            "name": "wyrihaximus/html-compress",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WyriHaximus/HtmlCompress.git",
+                "reference": "f6205df099f920ac69b4eeb98104cebacf87004a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WyriHaximus/HtmlCompress/zipball/f6205df099f920ac69b4eeb98104cebacf87004a",
+                "reference": "f6205df099f920ac69b4eeb98104cebacf87004a",
+                "shasum": ""
+            },
+            "require": {
+                "linkorb/jsmin-php": "1.0.0",
+                "meenie/javascript-packer": "1.1",
+                "natxet/cssmin": "^3.0",
+                "patchwork/jsqueeze": "~1.0|~2.0",
+                "php": ">=5.4.0",
+                "websharks/css-minifier": "150820"
+            },
+            "require-dev": {
+                "phake/phake": "^1.0",
+                "phpunit/phpunit": "^4.0",
+                "squizlabs/php_codesniffer": "^1.0",
+                "vectorface/dunit": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WyriHaximus\\HtmlCompress\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cees-Jan Kiewiet",
+                    "email": "ceesjank@gmail.com",
+                    "homepage": "http://wyrihaximus.net/"
+                }
+            ],
+            "description": "Compress/minify your HTML",
+            "keywords": [
+                "compress",
+                "html"
+            ],
+            "time": "2015-10-04 19:37:02"
         }
     ],
     "packages-dev": [
@@ -3014,16 +3308,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.24",
+            "version": "4.8.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a1066c562c52900a142a0e2bbf0582994671385e"
+                "reference": "6d1588a6542a52ed89636e5a9876bc7502bbb853"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a1066c562c52900a142a0e2bbf0582994671385e",
-                "reference": "a1066c562c52900a142a0e2bbf0582994671385e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6d1588a6542a52ed89636e5a9876bc7502bbb853",
+                "reference": "6d1588a6542a52ed89636e5a9876bc7502bbb853",
                 "shasum": ""
             },
             "require": {
@@ -3037,7 +3331,7 @@
                 "phpunit/php-code-coverage": "~2.1",
                 "phpunit/php-file-iterator": "~1.4",
                 "phpunit/php-text-template": "~1.2",
-                "phpunit/php-timer": ">=1.0.6",
+                "phpunit/php-timer": "^1.0.6",
                 "phpunit/phpunit-mock-objects": "~2.3",
                 "sebastian/comparator": "~1.1",
                 "sebastian/diff": "~1.2",
@@ -3082,7 +3376,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-03-14 06:16:08"
+            "time": "2016-05-10 18:47:12"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
