@@ -26,6 +26,7 @@ class Logger
             $logVisitor = new LogVisitor();
             //https://ipfind.co/?ip=202.62.16.202&auth=fbaffddb-9250-4200-b402-de3a1d84bb1a
             $client = new Client();
+            $clientBody = $client->get('https://ipfind.co/?ip=' . $clientIp . '&auth=fbaffddb-9250-4200-b402-de3a1d84bb1a')->getBody();
 
             $maxId = intval($logVisitor->max('VisID'));
             $maxId++;
@@ -42,7 +43,7 @@ class Logger
             $logVisitor->VisAgent = $browser . '/' . $agent->version($browser);
             $logVisitor->VisPlatform = $platform . '/' . $agent->version($platform);
             $logVisitor->VisAgentString = $agent->getUserAgent();
-            $logVisitor->tracker = $client->get('https://ipfind.co/?ip=' . $clientIp . '&auth=fbaffddb-9250-4200-b402-de3a1d84bb1a');
+            $logVisitor->tracker = \GuzzleHttp\json_decode($clientBody, true);
 
             $logVisitor->save();
 
