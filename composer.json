@@ -12,7 +12,9 @@
         "packagist/yuicompressor-bin" : "^v2.4.8",
         "jenssegers/mongodb" : "^v3.0.2",
         "jenssegers/agent": "^v2.3.3",
-        "wyrihaximus/html-compress": "^1.2.0"
+        "wyrihaximus/html-compress": "^1.2.0",
+        "tymon/jwt-auth": "^0.5.9",
+        "firebase/php-jwt": "v4.0.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
