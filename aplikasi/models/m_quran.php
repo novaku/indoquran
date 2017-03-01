@@ -451,28 +451,30 @@ class M_quran extends CI_Model
 		$sort    = $this->input->post('sort') == '' ? 'date' : $this->input->post('sort');
 
 		if ($act == 'insert') {
-			$this->email->from($email, $name);
-			$this->email->to('kontak@indoquran.web.id');
-			$this->email->reply_to('kontak@indoquran.web.id', 'Kontak Indoquran');
-			$this->email->cc($email);
+			return "{success:false, Msg:'Gagal memasukkan bukutamu dari " . $name . "'}";
 
-			$this->email->subject('Buku Tamu Baru IndoQuran.Web.Id Dari ' . $name);
-			$this->email->message('Buku Tamu Dari : ' . $name . '<br/>Email : <a href="mailto:' . $email . '">' . $email . '</a><br/>Isi : ' . $text);
+// 			$this->email->from($email, $name);
+// 			$this->email->to('kontak@indoquran.web.id');
+// 			$this->email->reply_to('kontak@indoquran.web.id', 'Kontak Indoquran');
+// 			$this->email->cc($email);
 
-			$this->email->send();
+// 			$this->email->subject('Buku Tamu Baru IndoQuran.Web.Id Dari ' . $name);
+// 			$this->email->message('Buku Tamu Dari : ' . $name . '<br/>Email : <a href="mailto:' . $email . '">' . $email . '</a><br/>Isi : ' . $text);
 
-			$data = array (
-				'name'         => $name,
-				'email'        => $email,
-				'text'         => $newText,
-				'email_status' => $this->email->print_debugger()
-			);
+// 			$this->email->send();
 
-			if ($this->db->insert('bukutamu', $data)) {
-				return "{success:true, Msg:'Sukses memasukkan bukutamu dari " . $name . "'}";
-			} else {
-				return "{success:false, Msg:'Gagal memasukkan bukutamu dari " . $name . "'}";
-			}
+// 			$data = array (
+// 				'name'         => $name,
+// 				'email'        => $email,
+// 				'text'         => $newText,
+// 				'email_status' => $this->email->print_debugger()
+// 			);
+
+// 			if ($this->db->insert('bukutamu', $data)) {
+// 				return "{success:true, Msg:'Sukses memasukkan bukutamu dari " . $name . "'}";
+// 			} else {
+// 				return "{success:false, Msg:'Gagal memasukkan bukutamu dari " . $name . "'}";
+// 			}
 		} elseif ($act == 'read') {
 			$query = $this->db->select('*')->from('bukutamu')->order_by($sort, $dir)->limit($limit, $start)->get();
 			$arr   = array ();
