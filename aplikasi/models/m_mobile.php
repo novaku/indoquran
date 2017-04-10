@@ -25,7 +25,8 @@ class M_mobile extends CI_Model
 		$arr  = array ();
 
 		switch ($act) {
-			case "insert" :
+//			case "insert" :
+			case "insert123" :
 				if ($name == "") {
 					$arr = array (
 						'success' => false,
