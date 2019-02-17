@@ -108,12 +108,13 @@ function quran_mp3($filenya, $ustadz = 'http://www.everyayah.com/data/Hudhaify_3
 function quran_mp3_js($filenya, $ustadz = 'http://www.everyayah.com/data/Hudhaify_32kbps/', $ayatInfo = null)
 {
 	$asset_cdn   = '<a href="' . $ustadz . $filenya . '">' . $filenya . '</a>';
-	$asset_local = '<p><a href="' . base_url('assets/quran_mp3/' . $filenya) . '" class="sm2_button">' . $ayatInfo . '</a> ' . $ayatInfo . '</p>';
-	if (usecdnfunc()) {
-		return $asset_cdn;
-	} else {
-		return $asset_local;
-	}
+//	$asset_local = '<p><a href="' . base_url('assets/quran_mp3/' . $filenya) . '" class="sm2_button">' . $ayatInfo . '</a> ' . $ayatInfo . '</p>';
+//	if (usecdnfunc()) {
+//		return $asset_cdn;
+//	} else {
+//		return $asset_local;
+//	}
+    return $asset_cdn;
 }
 
 function quran_img($filenya, $src = 'http://c00022506.cdn1.cloudfiles.rackspacecloud.com/')
