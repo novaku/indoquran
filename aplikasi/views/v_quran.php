@@ -29,7 +29,6 @@
             enable_page_level_ads: true
         });
     </script>
-
     <script type="text/javascript">
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-40015895-1']);

@@ -46,7 +46,7 @@ $config = [
     'quran_mp3'            => 'http://verses.quran.com/Alafasy/mp3/',
     'redis_host'           => '50.112.178.129',
     'redis_port'           => 6379,
-    'usecdn'               => false,
+    'usecdn'               => true,
     'usememcached'         => true,
     'juz-data'             => [
         [
