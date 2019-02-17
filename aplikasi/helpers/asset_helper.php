@@ -44,13 +44,13 @@ function extjs_asset_css()
 <link rel="stylesheet" type="text/css" href="' . base_url('assets/extjs/examples/ux/grid/css/RangeMenu.css') . '" />
 	';
 	$asset_cdn = '
-<link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/resources/css/ext-all.css" />
-<link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux/css/TabScrollerMenu.css" />
-<link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux/css/CheckHeader.css" />
-<link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/tabs/tabs-adv.css" />
-<link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/tabs/tabs.css" />
-<link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux/grid/css/GridFilters.css" />
-<link rel="stylesheet" type="text/css" href="http://cdn.sencha.io/ext-4.1.1-gpl/examples/ux/grid/css/RangeMenu.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.sencha.io/ext-4.1.1-gpl/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.sencha.io/ext-4.1.1-gpl/examples/ux/css/TabScrollerMenu.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.sencha.io/ext-4.1.1-gpl/examples/ux/css/CheckHeader.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.sencha.io/ext-4.1.1-gpl/examples/tabs/tabs-adv.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.sencha.io/ext-4.1.1-gpl/examples/tabs/tabs.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.sencha.io/ext-4.1.1-gpl/examples/ux/grid/css/GridFilters.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.sencha.io/ext-4.1.1-gpl/examples/ux/grid/css/RangeMenu.css" />
 	';
 	if (usecdnfunc()) {
 		return $asset_cdn;
@@ -72,7 +72,7 @@ function extjs_asset_js()
 	$asset_cdn = '
 <script type="text/javascript">document.getElementById(\'loading-message\').innerHTML = \'<font face="tahoma" color="white">Memuat Style...</font>\';</script>
 <script type="text/javascript">document.getElementById(\'loading-message\').innerHTML = \'<font face="tahoma" color="white">Memuat System..</font>\';</script>
-<script type="text/javascript" src="http://cdn.sencha.io/ext-4.1.1-gpl/ext-all.js"></script>
+<script type="text/javascript" src="//cdn.sencha.io/ext-4.1.1-gpl/ext-all.js"></script>
 <script type="text/javascript">document.getElementById(\'loading-message\').innerHTML = \'<font face="tahoma" color="white">Memuat Aplikasi...</font>\';</script>
 <script type="text/javascript">document.getElementById(\'loading-message\').innerHTML = \'<font face="tahoma" color="white">Inisialisasi...</font>\';</script>
 <!-- aplikasi js -->

@@ -9,7 +9,7 @@
 	<meta property="og:title" content="Indoquran.Web.Id" />
 	<meta property="og:site_name" content="AL-Quran Digital Online : Indonesian Translation">
 	<meta property="og:description" content="Alquran Digital moderen dengan tarjamah bahasa Indonesia" />
-	<meta property="og:image" content="http://www.indoquran.web.id/assets/images/quran.png" />
+	<meta property="og:image" content="/assets/images/quran.png" />
 	<meta property="og:type" content="religious">
 	<?=extjs_asset_css()?>
 	<?=css_asset('quran.css')?>
@@ -22,7 +22,15 @@
 	  ga('create', 'UA-40015895-1', 'indoquran.web.id');
 	  ga('send', 'pageview');
 	</script>
-	<script type="text/javascript">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-1219049204869601",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <script type="text/javascript">
 	  var _gaq = _gaq || [];
 	  _gaq.push(['_setAccount', 'UA-40015895-1']);
 	  _gaq.push(['_setDomainName', 'indoquran.web.id']);
