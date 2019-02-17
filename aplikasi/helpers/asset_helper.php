@@ -121,10 +121,12 @@ function quran_img($filenya, $src = 'http://c00022506.cdn1.cloudfiles.rackspacec
 	// list($width, $height, $type, $attr) = @getimagesize('assets/quran_img/'.$filenya);
 	list($width, $height, $type, $attr) = @getimagesize($src . $filenya);
 	$asset_cdn   = '<img class="img-responsive" src="' . $src . $filenya . '" ' . $attr . ' />';
-	$asset_local = '<img class="img-responsive" src="' . base_url('assets/quran_img/' . $filenya) . '" ' . $attr . ' />';
-	if (usecdnfunc()) {
-		return $asset_cdn;
-	} else {
-		return $asset_local;
-	}
+//	$asset_local = '<img class="img-responsive" src="' . base_url('assets/quran_img/' . $filenya) . '" ' . $attr . ' />';
+//	if (usecdnfunc()) {
+//		return $asset_cdn;
+//	} else {
+//		return $asset_local;
+//	}
+    // better use CDN
+    return $asset_cdn;
 }
