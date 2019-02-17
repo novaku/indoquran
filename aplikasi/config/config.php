@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+$protocol = $_SERVER["SERVER_PORT"] == 80 ? 'http://' : 'https://';
 $config = [
-    'base_url'             => $_SERVER["SERVER_PORT"] == 80 ? 'http://' : 'https://' . $_SERVER["HTTP_HOST"] . '/',
+    'base_url'             => $protocol . $_SERVER["HTTP_HOST"] . '/',
     'index_page'           => 'index.php',
     'uri_protocol'         => 'AUTO',
     'url_suffix'           => '.nhk',
